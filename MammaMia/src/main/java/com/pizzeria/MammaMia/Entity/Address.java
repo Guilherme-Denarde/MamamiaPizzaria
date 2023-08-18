@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.math.BigInteger;
+
 @Entity
 @Table(name = "address")
 public class Address {
@@ -12,10 +15,13 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Getter @Setter
+    @Column(name = "streetname")
     private String streetName;
     @Getter @Setter
+    @Column(name = "streetnum")
     private int streetNum;
     @Getter @Setter
+    @Column(name = "addressreference")
     private String addressReference;
     @Getter @Setter
     private String city;

@@ -16,7 +16,7 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-    @GetMapping
+    @GetMapping("/findAll")
     public ResponseEntity<List<Address>> getAllAddresses() {
         return ResponseEntity.ok(addressService.getAllAddresses());
     }
