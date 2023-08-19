@@ -1,5 +1,6 @@
 package com.pizzeria.MammaMia.Entity;
 
+import com.pizzeria.MammaMia.Dto.AddressDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,4 +41,9 @@ public class Address {
         this.state = state;
         this.postalCode = postalCode;
     }
+
+    public AddressDTO toDTO() {
+        return new AddressDTO(id, streetName, streetNum, addressReference, city, state, postalCode);
+    }
+
 }
