@@ -1,15 +1,13 @@
 package com.pizzeria.MammaMia.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 @Entity
+@Table(name = "register_user")
 public class RegisterUser {
     @Id
     @Getter
@@ -26,6 +24,7 @@ public class RegisterUser {
     @Getter @Setter
     private Boolean isActive;
     @Getter @Setter
+    @Column(name = "last_login")
     private Timestamp lastLogin;
     public RegisterUser(){
     }
