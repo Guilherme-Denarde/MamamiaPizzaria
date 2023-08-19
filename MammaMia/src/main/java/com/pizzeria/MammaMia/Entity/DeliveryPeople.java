@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "delivery_people")
-public class Delivery_People {
+public class DeliveryPeople {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

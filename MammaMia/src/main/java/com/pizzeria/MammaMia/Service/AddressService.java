@@ -1,6 +1,7 @@
 package com.pizzeria.MammaMia.Service;
 
 
+import com.pizzeria.MammaMia.Dto.AddressDTO;
 import com.pizzeria.MammaMia.Entity.Address;
 import com.pizzeria.MammaMia.Repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,17 @@ public class AddressService {
         return addressRepository.findById(id);
     }
 
-    public Address createAddress(Address address) {
+    public Address createAddressFromDTO(AddressDTO addressDto) {
+        Address address = new Address(addressDto.getId(), addressDto.getStreetName(), addressDto.getStreetNum(),
+                addressDto.getAddressReference(), addressDto.getCity(),
+                addressDto.getState(), addressDto.getPostalCode());
         return addressRepository.save(address);
     }
 
-    public Address updateAddress(Address address) {
+    public Address updateAddressFromDTO(AddressDTO addressDto) {
+        Address address = new Address(addressDto.getId(), addressDto.getStreetName(), addressDto.getStreetNum(),
+                addressDto.getAddressReference(), addressDto.getCity(),
+                addressDto.getState(), addressDto.getPostalCode());
         return addressRepository.save(address);
     }
 
@@ -35,3 +42,4 @@ public class AddressService {
         addressRepository.deleteById(id);
     }
 }
+
