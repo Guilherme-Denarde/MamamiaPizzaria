@@ -20,7 +20,7 @@ public class Review {
     private Product product;
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order order;
+    private Order Order;
     private int rating;
     private String comment;
     private Timestamp review_time;
