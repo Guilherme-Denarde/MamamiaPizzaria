@@ -10,7 +10,7 @@ import lombok.Data;
 public class DeliveryPeople {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long did;
     @ManyToOne
     @JoinColumn(name = "employ_id")
     private Employ employ;
