@@ -1,6 +1,7 @@
 package com.pizzeria.MammaMia.Service;
 
 
+import com.pizzeria.MammaMia.Dto.ClientDTO;
 import com.pizzeria.MammaMia.Entity.Client;
 import com.pizzeria.MammaMia.Repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,17 @@ public class ClientService {
         return clientRepository.findById(id);
     }
 
-    public Client createClient(Client client) {
+    public Client createClientFromDTO(ClientDTO clientDto) {
+        Client client = new Client(clientDto.getId(), clientDto.getRegisterUser(), clientDto.getAddress(),
+                clientDto.getCpf(),
+                clientDto.getName(), clientDto.getPhone());
         return clientRepository.save(client);
     }
 
-    public Client updateClient(Client client) {
+    public Client updateClientFromDTO(ClientDTO clientDto) {
+        Client client = new Client(clientDto.getId(), clientDto.getRegisterUser(), clientDto.getAddress(),
+                clientDto.getCpf(),
+                clientDto.getName(), clientDto.getPhone());
         return clientRepository.save(client);
     }
 

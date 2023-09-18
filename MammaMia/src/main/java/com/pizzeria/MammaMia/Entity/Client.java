@@ -1,5 +1,6 @@
 package com.pizzeria.MammaMia.Entity;
 
+import com.pizzeria.MammaMia.Dto.ClientDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,5 +35,8 @@ public class Client {
         this.cpf = cpf;
         this.name = name;
         this.phone = phone;
+    }
+    public ClientDTO toDTO() {
+        return new ClientDTO(id, registerUser, address, cpf, name, phone);
     }
 }
