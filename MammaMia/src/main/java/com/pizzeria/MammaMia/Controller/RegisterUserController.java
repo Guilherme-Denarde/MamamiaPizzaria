@@ -13,7 +13,6 @@ import java.util.List;
 public class RegisterUserController {
 
     private final RegisterUserService registerUserService;
-
     @Autowired
     public RegisterUserController(RegisterUserService registerUserService) {
         this.registerUserService = registerUserService;
@@ -39,4 +38,5 @@ public class RegisterUserController {
         registerUserService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
 }
