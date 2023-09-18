@@ -1,5 +1,6 @@
 package com.pizzeria.MammaMia.Service;
 
+import com.pizzeria.MammaMia.Dto.ProductDTO;
 import com.pizzeria.MammaMia.Entity.Product;
 import com.pizzeria.MammaMia.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class ProductService {
-
     @Autowired
     private ProductRepository productRepository;
 
@@ -22,7 +22,15 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-    public Product saveProduct(Product product) {
+    public Product createProduct(ProductDTO productDto) {
+        Product product = new Product();
+        product.setId(productDto.getId());
+        product.setName(productDto.getProductName());
+        product.setDescription(productDto.getProductDescription());
+        product.setPrice(productDto.getPrice());
+        product.setFlavor(productDto.getProductFlavor());
+        product.setQuantity(productDto.getQuantity());
+
         return productRepository.save(product);
     }
 

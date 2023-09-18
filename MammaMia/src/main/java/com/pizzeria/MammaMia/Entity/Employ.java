@@ -1,5 +1,6 @@
 package com.pizzeria.MammaMia.Entity;
 
+import com.pizzeria.MammaMia.Dto.EmployDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,4 +22,10 @@ public class Employ {
     private Permission permission;
     private int salary;
 
+    public Employ(Long id, RegisterUser registerUser, String cpf, String name, String phone, Permission permission, int salary) {
+    }
+
+    public EmployDTO toDTO() {
+        return new EmployDTO(id, registerUser, cpf, name, phone, permission, salary);
+    }
 }

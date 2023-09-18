@@ -18,25 +18,36 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private OrderMapper orderMapper;
-
     @GetMapping("/findAll")
     public ResponseEntity<List<OrderDTO>> getAllOrders() {
-        List<Order> Order = orderService.getAllOrders();
-        return ResponseEntity.ok(Order.stream().map(orderMapper::orderToOrderDTO).collect(Collectors.toList()));
+        List<OrderDTO> orders = orderService.getAllOrders()
+                .stream()
+                .map(Order::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(orders);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<OrderDTO> getOrderById(@PathVariable Long id) {
+    @GetMapping
+    public ResponseEntity<OrderDTO> getOrderById(@RequestParam("id") Long id) {
         return orderService.getOrderById(id)
-                .map(orderMapper::orderToOrderDTO)
+                .map(Order::toDTO)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDto) {
+
+        Order order = orderService.createOrder(orderDto);
+        return ResponseEntity.ok(order.toDTO());
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteOrder(@RequestParam("id") Long id) {
+        orderService.deleteOrder(id);
+        return ResponseEntity.ok().build();
+    }
+
         Order Order = orderMapper.orderDTOToOrder(orderDto);
         Order createdOrder = orderService.createOrder(Order);
         return ResponseEntity.ok(orderMapper.orderToOrderDTO(createdOrder));
@@ -57,6 +68,4 @@ public class OrderController {
         orderService.deleteOrder(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }
