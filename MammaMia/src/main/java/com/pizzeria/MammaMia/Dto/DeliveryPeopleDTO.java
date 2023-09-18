@@ -10,8 +10,9 @@ public class DeliveryPeopleDTO {
     private String cpf;
     private String name;
     private String phone;
-    public DeliveryPeopleDTO(){
-    }
+
+    public DeliveryPeopleDTO(){}
+
     public DeliveryPeopleDTO(Long id, Employ employ, String cpf, String name, String phone) {
         this.id = id;
         this.employ = employ;
@@ -19,5 +20,4 @@ public class DeliveryPeopleDTO {
         this.name = name;
         this.phone = phone;
     }
-
 }

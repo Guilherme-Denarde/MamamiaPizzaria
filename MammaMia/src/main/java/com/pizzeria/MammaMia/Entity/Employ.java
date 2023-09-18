@@ -1,6 +1,6 @@
 package com.pizzeria.MammaMia.Entity;
 
-import com.pizzeria.MammaMia.Dto.AddressDTO;
+import com.pizzeria.MammaMia.Dto.EmployDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,7 +21,11 @@ public class Employ {
     @Enumerated(EnumType.STRING)
     private Permission permission;
     private int salary;
-    public AddressDTO toDTO() {
-        return new AddressDTO(id, registerUser, cpf, name, phone, permission, salary);
+
+    public Employ(Long id, RegisterUser registerUser, String cpf, String name, String phone, Permission permission, int salary) {
+    }
+
+    public EmployDTO toDTO() {
+        return new EmployDTO(id, registerUser, cpf, name, phone, permission, salary);
     }
 }

@@ -1,6 +1,6 @@
 package com.pizzeria.MammaMia.Entity;
 
-import com.pizzeria.MammaMia.Dto.AddressDTO;
+import com.pizzeria.MammaMia.Dto.DeliveryPeopleDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import lombok.Data;
 public class DeliveryPeople {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long did;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "employ_id")
     private Employ employ;
@@ -26,8 +26,7 @@ public class DeliveryPeople {
         this.phone = phone;
     }
 
-    public AddressDTO toDTO() {
-        return new AddressDTO(id, employ, cpf, name, phone);
+    public DeliveryPeopleDTO toDTO() {
+        return new DeliveryPeopleDTO(id, employ, cpf, name, phone);
     }
-
 }

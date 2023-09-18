@@ -10,10 +10,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String product_name;
-    private String product_description;
+    private String name;
+    private String description;
     private Float price;
-    private int product_flavor;
+    private int flavor;
     private int quantity;
 
 }

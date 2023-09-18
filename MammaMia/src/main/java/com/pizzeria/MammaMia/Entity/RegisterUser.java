@@ -1,6 +1,5 @@
 package com.pizzeria.MammaMia.Entity;
 
-import com.pizzeria.MammaMia.Dto.AddressDTO;
 import com.pizzeria.MammaMia.Dto.RegisterUserDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -40,6 +39,6 @@ public class RegisterUser {
         this.lastLogin = lastLogin;
     }
     public RegisterUserDTO toDTO() {
-        return new AddressDTO(userId, name, email, password, salt, isActive, lastLogin);
+        return new RegisterUserDTO(userId, name, email, password, salt, isActive, lastLogin);
     }
 }

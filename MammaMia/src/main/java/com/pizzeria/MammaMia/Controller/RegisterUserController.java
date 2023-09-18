@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,13 +35,15 @@ public class RegisterUserController {
 
     @GetMapping
     public ResponseEntity<ResponseWrapper<RegisterUserDTO>> getRegisterUserById(@RequestParam("id") Long id) {
-        return registerUserService.getUserById(id)
+        Optional<RegisterUser> optionalUser = Optional.ofNullable(registerUserService.getUserById(id));
+        return optionalUser
                 .map(RegisterUser::toDTO)
                 .map(dto -> ResponseEntity.ok(new ResponseWrapper<>(dto)))
                 .orElseGet(() -> ResponseEntity
                         .status(HttpStatus.NOT_FOUND)
                         .body(new ResponseWrapper<>("RegisterUser with ID " + id + " not found.")));
     }
+
 
     @PostMapping
     public RegisterUser createUser(@RequestBody RegisterUser registerUser) {

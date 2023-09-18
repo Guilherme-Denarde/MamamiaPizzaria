@@ -23,4 +23,7 @@ public class EmployDTO {
         this.permission = permission;
         this.salary = salary;
     }
+    public EmployDTO toDTO() {
+        return new EmployDTO(id, registerUser, cpf, name, phone, permission, salary);
+    }
 }
