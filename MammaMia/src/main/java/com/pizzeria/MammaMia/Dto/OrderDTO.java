@@ -1,5 +1,6 @@
 package com.pizzeria.MammaMia.Dto;
 
+
 import com.pizzeria.MammaMia.Entity.OrderSize;
 import com.pizzeria.MammaMia.Entity.OrderState;
 import com.pizzeria.MammaMia.Entity.Payment;
@@ -22,7 +23,7 @@ public class OrderDTO {
     private Long employId;
 
     public OrderDTO() {}
-
+  
     public OrderDTO(Long id,
                     Payment payment,
                     OrderSize orderSize,
@@ -47,4 +48,5 @@ public class OrderDTO {
         this.clientId = clientId;
         this.employId = employId;
     }
+
 }

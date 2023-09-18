@@ -13,7 +13,9 @@ public class Product {
     private String name;
     private String description;
     private Float price;
-    private int flavor;
+    @ManyToOne
+    @JoinColumn(name = "product_flavor")
+    private Flavor product_flavor;
     private int quantity;
 
 }

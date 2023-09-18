@@ -21,4 +21,5 @@ public class ProductDTO {
         this.productFlavor = productFlavor;
         this.quantity = quantity;
     }
+
 }

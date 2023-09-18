@@ -30,6 +30,7 @@ public class ProductService {
         product.setPrice(productDto.getPrice());
         product.setFlavor(productDto.getProductFlavor());
         product.setQuantity(productDto.getQuantity());
+
         return productRepository.save(product);
     }
 

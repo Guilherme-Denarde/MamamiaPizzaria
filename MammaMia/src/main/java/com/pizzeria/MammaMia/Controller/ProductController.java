@@ -2,6 +2,7 @@ package com.pizzeria.MammaMia.Controller;
 
 import com.pizzeria.MammaMia.Dto.ProductDTO;
 import com.pizzeria.MammaMia.Entity.Product;
+import com.pizzeria.MammaMia.Mapper.ProductMapper;
 import com.pizzeria.MammaMia.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
 
     @GetMapping("/findAll")
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
@@ -39,10 +41,27 @@ public class ProductController {
         Product product = productService.createProduct(productDto);
         return ResponseEntity.ok(new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getFlavor(), product.getQuantity()));
     }
-
-    @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteProduct(@RequestParam("id") Long id) {
-        productService.deleteProduct(id);
-        return ResponseEntity.ok().build();
+  
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        return productService.getProductById(id)
+                .map(productMapper::productToProductDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+  
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+        if (!id.equals(productDTO.getId())) {
+            return ResponseEntity.badRequest().build();
+        }
+        Product updatedProduct = productService.saveProduct(productMapper.productDTOToProduct(productDTO));
+        return ResponseEntity.ok(productMapper.productToProductDTO(updatedProduct));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+   }
 }
