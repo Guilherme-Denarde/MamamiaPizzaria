@@ -25,9 +25,12 @@ public class EmployService {
     }
 
     public Employ createEmployFromDTO(EmployDTO employDto) {
+        System.out.println(employDto.getCpf());
         Employ employ = new Employ(employDto.getId(), employDto.getRegisterUser(), employDto.getCpf(),
                 employDto.getName(), employDto.getPhone(),
                 employDto.getPermission(), employDto.getSalary());
+        System.out.println(employ.getRegisterUser());
+        System.out.println(employ.getRegisterUser().getUserId());
         return employRepository.save(employ);
     }
 
