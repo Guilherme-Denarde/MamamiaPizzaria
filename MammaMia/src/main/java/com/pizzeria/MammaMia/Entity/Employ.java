@@ -12,7 +12,7 @@ public class Employ {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL )
     @JoinColumn(name = "user_id")
     private RegisterUser registerUser;
     private String cpf;
@@ -23,6 +23,13 @@ public class Employ {
     private int salary;
 
     public Employ(Long id, RegisterUser registerUser, String cpf, String name, String phone, Permission permission, int salary) {
+        this.id = id;
+        this.registerUser = registerUser;
+        this.cpf = cpf;
+        this.name = name;
+        this.phone = phone;
+        this.permission = permission;
+        this.salary = salary;
     }
 
     public EmployDTO toDTO() {

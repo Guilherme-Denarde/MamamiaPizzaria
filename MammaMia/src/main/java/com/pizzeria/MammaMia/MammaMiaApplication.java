@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class
 MammaMiaApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(MammaMiaApplication.class, args);
-    }
-
+	public static void main(String[] args) {
+		SpringApplication.run(MammaMiaApplication.class, args);
+	}
 }
