@@ -18,11 +18,18 @@ public class Employ {
     private String cpf;
     private String name;
     private String phone;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Permission permission;
     private int salary;
 
     public Employ(Long id, RegisterUser registerUser, String cpf, String name, String phone, Permission permission, int salary) {
+        this.id = id;
+        this.registerUser = registerUser;
+        this.cpf = cpf;
+        this.name = name;
+        this.phone = phone;
+        this.permission = permission;
+        this.salary = salary;
     }
 
     public EmployDTO toDTO() {
