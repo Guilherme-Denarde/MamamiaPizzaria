@@ -50,9 +50,17 @@ public class RegisterUserController {
         return registerUserService.createUser(registerUser);
     }
 
+
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteUser(@RequestParam("id") Long id) {
-        registerUserService.deleteUser(id);
-        return ResponseEntity.ok("Deletado com sucesso");
+        boolean isDeleted = registerUserService.deleteUser(id);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("Deleted successfully");
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("User with ID " + id + " does not exist");
+        }
     }
 }
