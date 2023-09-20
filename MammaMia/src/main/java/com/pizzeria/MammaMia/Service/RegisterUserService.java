@@ -30,7 +30,12 @@ public class RegisterUserService {
         return registerUserRepository.save(registerUser);
     }
 
-    public void deleteUser(Long id) {
-        registerUserRepository.deleteById(id);
+    public boolean deleteUser(Long id) {
+        if (registerUserRepository.existsById(id)) {
+            registerUserRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

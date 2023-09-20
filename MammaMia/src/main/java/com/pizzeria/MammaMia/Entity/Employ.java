@@ -12,13 +12,13 @@ public class Employ {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private RegisterUser registerUser;
     private String cpf;
     private String name;
     private String phone;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Permission permission;
     private int salary;
 
