@@ -3,6 +3,8 @@ package com.pizzeria.MammaMia.Controller;
 
 import com.pizzeria.MammaMia.Dto.ClientDTO;
 import com.pizzeria.MammaMia.Entity.Client;
+import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
+import com.pizzeria.MammaMia.Exceptions.ResourceNotFoundException;
 import com.pizzeria.MammaMia.Response.ResponseWrapper;
 import com.pizzeria.MammaMia.Service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +48,17 @@ public class ClientController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ClientDTO> updateClient(@RequestParam("id") Long id, @RequestBody ClientDTO clientDto) {
-        if (!id.equals(clientDto.getId())) {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity<?> updateClient(@RequestParam("id") Long id, @RequestBody ClientDTO clientDto) {
+        try {
+            if (!id.equals(clientDto.getId())) {
+                return ResponseEntity.badRequest().build();
+            }
+            Client updatedClient = clientService.updateClientFromDTO(clientDto);
+            return ResponseEntity.ok(updatedClient.toDTO());
+        } catch (ResourceNotFoundException e) {
+            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
-        Client updatedClient = clientService.updateClientFromDTO(clientDto); // corrected the capitalization here
-        return ResponseEntity.ok(updatedClient.toDTO());
     }
 
     @DeleteMapping("/delete")

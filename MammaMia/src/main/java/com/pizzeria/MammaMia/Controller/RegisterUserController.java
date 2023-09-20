@@ -35,7 +35,7 @@ public class RegisterUserController {
 
     @GetMapping
     public ResponseEntity<ResponseWrapper<RegisterUserDTO>> getRegisterUserById(@RequestParam("id") Long id) {
-        Optional<RegisterUser> optionalUser = Optional.ofNullable(registerUserService.getUserById(id));
+        Optional<RegisterUser> optionalUser = registerUserService.getUserById(id);
         return optionalUser
                 .map(RegisterUser::toDTO)
                 .map(dto -> ResponseEntity.ok(new ResponseWrapper<>(dto)))
