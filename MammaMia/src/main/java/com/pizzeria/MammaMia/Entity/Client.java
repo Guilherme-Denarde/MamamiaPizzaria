@@ -37,6 +37,8 @@ public class Client {
         this.phone = phone;
     }
     public ClientDTO toDTO() {
-        return new ClientDTO(id, registerUser, address, cpf, name, phone);
+        Long registerUserId = (this.registerUser != null) ? this.registerUser.getUserId() : null;
+        Long addressId = (this.address != null) ? this.address.getId() : null;
+        return new ClientDTO(id, registerUserId, addressId, cpf, name, phone);
     }
 }

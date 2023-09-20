@@ -10,4 +10,5 @@ MammaMiaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MammaMiaApplication.class, args);
 	}
+
 }

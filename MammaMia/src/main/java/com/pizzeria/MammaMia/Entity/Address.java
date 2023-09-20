@@ -42,6 +42,12 @@ public class Address {
         this.postalCode = postalCode;
     }
 
+    public static Address fromDTO(AddressDTO addressDto) {
+        return new Address(addressDto.getId(), addressDto.getStreetName(), addressDto.getStreetNum(),
+                addressDto.getAddressReference(), addressDto.getCity(),
+                addressDto.getState(), addressDto.getPostalCode());
+    }
+
     public AddressDTO toDTO() {
         return new AddressDTO(id, streetName, streetNum, addressReference, city, state, postalCode);
     }
