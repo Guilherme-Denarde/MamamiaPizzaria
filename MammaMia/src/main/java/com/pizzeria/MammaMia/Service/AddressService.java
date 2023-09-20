@@ -3,6 +3,7 @@ package com.pizzeria.MammaMia.Service;
 
 import com.pizzeria.MammaMia.Dto.AddressDTO;
 import com.pizzeria.MammaMia.Entity.Address;
+import com.pizzeria.MammaMia.Exceptions.AddressNotFoundException;
 import com.pizzeria.MammaMia.Repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,13 @@ public class AddressService {
     }
 
     public Address updateAddressFromDTO(AddressDTO addressDto) {
-        Address address = new Address(addressDto.getId(), addressDto.getStreetName(), addressDto.getStreetNum(),
-                addressDto.getAddressReference(), addressDto.getCity(),
-                addressDto.getState(), addressDto.getPostalCode());
-        return addressRepository.save(address);
+        Optional<Address> existingAddress = addressRepository.findById(addressDto.getId());
+        if (existingAddress.isPresent()) {
+            Address address = Address.fromDTO(addressDto);
+            return addressRepository.save(address);
+        } else {
+            throw new AddressNotFoundException(addressDto.getId());
+        }
     }
 
     public void deleteAddress(Long id) {

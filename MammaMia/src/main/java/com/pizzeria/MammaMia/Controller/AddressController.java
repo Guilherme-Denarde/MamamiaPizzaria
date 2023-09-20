@@ -51,6 +51,9 @@ public class AddressController {
             return ResponseEntity.badRequest().build();
         }
         Address updatedAddress = addressService.updateAddressFromDTO(addressDto);
+        if (updatedAddress == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(updatedAddress.toDTO());
     }
 

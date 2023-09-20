@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/employes")
+@RequestMapping("/api/employ")
 public class EmployController {
 
     @Autowired
@@ -41,7 +41,10 @@ public class EmployController {
     @PostMapping
     public ResponseEntity<EmployDTO> createEmploy(@RequestBody EmployDTO employDto) {
         Employ employ = employService.createEmployFromDTO(employDto);
-        return ResponseEntity.ok(employ.toDTO());
+        System.out.println(employ.getRegisterUser().getName());
+        EmployDTO employDTO = employ.toDTO();
+        System.out.println(employDTO.getRegisterUser().getName());
+        return ResponseEntity.ok(employDTO);
     }
 
     @PutMapping("/update")
