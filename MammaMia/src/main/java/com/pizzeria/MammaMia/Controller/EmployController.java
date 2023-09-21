@@ -43,6 +43,7 @@ public class EmployController {
     @PostMapping
     public ResponseEntity<EmployDTO> createEmploy(@RequestBody EmployDTO employDto) {
         Employ employ = employService.createEmployFromDTO(employDto);
+        System.out.println("Received employDto: " + employDto);
         System.out.println(employ.getRegisterUser().getName());
         EmployDTO employDTO = employ.toDTO();
         System.out.println(employDTO.getRegisterUser().getName());

@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Table(name = "register_user")
 public class RegisterUser {
     @Id
-    @Getter
+    @Getter @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     @Getter @Setter
