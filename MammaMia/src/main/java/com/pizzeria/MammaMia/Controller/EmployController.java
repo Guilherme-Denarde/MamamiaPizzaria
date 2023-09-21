@@ -2,8 +2,10 @@ package com.pizzeria.MammaMia.Controller;
 
 import com.pizzeria.MammaMia.Dto.EmployDTO;
 import com.pizzeria.MammaMia.Entity.Employ;
+import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
 import com.pizzeria.MammaMia.Response.ResponseWrapper;
 import com.pizzeria.MammaMia.Service.EmployService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,12 +50,16 @@ public class EmployController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<EmployDTO> updateEmploy(@RequestParam("id") Long id, @RequestBody EmployDTO employDto) {
-        if (!id.equals(employDto.getId())) {
-            return ResponseEntity.badRequest().build();
-        }
-        Employ updatedEmploy = employService.updateEmployFromDTO(employDto);
-        return ResponseEntity.ok(updatedEmploy.toDTO());
+    public ResponseEntity<Object> updateEmploy(@RequestParam("id") Long id, @RequestBody EmployDTO employDto) {
+        try {
+            if (!id.equals(employDto.getId())) {
+                return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
+            }
+            Employ updatedEmploy = employService.updateEmployFromDTO(employDto);
+            return ResponseEntity.ok(updatedEmploy.toDTO());
+        }catch (EntityNotFoundException e) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Employ with ID " + id + " not found", 404));
+            }
     }
 
     @DeleteMapping("/delete")

@@ -1,9 +1,14 @@
 package com.pizzeria.MammaMia.Controller;
 
+import com.pizzeria.MammaMia.Dto.EmployDTO;
 import com.pizzeria.MammaMia.Dto.FlavorDTO;
+import com.pizzeria.MammaMia.Entity.Employ;
 import com.pizzeria.MammaMia.Entity.Flavor;
+import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
 import com.pizzeria.MammaMia.Service.FlavorService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,9 +45,23 @@ public class FlavorController {
         return ResponseEntity.ok(new FlavorDTO(flavor.getId(), flavor.getName(), flavor.getPrice(), flavor.getIngredients()));
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Object> updateFlavor(@RequestParam("id") Long id, @RequestBody FlavorDTO flavorDTO) {
+        try {
+            if (!id.equals(flavorDTO.getId())) {
+                return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
+            }
+            Flavor updatedFlavor = flavorService.updateFlavorFromDTO(flavorDTO);
+            return ResponseEntity.ok(updatedFlavor.toDTO());
+        }catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Flavor with ID " + id + " not found", 404));
+        }
+    }
+
     @DeleteMapping("/delete")
     public ResponseEntity<Void> deleteFlavor(@RequestParam("id") Long id) {
         flavorService.deleteFlavor(id);
         return ResponseEntity.ok().build();
     }
+
 }
