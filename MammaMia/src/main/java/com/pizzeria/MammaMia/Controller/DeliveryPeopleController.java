@@ -60,7 +60,15 @@ public class DeliveryPeopleController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteDeliveryPeople(@RequestParam("id") Long id) {
-        deliveryPeopleService.deleteDeliveryPeople(id);
-        return ResponseEntity.ok("Deleted successfully");
+
+        boolean isDeleted = deliveryPeopleService.deleteDeliveryPeople(id);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("Deleted successfully");
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("DeliveryPeople with ID " + id + " does not exist");
+        }
     }
 }

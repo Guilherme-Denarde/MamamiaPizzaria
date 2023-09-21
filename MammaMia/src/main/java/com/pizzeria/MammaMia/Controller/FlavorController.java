@@ -59,9 +59,16 @@ public class FlavorController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteFlavor(@RequestParam("id") Long id) {
-        flavorService.deleteFlavor(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> deleteFlavor(@RequestParam("id") Long id) {
+        boolean isDeleted = flavorService.deleteFlavor(id);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("Deleted successfully");
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Flavor with ID " + id + " does not exist");
+        }
     }
 
 }

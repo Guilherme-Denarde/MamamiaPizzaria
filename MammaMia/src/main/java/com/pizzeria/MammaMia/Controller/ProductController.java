@@ -4,6 +4,7 @@ import com.pizzeria.MammaMia.Dto.ProductDTO;
 import com.pizzeria.MammaMia.Entity.Product;
 import com.pizzeria.MammaMia.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,8 +43,15 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteProduct(@RequestParam("id") Long id) {
-        productService.deleteProduct(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> deleteProduct(@RequestParam("id") Long id) {
+        boolean isDeleted = productService.deleteProduct(id);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("Deleted successfully");
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Product with ID " + id + " does not exist");
+        }
     }
 }

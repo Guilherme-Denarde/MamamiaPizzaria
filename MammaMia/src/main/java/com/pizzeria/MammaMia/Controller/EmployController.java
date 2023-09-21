@@ -64,7 +64,14 @@ public class EmployController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteEmploy(@RequestParam("id") Long id) {
-        employService.deleteEmploy(id);
-        return ResponseEntity.ok("Deletado com sucesso");
+        boolean isDeleted = employService.deleteEmploy(id);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("Deleted successfully");
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Employ with ID " + id + " does not exist");
+        }
     }
 }

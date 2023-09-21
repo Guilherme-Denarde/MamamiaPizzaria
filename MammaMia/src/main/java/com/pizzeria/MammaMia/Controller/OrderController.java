@@ -55,8 +55,15 @@ public class OrderController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteOrder(@RequestParam("id") Long id) {
-        orderService.deleteOrder(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> deleteOrder(@RequestParam("id") Long id) {
+        boolean isDeleted = orderService.deleteOrder(id);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("Deleted successfully");
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Order with ID " + id + " does not exist");
+        }
     }
 }

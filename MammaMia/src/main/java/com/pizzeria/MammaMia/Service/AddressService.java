@@ -42,8 +42,13 @@ public class AddressService {
         }
     }
 
-    public void deleteAddress(Long id) {
-        addressRepository.deleteById(id);
+    public boolean deleteAddress(Long id) {
+        if (addressRepository.existsById(id)) {
+            addressRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

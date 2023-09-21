@@ -61,7 +61,12 @@ public class EmployService {
             throw new EntityNotFoundException("Employ com o ID " + employDto.getId() + " não encontrado");
         }
     }
-    public void deleteEmploy(Long id) {
-        employRepository.deleteById(id);
+    public boolean deleteEmploy(Long id) {
+        if (registerUserRepository.existsById(id)) {
+            registerUserRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -63,7 +63,14 @@ public class ClientController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteClient(@RequestParam("id") Long id) {
-        clientService.deleteClient(id);
-        return ResponseEntity.ok("Deletado com sucesso");
+        boolean isDeleted = clientService.deleteClient(id);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("Deleted successfully");
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Client with ID " + id + " does not exist");
+        }
     }
 }

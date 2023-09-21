@@ -50,7 +50,12 @@ public class FlavorService {
         }
     }
 
-    public void deleteFlavor(Long id) {
-        flavorRepository.deleteById(id);
+    public boolean deleteFlavor(Long id) {
+        if (flavorRepository.existsById(id)) {
+            flavorRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

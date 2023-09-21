@@ -48,7 +48,12 @@ public class DeliveryPeopleService {
         }
     }
 
-    public void deleteDeliveryPeople(Long id) {
-        deliveryPeopleRepository.deleteById(id);
+    public boolean deleteDeliveryPeople(Long id) {
+        if (deliveryPeopleRepository.existsById(id)) {
+            deliveryPeopleRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

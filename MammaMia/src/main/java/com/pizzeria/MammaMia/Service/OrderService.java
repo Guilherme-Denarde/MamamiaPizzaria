@@ -120,8 +120,13 @@ public class OrderService {
         }
     }
 
-    public void deleteOrder(Long id) {
-        orderRepository.deleteById(id);
+    public boolean deleteOrder(Long id) {
+        if (orderRepository.existsById(id)) {
+            orderRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Order mapDtoToOrder(OrderDTO dto) {

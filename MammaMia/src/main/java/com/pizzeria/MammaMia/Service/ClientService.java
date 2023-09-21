@@ -86,7 +86,12 @@ public class ClientService {
         return clientRepository.save(existingClient);
     }
 
-    public void deleteClient(Long id) {
-        clientRepository.deleteById(id);
+    public boolean deleteClient(Long id) {
+        if (clientRepository.existsById(id)) {
+            clientRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

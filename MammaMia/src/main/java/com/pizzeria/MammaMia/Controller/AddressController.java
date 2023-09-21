@@ -59,7 +59,14 @@ public class AddressController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteAddress(@RequestParam("id") Long id) {
-        addressService.deleteAddress(id);
-        return ResponseEntity.ok("Deletado com sucesso");
+        boolean isDeleted = addressService.deleteAddress(id);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("Deleted successfully");
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Address with ID " + id + " does not exist");
+        }
     }
 }
