@@ -3,8 +3,11 @@ package com.pizzeria.MammaMia.Controller;
 
 import com.pizzeria.MammaMia.Dto.AddressDTO;
 import com.pizzeria.MammaMia.Entity.Address;
+import com.pizzeria.MammaMia.Entity.DeliveryPeople;
+import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
 import com.pizzeria.MammaMia.Response.ResponseWrapper;
 import com.pizzeria.MammaMia.Service.AddressService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,15 +49,16 @@ public class AddressController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<AddressDTO> updateAddress(@RequestParam("id") Long id, @RequestBody AddressDTO addressDto) {
-        if (!id.equals(addressDto.getId())) {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity<Object> updateAddress(@RequestParam("id") Long id, @RequestBody AddressDTO addressDto) {
+        try {
+            if (!id.equals(addressDto.getId())) {
+                return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
+            }
+            Address updatedAddress= addressService.updateAddressFromDTO(addressDto);
+            return ResponseEntity.ok(updatedAddress.toDTO());
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Address with ID " + id + " not found", 404));
         }
-        Address updatedAddress = addressService.updateAddressFromDTO(addressDto);
-        if (updatedAddress == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(updatedAddress.toDTO());
     }
 
     @DeleteMapping("/delete")
