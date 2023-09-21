@@ -2,14 +2,14 @@ package com.pizzeria.MammaMia.Service;
 
 
 import com.pizzeria.MammaMia.Dto.ClientDTO;
-import com.pizzeria.MammaMia.Entity.Client;
-import com.pizzeria.MammaMia.Entity.RegisterUser;
-import com.pizzeria.MammaMia.Entity.Address;
+import com.pizzeria.MammaMia.Dto.OrderDTO;
+import com.pizzeria.MammaMia.Entity.*;
 import com.pizzeria.MammaMia.Exceptions.AddressNotFoundException;
 import com.pizzeria.MammaMia.Exceptions.ResourceNotFoundException;
 import com.pizzeria.MammaMia.Repository.AddressRepository;
 import com.pizzeria.MammaMia.Repository.ClientRepository;
 import com.pizzeria.MammaMia.Repository.RegisterUserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -42,21 +42,31 @@ public class ClientService {
         return clientRepository.findById(id);
     }
 
-    public Client createClientFromDTO(ClientDTO clientDto) {
-        Optional<RegisterUser> optionalRegisterUser = registerUserRepository.findById(clientDto.getRegisterUserId());
-        if (optionalRegisterUser.isEmpty()) {
-            throw new ResourceNotFoundException("RegisterUser with the provided ID not found");
-        }
-        RegisterUser registerUser = optionalRegisterUser.get();
+    public Client createClientFromDTO(ClientDTO clientDTO) {
+        Client client = new Client();
+        client.setId(clientDTO.getId());
+        client.setRegisterUser(clientDTO.getRegisterUserId());
+        client.setAddress(clientDTO.getAddressId());
+        client.setCpf(clientDTO.getCpf());
+        client.setName(clientDTO.getName());
+        client.setPhone(clientDTO.getPhone());
 
-        Optional<Address> optionalAddress = addressRepository.findById(clientDto.getAddressId());
-        if (optionalAddress.isEmpty()) {
-            throw new ResourceNotFoundException("Address with the provided ID not found");
+        if (clientDTO.getRegisterUserId() != null) {
+            RegisterUser registerUser = registerUserRepository.findById(clientDTO.getRegisterUserId().getUserId())
+                    .orElseThrow(() -> new EntityNotFoundException("RegisterUser não encontrado"));
+            client.setRegisterUser(registerUser);
         }
-        Address address = optionalAddress.get();
+        if (clientDTO.getAddressId() != null) {
+            Address address = addressRepository.findById(clientDTO.getAddressId().getId())
+                    .orElseThrow(() -> new EntityNotFoundException("Addres não encontrado"));
+            client.setAddress(address);
+        }
 
-        Client client = new Client(clientDto.getId(), registerUser, address, clientDto.getCpf(), clientDto.getName(), clientDto.getPhone());
-        return clientRepository.save(client);
+        try {
+            return clientRepository.save(client);
+        } catch (DataIntegrityViolationException e) {
+            throw new EntityNotFoundException("Já existe um cliente com esse RegisterUser ID "+clientDTO.getRegisterUserId().getUserId());
+        }
     }
 
 

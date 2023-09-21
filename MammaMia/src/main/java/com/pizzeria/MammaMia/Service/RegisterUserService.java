@@ -1,10 +1,13 @@
 package com.pizzeria.MammaMia.Service;
 
 
+import com.pizzeria.MammaMia.Dto.RegisterUserDTO;
 import com.pizzeria.MammaMia.Entity.Client;
 import com.pizzeria.MammaMia.Entity.RegisterUser;
 import com.pizzeria.MammaMia.Repository.RegisterUserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,12 +35,38 @@ public class RegisterUserService {
         return registerUserRepository.save(registerUser);
     }
 
+
+    public RegisterUser updateRegisterUserFromDTO(RegisterUserDTO registerUserDTO) {
+        Optional<RegisterUser> existingRegisterUser = registerUserRepository.findById(registerUserDTO.getUserId());
+
+        if (existingRegisterUser.isPresent()) {
+            RegisterUser registerUser = existingRegisterUser.get();
+
+            registerUser.setName(registerUserDTO.getName());
+            registerUser.setEmail(registerUserDTO.getEmail());
+            registerUser.setPassword(registerUserDTO.getPassword());
+            registerUser.setSalt(registerUserDTO.getSalt());
+            registerUser.setIsActive(registerUserDTO.getIsActive());
+            registerUser.setLastLogin(registerUserDTO.getLastLogin());
+
+            return registerUserRepository.save(registerUser);
+        } else {
+            throw new EntityNotFoundException("Order com o ID " + registerUserDTO.getUserId() + " não encontrado");
+        }
+    }
+
     public boolean deleteUser(Long id) {
         if (registerUserRepository.existsById(id)) {
-            registerUserRepository.deleteById(id);
-            return true;
+            try {
+                registerUserRepository.deleteById(id);
+                return true;
+            } catch (DataIntegrityViolationException e) {
+                throw new EntityNotFoundException("Registro não pode ser deletado porque está sendo referenciado");
+            }
         } else {
             return false;
         }
     }
+
+
 }

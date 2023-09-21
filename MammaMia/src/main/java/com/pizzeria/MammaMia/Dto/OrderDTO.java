@@ -17,8 +17,8 @@ public class OrderDTO {
     private Timestamp orderTime;
     private Timestamp deliveryTime;
     private Float priceTotal;
-    private DeliveryPeople deliveryPeople; // Alterado de Long para o tipo de objeto
-    private Client client;                 // Alterado de Long para o tipo de objeto
+    private DeliveryPeople deliveryPeople;
+    private Client client;
     private Employ employ;
 
     public OrderDTO() {}

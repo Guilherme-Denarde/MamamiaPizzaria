@@ -54,7 +54,6 @@ public class OrderController {
             return ResponseEntity.ok(updatedOrder.toDTO());
     }
 
-
     @DeleteMapping("/delete")
     public ResponseEntity<Void> deleteOrder(@RequestParam("id") Long id) {
         orderService.deleteOrder(id);

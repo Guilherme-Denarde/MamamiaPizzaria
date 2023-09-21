@@ -1,9 +1,13 @@
 package com.pizzeria.MammaMia.Controller;
 
+import com.pizzeria.MammaMia.Dto.OrderDTO;
 import com.pizzeria.MammaMia.Dto.RegisterUserDTO;
-import com.pizzeria.MammaMia.Entity.RegisterUser;
+import com.pizzeria.MammaMia.Entity.*;
+import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
+import com.pizzeria.MammaMia.Repository.RegisterUserRepository;
 import com.pizzeria.MammaMia.Response.ResponseWrapper;
 import com.pizzeria.MammaMia.Service.RegisterUserService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +22,9 @@ import java.util.stream.Collectors;
 public class RegisterUserController {
 
     private final RegisterUserService registerUserService;
+
+    @Autowired
+    private RegisterUserRepository registerUserRepository;
 
     @Autowired
     public RegisterUserController(RegisterUserService registerUserService) {
@@ -44,10 +51,19 @@ public class RegisterUserController {
                         .body(new ResponseWrapper<>("RegisterUser with ID " + id + " not found.")));
     }
 
-
     @PostMapping
     public RegisterUser createUser(@RequestBody RegisterUser registerUser) {
         return registerUserService.createUser(registerUser);
+    }
+
+
+    @PutMapping("/update")
+    public ResponseEntity<Object> updateRegisterUser(@RequestParam("id") Long id, @RequestBody RegisterUserDTO registerUserDTO) {
+        if (!id.equals(registerUserDTO.getUserId())) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
+        }
+        RegisterUser updateRegisterUser = registerUserService.updateRegisterUserFromDTO(registerUserDTO);
+        return ResponseEntity.ok(updateRegisterUser.toDTO());
     }
 
 
