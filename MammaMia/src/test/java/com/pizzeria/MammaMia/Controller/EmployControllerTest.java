@@ -1,7 +1,6 @@
-package com.pizzeria.MammaMia.controller;
+package com.pizzeria.MammaMia.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pizzeria.MammaMia.Controller.EmployController;
 import com.pizzeria.MammaMia.Dto.EmployDTO;
 import com.pizzeria.MammaMia.Entity.Employ;
 import com.pizzeria.MammaMia.Entity.RegisterUser;
