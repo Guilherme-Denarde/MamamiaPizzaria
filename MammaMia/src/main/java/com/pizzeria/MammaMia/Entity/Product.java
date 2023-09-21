@@ -1,5 +1,7 @@
 package com.pizzeria.MammaMia.Entity;
 
+import com.pizzeria.MammaMia.Dto.OrderDTO;
+import com.pizzeria.MammaMia.Dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,9 +20,14 @@ public class Product {
     @Column(name = "product_description")
     private String description;
     private Float price;
+//    private int productFlavor;
     @JoinColumn(name = "product_flavor")
     @ManyToOne
     private Flavor flavor;
     private int quantity;
+
+    public ProductDTO toDTO() {
+        return new ProductDTO(id, name, description, price, quantity, flavor);
+    }
 
 }

@@ -16,7 +16,6 @@ public class DeliveryPeople {
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employ_id")
-
     private Employ employ;
     private String cpf;
     private String name;

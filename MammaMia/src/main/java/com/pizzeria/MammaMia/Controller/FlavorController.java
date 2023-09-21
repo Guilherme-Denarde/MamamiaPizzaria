@@ -5,6 +5,7 @@ import com.pizzeria.MammaMia.Dto.FlavorDTO;
 import com.pizzeria.MammaMia.Entity.Employ;
 import com.pizzeria.MammaMia.Entity.Flavor;
 import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
+import com.pizzeria.MammaMia.Response.ResponseWrapper;
 import com.pizzeria.MammaMia.Service.FlavorService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,13 @@ public class FlavorController {
     }
 
     @GetMapping
-    public ResponseEntity<FlavorDTO> getFlavorById(@RequestParam("id") Long id) {
+    public ResponseEntity<ResponseWrapper<FlavorDTO>> getFlavorById(@RequestParam("id") Long id) {
         return flavorService.getFlavorById(id)
                 .map(flavor -> new FlavorDTO(flavor.getId(), flavor.getName(), flavor.getPrice(), flavor.getIngredients()))
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .map(dto -> ResponseEntity.ok(new ResponseWrapper<>(dto)))
+                .orElseGet(() -> ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseWrapper<>("Flavor with ID " + id + " not found.")));
     }
 
     @PostMapping

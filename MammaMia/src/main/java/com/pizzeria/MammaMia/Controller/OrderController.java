@@ -5,6 +5,7 @@ import com.pizzeria.MammaMia.Dto.OrderDTO;
 import com.pizzeria.MammaMia.Entity.Employ;
 import com.pizzeria.MammaMia.Entity.Order;
 import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
+import com.pizzeria.MammaMia.Response.ResponseWrapper;
 import com.pizzeria.MammaMia.Service.OrderService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,13 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<OrderDTO> getOrderById(@RequestParam("id") Long id) {
+    public ResponseEntity<ResponseWrapper<OrderDTO>> getOrderById(@RequestParam("id") Long id) {
         return orderService.getOrderById(id)
                 .map(Order::toDTO)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .map(dto -> ResponseEntity.ok(new ResponseWrapper<>(dto)))
+                .orElseGet(() -> ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseWrapper<>("Order with ID " + id + " not found.")));
     }
 
     @PostMapping
