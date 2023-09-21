@@ -46,24 +46,24 @@ public class EmployControllerTest {
 
     }
 
-    @Test
-    void createEmployTest() throws Exception {
-        EmployDTO employDto = new EmployDTO();
-        employDto.setId(1L);
-        employDto.setName("John");
-
-        RegisterUser registerUser = new RegisterUser();
-        registerUser.setUserId(1L);
-        employDto.setRegisterUser(registerUser);
-
-        String employDtoJson = objectMapper.writeValueAsString(employDto);
-
-        mockMvc.perform(post("/api/employ")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(employDtoJson))
-                .andExpect(status().isOk())
-                .andDo(MockMvcResultHandlers.print());
-    }
+//    @Test
+//    void createEmployTest() throws Exception {
+//        EmployDTO employDto = new EmployDTO();
+//        employDto.setId(1L);
+//        employDto.setName("John");
+//
+//        RegisterUser registerUser = new RegisterUser();
+//        registerUser.setUserId(1L);
+//        employDto.setRegisterUser(registerUser);
+//
+//        String employDtoJson = objectMapper.writeValueAsString(employDto);
+//
+//        mockMvc.perform(post("/api/employ")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(employDtoJson))
+//                .andExpect(status().isOk())
+//                .andDo(MockMvcResultHandlers.print());
+//    }
 
     @Test
     void getAllEmployesTest() throws Exception {

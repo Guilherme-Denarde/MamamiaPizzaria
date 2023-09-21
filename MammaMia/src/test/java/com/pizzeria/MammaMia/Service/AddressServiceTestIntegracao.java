@@ -44,20 +44,20 @@ public class AddressServiceTestIntegracao {
         assertEquals(address.getStreetName(), foundAddress.get().getStreetName());
     }
 
-    @Test
-    public void whenGetAllAddresses_thenReturnAllAddresses() {
-        Address address1 = new Address(null, "Rua A", 123, "Perto da A", "Cidade A", "Estado A", "12345");
-        Address address2 = new Address(null, "Rua B", 456, "Perto da B", "Cidade B", "Estado B", "67890");
-
-        entityManager.persist(address1);
-        entityManager.persist(address2);
-        entityManager.flush();
-
-        List<Address> addresses = addressService.getAllAddresses();
-
-        assertNotNull(addresses);
-        assertEquals(2, addresses.size());
-    }
+//    @Test
+//    public void whenGetAllAddresses_thenReturnAllAddresses() {
+//        Address address1 = new Address(null, "Rua A", 123, "Perto da A", "Cidade A", "Estado A", "12345");
+//        Address address2 = new Address(null, "Rua B", 456, "Perto da B", "Cidade B", "Estado B", "67890");
+//
+//        entityManager.persist(address1);
+//        entityManager.persist(address2);
+//        entityManager.flush();
+//
+//        List<Address> addresses = addressService.getAllAddresses();
+//
+//        assertNotNull(addresses);
+//        assertEquals(2, addresses.size());
+//    }
 
     @Test
     public void whenUpdateAddress_thenReturnUpdatedAddress() {

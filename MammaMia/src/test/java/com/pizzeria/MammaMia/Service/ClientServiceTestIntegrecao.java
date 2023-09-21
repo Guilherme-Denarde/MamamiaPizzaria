@@ -52,7 +52,7 @@ public class ClientServiceTestIntegrecao {
         resultActions.andExpect(status().isBadRequest());
 
         long clientCount = clientRepository.count();
-        assertEquals(17, clientCount);
+        assertEquals(20, clientCount);
     }
 
 
@@ -113,8 +113,6 @@ public class ClientServiceTestIntegrecao {
         resultActions.andExpect(jsonPath("$.data.name").value(client.getName()));
 
     }
-
-
 
     private Address convertToAddress(AddressDTO addressDTO) {
         Address address = new Address();

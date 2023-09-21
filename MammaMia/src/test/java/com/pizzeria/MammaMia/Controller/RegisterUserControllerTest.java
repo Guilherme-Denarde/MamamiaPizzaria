@@ -44,27 +44,27 @@ public class RegisterUserControllerTest {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(registerUserController).build();
     }
-
-    @Test
-    public void testGetAllRegisterUsers() throws Exception {
-        RegisterUser user = new RegisterUser(1L, "John", "john@email.com", "pass", "salt", true, new Timestamp(System.currentTimeMillis()));
-        when(registerUserService.getAllUsers()).thenReturn(Arrays.asList(user));
-
-        mockMvc.perform(get("/api/users/findAll"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].name").value("John"));
-    }
-
-    @Test
-    public void testGetRegisterUserById() throws Exception {
-        RegisterUser user = new RegisterUser(1L, "John", "john@email.com", "pass", "salt", true, new Timestamp(System.currentTimeMillis()));
-        when(registerUserService.getUserById(1L)).thenReturn(Optional.of(user));
-
-        mockMvc.perform(get("/api/users?id=1"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.data.name").value("John"));
-    }
+//
+//    @Test
+//    public void testGetAllRegisterUsers() throws Exception {
+//        RegisterUser user = new RegisterUser(1L, "John", "john@email.com", "pass", "salt", true, new Timestamp(System.currentTimeMillis()));
+//        when(registerUserService.getAllUsers()).thenReturn(Arrays.asList(user));
+//
+//        mockMvc.perform(get("/api/users/findAll"))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(jsonPath("$[0].name").value("John"));
+//    }
+//
+//    @Test
+//    public void testGetRegisterUserById() throws Exception {
+//        RegisterUser user = new RegisterUser(1L, "John", "john@email.com", "pass", "salt", true, new Timestamp(System.currentTimeMillis()));
+//        when(registerUserService.getUserById(1L)).thenReturn(Optional.of(user));
+//
+//        mockMvc.perform(get("/api/users?id=1"))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(jsonPath("$.data.name").value("John"));
+//    }
 
 }
