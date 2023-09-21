@@ -12,20 +12,14 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ClientDTO {
     private Long id;
-    private Long registerUserId;
-    private Long addressId;
+    private RegisterUser registerUserId;
+    private Address addressId;
     private String cpf;
     private String name;
     private String phone;
 
-    public ClientDTO(Long id, Long registerUserId, Long addressId, String cpf, String name, String phone) {
-        this.id = id;
-        this.registerUserId = registerUserId;
-        this.addressId = addressId;
-        this.cpf = cpf;
-        this.name = name;
-        this.phone = phone;
-    }
+
 }

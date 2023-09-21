@@ -2,7 +2,9 @@ package com.pizzeria.MammaMia.Service;
 
 
 import com.pizzeria.MammaMia.Dto.EmployDTO;
+import com.pizzeria.MammaMia.Entity.DeliveryPeople;
 import com.pizzeria.MammaMia.Entity.Employ;
+import com.pizzeria.MammaMia.Entity.Permission;
 import com.pizzeria.MammaMia.Entity.RegisterUser;
 import com.pizzeria.MammaMia.Repository.EmployRepository;
 import com.pizzeria.MammaMia.Repository.RegisterUserRepository;
@@ -44,13 +46,27 @@ public class EmployService {
     }
 
     public Employ updateEmployFromDTO(EmployDTO employDto) {
-        Employ employ = new Employ(employDto.getId(), employDto.getRegisterUser(), employDto.getCpf(),
-                employDto.getName(), employDto.getPhone(),
-                employDto.getPermission(), employDto.getSalary());
-        return employRepository.save(employ);
-    }
+        Optional<Employ> existingEmploy = employRepository.findById(employDto.getId());
+        if (existingEmploy.isPresent()) {
+            Employ employ = existingEmploy.get();
 
-    public void deleteEmploy(Long id) {
-        employRepository.deleteById(id);
+            employ.setCpf(employDto.getCpf());
+            employ.setName(employDto.getName());
+            employ.setPhone(employDto.getPhone());
+            employ.setPermission(employDto.getPermission());
+            employ.setSalary(employDto.getSalary());
+
+            return employRepository.save(employ);
+        } else {
+            throw new EntityNotFoundException("Employ com o ID " + employDto.getId() + " não encontrado");
+        }
+    }
+    public boolean deleteEmploy(Long id) {
+        if (registerUserRepository.existsById(id)) {
+            registerUserRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

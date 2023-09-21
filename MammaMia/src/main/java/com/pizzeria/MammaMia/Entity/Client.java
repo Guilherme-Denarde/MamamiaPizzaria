@@ -9,7 +9,7 @@ import lombok.Setter;
 @Table(name = "client")
 public class Client {
     @Id
-    @Getter
+    @Getter @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
@@ -37,8 +37,6 @@ public class Client {
         this.phone = phone;
     }
     public ClientDTO toDTO() {
-        Long registerUserId = (this.registerUser != null) ? this.registerUser.getUserId() : null;
-        Long addressId = (this.address != null) ? this.address.getId() : null;
-        return new ClientDTO(id, registerUserId, addressId, cpf, name, phone);
+        return new ClientDTO(id, registerUser, address, cpf, name, phone);
     }
 }

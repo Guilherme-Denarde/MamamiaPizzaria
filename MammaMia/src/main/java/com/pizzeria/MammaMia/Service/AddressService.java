@@ -3,8 +3,11 @@ package com.pizzeria.MammaMia.Service;
 
 import com.pizzeria.MammaMia.Dto.AddressDTO;
 import com.pizzeria.MammaMia.Entity.Address;
+import com.pizzeria.MammaMia.Entity.DeliveryPeople;
 import com.pizzeria.MammaMia.Exceptions.AddressNotFoundException;
 import com.pizzeria.MammaMia.Repository.AddressRepository;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +17,7 @@ import java.util.Optional;
 @Service
 public class AddressService {
 
-    @Autowired
+    @Autowired @Setter
     private AddressRepository addressRepository;
 
     public List<Address> getAllAddresses() {
@@ -34,16 +37,31 @@ public class AddressService {
 
     public Address updateAddressFromDTO(AddressDTO addressDto) {
         Optional<Address> existingAddress = addressRepository.findById(addressDto.getId());
+
         if (existingAddress.isPresent()) {
-            Address address = Address.fromDTO(addressDto);
+            Address address = existingAddress.get();
+
+
+            address.setStreetName(addressDto.getStreetName());
+            address.setStreetNum(addressDto.getStreetNum());
+            address.setAddressReference(addressDto.getAddressReference());
+            address.setCity(addressDto.getCity());
+            address.setState(addressDto.getState());
+            address.setPostalCode(addressDto.getPostalCode());
+
             return addressRepository.save(address);
         } else {
-            throw new AddressNotFoundException(addressDto.getId());
+            throw new EntityNotFoundException("Address com o ID " + addressDto.getId() + " não encontrado");
         }
     }
 
-    public void deleteAddress(Long id) {
-        addressRepository.deleteById(id);
+    public boolean deleteAddress(Long id) {
+        if (addressRepository.existsById(id)) {
+            addressRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

@@ -1,8 +1,11 @@
 package com.pizzeria.MammaMia.Service;
 
+import com.pizzeria.MammaMia.Dto.EmployDTO;
 import com.pizzeria.MammaMia.Dto.FlavorDTO;
+import com.pizzeria.MammaMia.Entity.Employ;
 import com.pizzeria.MammaMia.Entity.Flavor;
 import com.pizzeria.MammaMia.Repository.FlavorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +34,28 @@ public class FlavorService {
         return flavorRepository.save(flavor);
     }
 
-    public void deleteFlavor(Long id) {
-        flavorRepository.deleteById(id);
+
+    public Flavor updateFlavorFromDTO(FlavorDTO flavorDTO) {
+        Optional<Flavor> existingFlavor = flavorRepository.findById(flavorDTO.getId());
+        if (existingFlavor.isPresent()) {
+            Flavor flavor = existingFlavor.get();
+
+            flavor.setName(flavorDTO.getFlavorName());
+            flavor.setPrice(flavorDTO.getFlavorPrice());
+            flavor.setIngredients(flavorDTO.getFlavorIngredients());
+
+            return flavorRepository.save(flavor);
+        } else {
+            throw new EntityNotFoundException("Flavor com o ID " + flavorDTO.getId() + " não encontrado");
+        }
+    }
+
+    public boolean deleteFlavor(Long id) {
+        if (flavorRepository.existsById(id)) {
+            flavorRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

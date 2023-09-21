@@ -2,7 +2,10 @@ package com.pizzeria.MammaMia.Controller;
 
 import com.pizzeria.MammaMia.Dto.DeliveryPeopleDTO;
 import com.pizzeria.MammaMia.Entity.DeliveryPeople;
+import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
+import com.pizzeria.MammaMia.Response.ResponseWrapper;
 import com.pizzeria.MammaMia.Service.DeliveryPeopleService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +31,13 @@ public class DeliveryPeopleController {
     }
 
     @GetMapping
-    public ResponseEntity<DeliveryPeopleDTO> getDeliveryPeopleById(@RequestParam("id") Long id) {
+    public ResponseEntity<ResponseWrapper<DeliveryPeopleDTO>> getDeliveryPeopleById(@RequestParam("id") Long id) {
         return deliveryPeopleService.getDeliveryPeopleById(id)
                 .map(DeliveryPeople::toDTO)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+                .map(dto -> ResponseEntity.ok(new ResponseWrapper<>(dto)))
+                .orElseGet(() -> ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseWrapper<>("DeliveryPeople with ID " + id + " not found.")));
     }
 
     @PostMapping
@@ -42,17 +47,31 @@ public class DeliveryPeopleController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<DeliveryPeopleDTO> updateDeliveryPeople(@RequestParam("id") Long id, @RequestBody DeliveryPeopleDTO deliveryPeopleDto) {
-        if (!id.equals(deliveryPeopleDto.getId())) {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity<Object> updateDeliveryPeople(@RequestParam("id") Long id, @RequestBody DeliveryPeopleDTO deliveryPeopleDto) {
+        try {
+            if (!id.equals(deliveryPeopleDto.getId())) {
+                return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
+            }
+            DeliveryPeople updatedDeliveryPeople = deliveryPeopleService.updateDeliveryPeopleFromDTO(deliveryPeopleDto);
+            return ResponseEntity.ok(updatedDeliveryPeople.toDTO());
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("DeliveryPeople with ID " + id + " not found", 404));
         }
-        DeliveryPeople updatedDeliveryPeople = deliveryPeopleService.updateDeliveryPeopleFromDTO(deliveryPeopleDto);
-        return ResponseEntity.ok(updatedDeliveryPeople.toDTO());
     }
+
+
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteDeliveryPeople(@RequestParam("id") Long id) {
-        deliveryPeopleService.deleteDeliveryPeople(id);
-        return ResponseEntity.ok("Deleted successfully");
+
+        boolean isDeleted = deliveryPeopleService.deleteDeliveryPeople(id);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("Deleted successfully");
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("DeliveryPeople with ID " + id + " does not exist");
+        }
     }
 }
