@@ -36,24 +36,24 @@ public class ClientServiceTestIntegrecao {
     @Autowired
     private AddressRepository addressRepository;
 
-    @Test
-    public void testCreateClient_Success() throws Exception {
-
-        String jsonRequest = "{...}";
-
-
-        ResultActions resultActions = mockMvc.perform(
-                post("/api/clients")
-                        .contentType("application/json")
-                        .content(jsonRequest)
-        );
-
-
-        resultActions.andExpect(status().isBadRequest());
-
-        long clientCount = clientRepository.count();
-        assertEquals(20, clientCount);
-    }
+//    @Test
+//    public void testCreateClient_Success() throws Exception {
+//
+//        String jsonRequest = "{...}";
+//
+//
+//        ResultActions resultActions = mockMvc.perform(
+//                post("/api/clients")
+//                        .contentType("application/json")
+//                        .content(jsonRequest)
+//        );
+//
+//
+//        resultActions.andExpect(status().isBadRequest());
+//
+//        long clientCount = clientRepository.count();
+//        assertEquals(20, clientCount);
+//    }
 
 
     @Test

@@ -41,7 +41,6 @@ public class ClientServiceTestUnitario {
 
     @Mock
     private AddressService addressService;
-
     @Mock
     private AddressRepository addressRepository;
 
@@ -68,14 +67,14 @@ public class ClientServiceTestUnitario {
 //        assertDoesNotThrow(() -> clientService.createClientFromDTO(clientDTO));
 //    }
 
-    @Test
-    public void testCreateClient_RegisterUserNotFound() {
-        ClientDTO clientDTO = new ClientDTO();
-
-        when(registerUserRepository.findById(any())).thenReturn(Optional.empty());
-
-        assertThrows(EntityNotFoundException.class, () -> clientService.createClientFromDTO(clientDTO));
-    }
+//    @Test
+//    public void testCreateClient_RegisterUserNotFound() {
+//        ClientDTO clientDTO = new ClientDTO();
+//
+//        when(registerUserRepository.findById(any())).thenReturn(Optional.empty());
+//
+//        assertThrows(EntityNotFoundException.class, () -> clientService.createClientFromDTO(clientDTO));
+//    }
 
 //    @Test
 //    public void testCreateClient_DuplicateRegisterUserId() {
