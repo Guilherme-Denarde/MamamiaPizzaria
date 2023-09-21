@@ -7,6 +7,7 @@ import com.pizzeria.MammaMia.Entity.DeliveryPeople;
 import com.pizzeria.MammaMia.Exceptions.AddressNotFoundException;
 import com.pizzeria.MammaMia.Repository.AddressRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import java.util.Optional;
 @Service
 public class AddressService {
 
-    @Autowired
+    @Autowired @Setter
     private AddressRepository addressRepository;
 
     public List<Address> getAllAddresses() {
