@@ -2,11 +2,15 @@ package com.pizzeria.MammaMia.Entity;
 
 import com.pizzeria.MammaMia.Dto.EmployDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "employ")
+@NoArgsConstructor
+//@AllArgsConstructor
 public class Employ {
 
     @Id

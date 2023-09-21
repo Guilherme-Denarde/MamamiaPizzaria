@@ -2,15 +2,18 @@ package com.pizzeria.MammaMia.Entity;
 
 import com.pizzeria.MammaMia.Dto.OrderDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
 @Data
 @Entity
 @Table(name = "orders")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,27 +30,15 @@ public class Order {
     private Float priceTotal;
     @ManyToOne
     @JoinColumn(name = "delivery_people")
-    private DeliveryPeople delivery_people;
+    private DeliveryPeople deliveryPeopleId;
     @ManyToOne
     @JoinColumn(name = "client")
     private Client client;
     @ManyToOne
     @JoinColumn(name = "employ")
     private Employ employ;
-    public OrderDTO toDTO() {
-        OrderDTO dto = new OrderDTO();
-        dto.setId(this.id);
-        dto.setPayment(this.payment);
-        dto.setOrderSize(this.orderSize);
-        dto.setOrderState(this.orderState);
-        dto.setMustDelivery(this.must_delivery);
-        dto.setOrderTime(this.order_time);
-        dto.setDeliveryTime(this.delivery_time);
-        dto.setPriceTotal(this.priceTotal);
-        dto.setDeliveryPeopleId(this.delivery_people != null ? this.delivery_people.getId() : null);
-        dto.setClientId(this.client != null ? this.client.getId() : null);
-        dto.setEmployId(this.employ != null ? this.employ.getId() : null);
-        return dto;
-    }
 
+    public OrderDTO toDTO() {
+        return new OrderDTO(id, payment, orderSize, orderState, must_delivery, order_time, delivery_time, priceTotal, deliveryPeopleId, client, employ);
+    }
 }
