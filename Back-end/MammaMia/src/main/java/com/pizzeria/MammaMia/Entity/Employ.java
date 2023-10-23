@@ -15,18 +15,18 @@ public class Employ {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private RegisterUser registerUser;
     private String cpf;
     private String name;
     private String phone;
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Permission permission;
     private int salary;
 
-    public Employ(Long id, RegisterUser registerUser, String cpf, String name, String phone, Permission permission, int salary) {
+    public Employ(Integer id, RegisterUser registerUser, String cpf, String name, String phone, Permission permission, int salary) {
         this.id = id;
         this.registerUser = registerUser;
         this.cpf = cpf;
@@ -39,4 +39,5 @@ public class Employ {
     public EmployDTO toDTO() {
         return new EmployDTO(id, registerUser, cpf, name, phone, permission, salary);
     }
+
 }

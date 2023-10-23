@@ -14,7 +14,12 @@ import { PedidoslistComponent } from './components/pedidos/pedidoslist/pedidosli
 import { PedidosdetailsComponent } from './components/pedidos/pedidosdetails/pedidosdetails.component';
 import { ProdutoslistComponent } from './components/produtos/produtoslist/produtoslist.component';
 import { ProdutosdetailsComponent } from './components/produtos/produtosdetails/produtosdetails.component';
-import { PerfilComponent } from './components/layout/perfil/perfil.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { EntrarComponent } from './components/entrar/entrar.component';
+import { CadastrarComponent } from './components/sistema/cadastrar/cadastrar.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,14 +32,19 @@ import { PerfilComponent } from './components/layout/perfil/perfil.component';
     PedidosdetailsComponent,
     ProdutoslistComponent,
     ProdutosdetailsComponent,
-    PerfilComponent
+    PerfilComponent,
+    HomePageComponent,
+    EntrarComponent,
+    CadastrarComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

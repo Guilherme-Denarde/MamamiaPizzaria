@@ -35,7 +35,7 @@ public class EmployService {
 
     public Employ createEmployFromDTO(EmployDTO employDto) {
         RegisterUser registerUser = registerUserRepository
-                .findById(employDto.getRegisterUser().getUserId())
+                .findById(Long.valueOf(employDto.getRegisterUser().getUserId()))
                 .orElseThrow(() -> new EntityNotFoundException("RegisterUser not found"));
 
         Employ employ = new Employ(employDto.getId(), registerUser, employDto.getCpf(),
@@ -46,7 +46,7 @@ public class EmployService {
     }
 
     public Employ updateEmployFromDTO(EmployDTO employDto) {
-        Optional<Employ> existingEmploy = employRepository.findById(employDto.getId());
+        Optional<Employ> existingEmploy = employRepository.findById(Long.valueOf(employDto.getId()));
         if (existingEmploy.isPresent()) {
             Employ employ = existingEmploy.get();
 
