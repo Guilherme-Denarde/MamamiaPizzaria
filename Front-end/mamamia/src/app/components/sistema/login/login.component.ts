@@ -31,6 +31,10 @@ export class LoginComponent {
         this.toastr.error(error.error.message, 'Login Error');
       } else {
         this.toastr.error('Login failed. Please try again.', 'Login Error');
+        console.error('Full error object:', error);
+
+      // this.router.navigate(['/home']);
+
       }
     });
   }

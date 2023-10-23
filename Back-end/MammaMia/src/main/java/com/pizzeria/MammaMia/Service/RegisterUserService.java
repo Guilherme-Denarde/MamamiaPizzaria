@@ -91,4 +91,11 @@ public RegisterUser createUser(RegisterUser registerUser) {
             throw new EntityNotFoundException("User with ID " + id + " not found.");
         }
     }
+    public Optional<RegisterUser> verifyUserCredentials(String email, String password) {
+        Optional<RegisterUser> userOptional = registerUserRepository.findByEmail(email);
+        if (userOptional.isPresent() && userOptional.get().getPassword().equals(password)) {
+            return userOptional;
+        }
+        return Optional.empty();
+    }
 }

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 import java.util.Optional;
 
 import java.util.List;
@@ -79,4 +81,18 @@ public class RegisterUserController {
                     .body("User with ID " + id + " does not exist");
         }
     }
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody Map<String, String> credentials) {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
+
+        Optional<RegisterUser> verifiedUser = registerUserService.verifyUserCredentials(email, password);
+
+        if (verifiedUser.isPresent()) {
+            return ResponseEntity.ok().body(Map.of("message", "Login successful"));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Invalid email or password"));
+        }
+    }
+
 }
