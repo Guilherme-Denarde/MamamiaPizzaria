@@ -41,7 +41,7 @@ public class DeliveryPeopleService {
         deliveryPeople.setPhone(deliveryPeopleDTO.getPhone());
 
         if (deliveryPeopleDTO.getEmploy() != null) {
-            Employ employ = employRepository.findById(deliveryPeopleDTO.getEmploy().getId())
+            Employ employ = employRepository.findById(Long.valueOf(deliveryPeopleDTO.getEmploy().getId()))
                     .orElseThrow(() -> new EntityNotFoundException("Employ não encontrado"));
             deliveryPeople.setEmploy(employ);
         }
@@ -50,7 +50,7 @@ public class DeliveryPeopleService {
     }
 
     public DeliveryPeople updateDeliveryPeopleFromDTO(DeliveryPeopleDTO deliveryPeopleDto) {
-        Optional<DeliveryPeople> existingDeliveryPeople = deliveryPeopleRepository.findById(deliveryPeopleDto.getId());
+        Optional<DeliveryPeople> existingDeliveryPeople = deliveryPeopleRepository.findById(Long.valueOf(deliveryPeopleDto.getId()));
 
         if (existingDeliveryPeople.isPresent()) {
             DeliveryPeople deliveryPeople = existingDeliveryPeople.get();

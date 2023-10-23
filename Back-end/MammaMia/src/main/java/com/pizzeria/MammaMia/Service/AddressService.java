@@ -36,7 +36,7 @@ public class AddressService {
     }
 
     public Address updateAddressFromDTO(AddressDTO addressDto) {
-        Optional<Address> existingAddress = addressRepository.findById(addressDto.getId());
+        Optional<Address> existingAddress = addressRepository.findById(Long.valueOf(addressDto.getId()));
 
         if (existingAddress.isPresent()) {
             Address address = existingAddress.get();

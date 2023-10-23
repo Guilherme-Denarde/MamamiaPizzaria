@@ -36,7 +36,7 @@ public class FlavorService {
 
 
     public Flavor updateFlavorFromDTO(FlavorDTO flavorDTO) {
-        Optional<Flavor> existingFlavor = flavorRepository.findById(flavorDTO.getId());
+        Optional<Flavor> existingFlavor = flavorRepository.findById(Long.valueOf(flavorDTO.getId()));
         if (existingFlavor.isPresent()) {
             Flavor flavor = existingFlavor.get();
 

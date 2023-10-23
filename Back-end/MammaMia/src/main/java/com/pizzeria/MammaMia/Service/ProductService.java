@@ -37,7 +37,7 @@ public class ProductService {
         product.setQuantity(productDto.getQuantity());
 
         if (productDto.getFlavor() != null) {
-            Flavor flavor = flavorRepository.findById(productDto.getFlavor().getId())
+            Flavor flavor = flavorRepository.findById(Long.valueOf(productDto.getFlavor().getId()))
                     .orElseThrow(() -> new EntityNotFoundException("Flavor não encontrado"));
             product.setFlavor(flavor);
         }
@@ -46,7 +46,7 @@ public class ProductService {
     }
 
     public Product updateProductFromDTO(ProductDTO productDTO) {
-        Optional<Product> existingProduct = productRepository.findById(productDTO.getId());
+        Optional<Product> existingProduct = productRepository.findById(Long.valueOf(productDTO.getId()));
 
         if (existingProduct.isPresent()) {
             Product product = existingProduct.get();
@@ -60,7 +60,7 @@ public class ProductService {
 
             // Verificar e atualizar DeliveryPeople
             if (productDTO.getFlavor() != null) {
-                Flavor flavor = flavorRepository.findById(productDTO.getFlavor().getId())
+                Flavor flavor = flavorRepository.findById(Long.valueOf(productDTO.getFlavor().getId()))
                         .orElseThrow(() -> new EntityNotFoundException("Flavor com o ID " + productDTO.getFlavor().getId() + " não encontrado"));
                 product.setFlavor(flavor);
             } else {

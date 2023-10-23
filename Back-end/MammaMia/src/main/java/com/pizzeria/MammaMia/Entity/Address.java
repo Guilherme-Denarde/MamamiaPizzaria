@@ -14,7 +14,7 @@ public class Address {
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Getter @Setter
     @Column(name = "streetname")
     private String streetName;
@@ -32,7 +32,7 @@ public class Address {
     private String postalCode;
     public Address(){
     }
-    public Address(Long id, String streetName, int streetNum, String addressReference, String city, String state, String postalCode) {
+    public Address(Integer id, String streetName, int streetNum, String addressReference, String city, String state, String postalCode) {
         this.id = id;
         this.streetName = streetName;
         this.streetNum = streetNum;

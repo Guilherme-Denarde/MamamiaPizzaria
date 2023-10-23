@@ -1,6 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
-import { Usuario } from 'src/app/models/usuario';
+import { ToastrService } from 'ngx-toastr';
+import { LoginUser } from 'src/app/models/user/user';
 
 @Component({
   selector: 'app-login',
@@ -9,15 +11,27 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class LoginComponent {
 
-  usuario: Usuario = new Usuario();
-  roteador = inject(Router);
+  loginUser : LoginUser = {
+    email: '',
+    password: ''
+  };
 
-  logar() {
-    if (this.usuario.login == 'admin' && this.usuario.senha == 'admin')
-      this.roteador.navigate(['admin/pedidos']);
-    else
-      alert('Login ou senha incorretos!');
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
+
+  onLogin() {
+    this.userService.login(this.loginUser).subscribe(response => {
+      // Handle the response from the server (e.g. save the token, navigate to another page)
+      this.router.navigate(['/home']);
+    }, error => {
+      if (error.error && error.error.message) {
+        this.toastr.error(error.error.message, 'Login Error');
+      } else {
+        this.toastr.error('Login failed. Please try again.', 'Login Error');
+      }
+    });
   }
-
-
 }
