@@ -4,23 +4,22 @@ import com.pizzeria.MammaMia.Entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDTO {
-    private Long id;
+    private Integer id;
     private Payment payment;
     private OrderSize orderSize;
     private OrderState orderState;
-    private boolean mustDelivery;
+    private boolean mustDeliver;
     private Timestamp orderTime;
     private Timestamp deliveryTime;
-    private Float priceTotal;
+    private BigDecimal priceTotal;
     private DeliveryPeople deliveryPeople;
     private Client client;
     private Employ employ;
-
 }

@@ -52,12 +52,12 @@ public class ClientService {
         client.setPhone(clientDTO.getPhone());
 
         if (clientDTO.getRegisterUserId() != null) {
-            RegisterUser registerUser = registerUserRepository.findById(clientDTO.getRegisterUserId().getUserId())
+            RegisterUser registerUser = registerUserRepository.findById(Long.valueOf(clientDTO.getRegisterUserId().getUserId()))
                     .orElseThrow(() -> new EntityNotFoundException("RegisterUser não encontrado"));
             client.setRegisterUser(registerUser);
         }
         if (clientDTO.getAddressId() != null) {
-            Address address = addressRepository.findById(clientDTO.getAddressId().getId())
+            Address address = addressRepository.findById(Long.valueOf(clientDTO.getAddressId().getId()))
                     .orElseThrow(() -> new EntityNotFoundException("Addres não encontrado"));
             client.setAddress(address);
         }
@@ -72,7 +72,7 @@ public class ClientService {
 
     public Client updateClientFromDTO(ClientDTO clientDto) {
 
-        Optional<Client> optionalExistingClient = clientRepository.findById(clientDto.getId());
+        Optional<Client> optionalExistingClient = clientRepository.findById(Long.valueOf(clientDto.getId()));
         if (optionalExistingClient.isEmpty()) {
             throw new ResourceNotFoundException("Client with the provided ID not found");
         }

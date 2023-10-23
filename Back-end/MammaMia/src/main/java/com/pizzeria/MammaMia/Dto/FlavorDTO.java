@@ -2,16 +2,18 @@ package com.pizzeria.MammaMia.Dto;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class FlavorDTO {
-    private Long id;
+    private Integer id;
     private String flavorName;
-    private Float flavorPrice;
+    private BigDecimal  flavorPrice;
     private String flavorIngredients;
 
     public FlavorDTO() {}
 
-    public FlavorDTO(Long id, String flavorName, Float flavorPrice, String flavorIngredients) {
+    public FlavorDTO(Integer id, String flavorName, BigDecimal flavorPrice, String flavorIngredients) {
         this.id = id;
         this.flavorName = flavorName;
         this.flavorPrice = flavorPrice;

@@ -1,29 +1,29 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Produto } from '../models/produto';
+import { Pedido } from 'src/app/models/pedido/pedido';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutosService {
+export class PedidosService {
 
-  API: string = 'http://localhost:8080/api/produto';
+  API: string = 'http://localhost:8080/api/pedido';
   http = inject(HttpClient);
 
   constructor() { }
 
 
-  listAll(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(this.API);
+  listAll(): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(this.API);
   }
 
-  save(produto: Produto): Observable<Produto> {
-    return this.http.post<Produto>(this.API, produto);
+  save(pedido: Pedido): Observable<Pedido> {
+    return this.http.post<Pedido>(this.API, pedido);
   }
 
-  exemploErro(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(this.API + '/erro');
+  exemploErro(): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(this.API + '/erro');
   }
 
 

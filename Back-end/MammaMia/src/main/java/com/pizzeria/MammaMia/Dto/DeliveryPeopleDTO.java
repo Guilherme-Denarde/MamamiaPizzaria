@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class DeliveryPeopleDTO {
-    private Long id;
+    private Integer id;
     private Employ employ;
     private String cpf;
     private String name;
@@ -13,7 +13,7 @@ public class DeliveryPeopleDTO {
 
     public DeliveryPeopleDTO(){}
 
-    public DeliveryPeopleDTO(Long id, Employ employ, String cpf, String name, String phone) {
+    public DeliveryPeopleDTO(Integer id, Employ employ, String cpf, String name, String phone) {
         this.id = id;
         this.employ = employ;
         this.cpf = cpf;

@@ -1,13 +1,10 @@
 package com.pizzeria.MammaMia.Service;
 
-import com.pizzeria.MammaMia.Dto.DeliveryPeopleDTO;
-import com.pizzeria.MammaMia.Dto.EmployDTO;
 import com.pizzeria.MammaMia.Dto.OrderDTO;
 import com.pizzeria.MammaMia.Entity.Client;
 import com.pizzeria.MammaMia.Entity.DeliveryPeople;
 import com.pizzeria.MammaMia.Entity.Employ;
 import com.pizzeria.MammaMia.Entity.Order;
-import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
 import com.pizzeria.MammaMia.Repository.ClientRepository;
 import com.pizzeria.MammaMia.Repository.DeliveryPeopleRepository;
 import com.pizzeria.MammaMia.Repository.EmployRepository;
@@ -49,30 +46,30 @@ public class OrderService {
         order.setPayment(orderDTO.getPayment());
         order.setOrderSize(orderDTO.getOrderSize());
         order.setOrderState(orderDTO.getOrderState());
-        order.setMust_delivery(orderDTO.isMustDelivery());
-        order.setOrder_time(orderDTO.getOrderTime());
-        order.setDelivery_time(orderDTO.getDeliveryTime());
+        order.setMustDeliver(orderDTO.isMustDeliver());
+        order.setOrderTime(orderDTO.getOrderTime());
+        order.setDeliveryTime(orderDTO.getDeliveryTime());
         order.setPriceTotal(orderDTO.getPriceTotal());
 
         if (orderDTO.getDeliveryPeople() != null) {
-            DeliveryPeople deliveryPeople = deliveryPeopleRepository.findById(orderDTO.getDeliveryPeople().getId())
+            DeliveryPeople deliveryPeople = deliveryPeopleRepository.findById(Long.valueOf(orderDTO.getDeliveryPeople().getId()))
                     .orElseThrow(() -> new EntityNotFoundException("DeliveryPeople não encontrado"));
-            order.setDeliveryPeopleId(deliveryPeople);
+            order.setDeliveryPeople(deliveryPeople);
         }
         if (orderDTO.getClient() != null) {
-            Client client = clientRepository.findById(orderDTO.getClient().getId())
+            Client client = clientRepository.findById(Long.valueOf(orderDTO.getClient().getId()))
                     .orElseThrow(() -> new EntityNotFoundException("Client não encontrado"));
             order.setClient(client);
         }
         if (orderDTO.getEmploy() != null) {
-            Employ employ = employRepository.findById(orderDTO.getEmploy().getId())
+            Employ employ = employRepository.findById(Long.valueOf(orderDTO.getEmploy().getId()))
                     .orElseThrow(() -> new EntityNotFoundException("Employ não encontrado"));
             order.setEmploy(employ);
         }
         return orderRepository.save(order);
     }
     public Order updateOrderFromDTO(OrderDTO orderDTO) {
-        Optional<Order> existingOrder = orderRepository.findById(orderDTO.getId());
+        Optional<Order> existingOrder = orderRepository.findById(Long.valueOf(orderDTO.getId()));
 
         if (existingOrder.isPresent()) {
             Order order = existingOrder.get();
@@ -81,23 +78,23 @@ public class OrderService {
             order.setPayment(orderDTO.getPayment());
             order.setOrderSize(orderDTO.getOrderSize());
             order.setOrderState(orderDTO.getOrderState());
-            order.setMust_delivery(orderDTO.isMustDelivery());
-            order.setOrder_time(orderDTO.getOrderTime());
-            order.setDelivery_time(orderDTO.getDeliveryTime());
+            order.setMustDeliver(orderDTO.isMustDeliver());
+            order.setOrderTime(orderDTO.getOrderTime());
+            order.setDeliveryTime(orderDTO.getDeliveryTime());
             order.setPriceTotal(orderDTO.getPriceTotal());
 
             // Verificar e atualizar DeliveryPeople
             if (orderDTO.getDeliveryPeople() != null) {
-                DeliveryPeople deliveryPeople = deliveryPeopleRepository.findById(orderDTO.getDeliveryPeople().getId())
+                DeliveryPeople deliveryPeople = deliveryPeopleRepository.findById(Long.valueOf(orderDTO.getDeliveryPeople().getId()))
                         .orElseThrow(() -> new EntityNotFoundException("DeliveryPeople com o ID " + orderDTO.getDeliveryPeople().getId() + " não encontrado"));
-                order.setDeliveryPeopleId(deliveryPeople);
+                order.setDeliveryPeople(deliveryPeople);
             } else {
                 throw new EntityNotFoundException("O ID de DeliveryPeople não foi fornecido");
             }
 
             // Verificar e atualizar Client
             if (orderDTO.getClient() != null) {
-                Client client = clientRepository.findById(orderDTO.getClient().getId())
+                Client client = clientRepository.findById(Long.valueOf(orderDTO.getClient().getId()))
                         .orElseThrow(() -> new EntityNotFoundException("Client com o ID " + orderDTO.getClient().getId() + " não encontrado"));
                 order.setClient(client);
             } else {
@@ -106,7 +103,7 @@ public class OrderService {
 
             // Verificar e atualizar Employ
             if (orderDTO.getEmploy() != null) {
-                Employ employ = employRepository.findById(orderDTO.getEmploy().getId())
+                Employ employ = employRepository.findById(Long.valueOf(orderDTO.getEmploy().getId()))
                         .orElseThrow(() -> new EntityNotFoundException("Employ com o ID " + orderDTO.getEmploy().getId() + " não encontrado"));
                 order.setEmploy(employ);
             } else {
@@ -135,9 +132,9 @@ public class OrderService {
         order.setPayment(dto.getPayment());
         order.setOrderSize(dto.getOrderSize());
         order.setOrderState(dto.getOrderState());
-        order.setMust_delivery(dto.isMustDelivery());
-        order.setOrder_time(dto.getOrderTime());
-        order.setDelivery_time(dto.getDeliveryTime());
+        order.setMustDeliver(dto.isMustDeliver());
+        order.setOrderTime(dto.getOrderTime());
+        order.setDeliveryTime(dto.getDeliveryTime());
         order.setPriceTotal(dto.getPriceTotal());
         return order;
     }
