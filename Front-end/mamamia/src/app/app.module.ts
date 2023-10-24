@@ -4,22 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/layout/header/header.component';
-import { FooterComponent } from './components/layout/footer/footer.component';
-import { IndexComponent } from './components/layout/index/index.component';
-import { LoginComponent } from './components/sistema/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { PedidoslistComponent } from './components/pedidos/pedidoslist/pedidoslist.component';
-import { PedidosdetailsComponent } from './components/pedidos/pedidosdetails/pedidosdetails.component';
-import { ProdutoslistComponent } from './components/produtos/produtoslist/produtoslist.component';
-import { ProdutosdetailsComponent } from './components/produtos/produtosdetails/produtosdetails.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { EntrarComponent } from './components/entrar/entrar.component';
-import { CadastrarComponent } from './components/sistema/cadastrar/cadastrar.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './modules/user/components/layout/header/header.component';
+import { FooterComponent } from './modules/user/components/layout/footer/footer.component';
+import { IndexComponent } from './modules/user/components/layout/index/index.component';
+import { LoginComponent } from './modules/user/components/sistema/login/login.component';
+import { PerfilComponent } from './modules/user/components/perfil/perfil.component';
+import { EntrarComponent } from './modules/user/components/entrar/entrar.component';
+import { HomePageComponent } from './modules/user/components/home-page/home-page.component';
+import { CadastrarComponent } from './modules/user/components/sistema/cadastrar/cadastrar.component';
+import { ProductCardComponent } from './modules/shared/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +25,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FooterComponent,
     IndexComponent,
     LoginComponent,
-    PedidoslistComponent,
-    PedidosdetailsComponent,
-    ProdutoslistComponent,
-    ProdutosdetailsComponent,
     PerfilComponent,
     HomePageComponent,
     EntrarComponent,
     CadastrarComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,

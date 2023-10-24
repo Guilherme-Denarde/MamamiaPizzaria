@@ -26,6 +26,11 @@ public class Product {
 
     private BigDecimal price;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    private int stars;
+
     @ManyToOne
     @JoinColumn(name = "product_flavor")
     private Flavor flavor;
@@ -33,6 +38,6 @@ public class Product {
     private int quantity;
 
     public ProductDTO toDTO() {
-        return new ProductDTO(id, name, description, price, quantity, flavor);
+        return new ProductDTO(id, name, description, price, quantity, flavor, imageUrl, stars); // Add imageUrl and stars
     }
 }
