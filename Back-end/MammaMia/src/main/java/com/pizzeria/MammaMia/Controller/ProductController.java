@@ -31,7 +31,6 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-
     @GetMapping
     public ResponseEntity<ResponseWrapper<ProductDTO>> getProductById(@RequestParam("id") Long id) {
         return productService.getProductById(id)

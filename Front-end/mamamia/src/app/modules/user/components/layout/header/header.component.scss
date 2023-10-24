@@ -1,0 +1,16 @@
+.cart-icon-container {
+    display: flex;
+    align-items: center;
+
+    .total-price {
+        margin-right: 10px;
+    }
+
+    .item-count {
+        background-color: #ff4500;
+        border-radius: 50%;
+        color: #fff;
+        padding: 2px 5px;
+        margin-left: 5px;
+    }
+}
