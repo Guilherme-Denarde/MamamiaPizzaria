@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { User } from 'src/app/modules/models/user/user';
 import { UserService } from 'src/app/middleware/services/user/user.service';
+import { User } from 'src/app/models/user/user';
 
 @Component({
   selector: 'app-cadastrar',

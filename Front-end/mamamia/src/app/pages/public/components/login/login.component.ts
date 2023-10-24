@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/middleware/services/user/user.service';
-import { LoginUser } from 'src/app/modules/models/user/user';
+import { LoginUser } from 'src/app/models/user/user';
 
 @Component({
   selector: 'app-login',
