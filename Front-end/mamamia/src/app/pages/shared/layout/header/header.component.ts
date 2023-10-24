@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Order } from 'src/app/modules/models/orders/orders';
-import { Product } from 'src/app/modules/models/product/product';
+import { Order } from 'src/app/models/orders/orders';
+import { Product } from 'src/app/models/product/product';
 
 @Component({
   selector: 'app-header',
