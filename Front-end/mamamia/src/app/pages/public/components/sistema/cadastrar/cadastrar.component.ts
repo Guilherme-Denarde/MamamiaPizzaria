@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { UserService } from 'src/app/middleware/services/user/user.service';
 import { User } from 'src/app/models/user/user';
+import { RegisterUserService } from 'src/app/middleware/services/register-user/register-user.service';
 
 @Component({
   selector: 'app-cadastrar',
@@ -14,6 +14,7 @@ import { User } from 'src/app/models/user/user';
 export class CadastrarComponent {
 
   user: User = {
+    id: 1,
     name: '',
     email: '',
     password: '',
@@ -23,7 +24,7 @@ export class CadastrarComponent {
   };
 
   constructor(
-      private userService: UserService,
+      private userService: RegisterUserService,
       private router: Router,
       private toastr: ToastrService
       ) { } 
