@@ -8,15 +8,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './modules/user/components/layout/header/header.component';
-import { FooterComponent } from './modules/user/components/layout/footer/footer.component';
-import { IndexComponent } from './modules/user/components/layout/index/index.component';
-import { LoginComponent } from './modules/user/components/sistema/login/login.component';
-import { PerfilComponent } from './modules/user/components/perfil/perfil.component';
-import { EntrarComponent } from './modules/user/components/entrar/entrar.component';
-import { HomePageComponent } from './modules/user/components/home-page/home-page.component';
-import { CadastrarComponent } from './modules/user/components/sistema/cadastrar/cadastrar.component';
-import { ProductCardComponent } from './modules/shared/product-card/product-card.component';
+import { HeaderComponent } from './pages/shared/layout/header/header.component';
+import { FooterComponent } from './pages/shared/layout/footer/footer.component';
+import { IndexComponent } from './pages/shared/layout/index/index.component';
+import { PerfilComponent } from './pages/user/components/perfil/perfil.component';
+import { LoginComponent } from './pages/public/components/login/login.component';
+import { HomePageComponent } from './pages/shared/components/home-page/home-page.component';
+import { EntrarComponent } from './pages/shared/components/entrar/entrar.component';
+import { CadastrarComponent } from './pages/public/components/sistema/cadastrar/cadastrar.component';
+import { ProductCardComponent } from './pages/shared/product-card/product-card.component';
 
 @NgModule({
   declarations: [
