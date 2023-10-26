@@ -2,17 +2,65 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product/product';
+import { Order, Payment, OrderSize, OrderState } from '../../../models/orders/orders'; // <-- Importe a model Order
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
-
-  API: string = 'http://localhost:8080/api/produto';
+  
+  API = 'http://localhost:8080/api/produto';
   http = inject(HttpClient);
 
-  constructor() { }
+  pedidoURI = '';
+  formularioURI = '';
 
+  orders: Order[] = [];  
+  pedidos: Product[] = [];
+  
+
+  constructor(private _snackBar: MatSnackBar) {}
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+
+  openSnackBar(msg: string) {
+    this._snackBar.open(msg, 'X', {
+      duration: 700,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+
+  getPedidoValues(item: string, price: number) {
+    const newOrder: Order = {
+      id: this.orders.length,
+      payment: Payment.MONEY, 
+      orderSize: OrderSize.M, 
+      orderState: OrderState.OPEN,
+      mustDeliver: false, 
+      orderTime: new Date(), 
+      priceTotal: price
+    };
+    this.orders.push(newOrder);
+  }
+
+
+
+addPedido(product: Product) {
+    this.pedidos.push(product);
+    this.openSnackBar('Pedido adicionado!');
+}
+
+getPedidos(): Product[] {
+  return this.pedidos;
+}
 
   listAll(): Observable<Product[]> {
     return this.http.get<Product[]>(this.API);
@@ -25,31 +73,4 @@ export class OrdersService {
   exemploErro(): Observable<Product[]> {
     return this.http.get<Product[]>(this.API + '/erro');
   }
-
-
-
-  /*
-  CASO PRECISE ENVIAR REQUEST PARAMS, BASTA DECLARAR ASSIM E INCLUIR NA REQUISIÇÃO HTTP
-
-  let params = new HttpParams()
-      .set('empresaId', empresaId.toString())
-
-  return this.http.get<Pessoa[]>(this.API, { params: params});
-
-  
-  
-  SE PRECISAR COLOCAR COISAS NO HEADER DA REQUISIÇÃO
-
-
-      let headers = new HttpHeaders()
-      .set("Content-Type", "application/json");
-
-
-        return this.http.get<Pessoa[]>(this.API, { headers: headers});
-
-
-
-  */
-
-
 }

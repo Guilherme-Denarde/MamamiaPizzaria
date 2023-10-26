@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<div class="form-container">
+<h2 mat-dialog-title class="txt-center">Formulário de Pedido</h2>
+<mat-dialog-content class="mat-typography p-3">
+  <form>
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="nome" name="nome" class="">
+      </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>Bairro</mat-label>
+        <input matInput [(ngModel)]="bairro" name="bairro" class="">
+      </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>Rua</mat-label>
+        <input matInput [(ngModel)]="rua" name="rua" class="">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <mat-form-field class="w-100 numero">
+          <mat-label>Número</mat-label>
+          <input matInput [(ngModel)]="numero" name="numero" class="">
+        </mat-form-field>
+      </div>
+    
+      <div class="form-group col-md-8">
+        <mat-form-field class="w-100 complemento">
+          <mat-label>Complemento</mat-label>
+          <input matInput [(ngModel)]="complemento" name="complemento" class="">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>Troco para?</mat-label>
+        <input matInput [(ngModel)]="troco" name="troco" class="">
+      </mat-form-field>
+    </div>
+  </form>
+  
+</mat-dialog-content>
+
+  
+<mat-dialog-actions class="btn-dialog d-flex justify-content-center mt-3">
+  <button mat-raised-button [mat-dialog-close]="true" (click)="concluirPedido()" class="btn custom-btn mr-2">
+    <mat-icon class="dialog-icon">shopping_cart</mat-icon>
+    <span>Concluir</span>
+  </button>
+
+  <button mat-raised-button mat-dialog-close class="btn custom-btn-cancel">
+    <mat-icon class="dialog-icon">cancel</mat-icon>
+    <span>Fechar</span>
+  </button>
+</mat-dialog-actions>
+</div>
