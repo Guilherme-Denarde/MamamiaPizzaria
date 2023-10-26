@@ -3,7 +3,7 @@ import { RegisterUserService } from 'src/app/middleware/services/register-user/r
 import { User } from 'src/app/models/user/user';
 
 @Component({
-  selector: 'app-register-user-details',
+  selector: 'app-register-userdetails',
   templateUrl: './register-userdetails.component.html',
   styleUrls: ['./register-userdetails.component.scss']
 })
@@ -15,15 +15,25 @@ export class RegisterUserDetailsComponent {
 
   constructor(private userService: RegisterUserService) { }
 
-  salvar() {
-    this.userService.save(this.registerUser).subscribe({  
-      next: user => { 
-        this.retorno.emit(user);
-      },
-      error: erro => { 
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
-        console.error(erro);
-      }
+  save() {
+    this.registerUser.salt = ''; 
+    this.registerUser.isActive = true; 
+    this.registerUser.lastLogin = new Date().toISOString(); 
+    
+    const userObservable = this.registerUser.userId ? 
+                           this.userService.edit(this.registerUser) :
+                           this.userService.save(this.registerUser);
+
+    userObservable.subscribe({  
+        next: user => { 
+            this.retorno.emit(user);
+        },
+        error: erro => { 
+            alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+            console.error(erro);
+        }
     });
-  }
+}
+
+  
 }

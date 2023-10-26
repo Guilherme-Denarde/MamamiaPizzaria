@@ -53,7 +53,7 @@ public class EmployController {
     @PutMapping("/update")
     public ResponseEntity<Object> updateEmploy(@RequestParam("id") Long id, @RequestBody EmployDTO employDto) {
         try {
-            if (!id.equals(employDto.getId())) {
+            if (!id.equals(Long.valueOf(employDto.getId()))) {
                 return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
             }
             Employ updatedEmploy = employService.updateEmployFromDTO(employDto);

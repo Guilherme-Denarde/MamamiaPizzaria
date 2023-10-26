@@ -49,7 +49,7 @@ public class DeliveryPeopleController {
     @PutMapping("/update")
     public ResponseEntity<Object> updateDeliveryPeople(@RequestParam("id") Long id, @RequestBody DeliveryPeopleDTO deliveryPeopleDto) {
         try {
-            if (!id.equals(deliveryPeopleDto.getId())) {
+            if (!id.equals(Long.valueOf(deliveryPeopleDto.getId()))) {
                 return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
             }
             DeliveryPeople updatedDeliveryPeople = deliveryPeopleService.updateDeliveryPeopleFromDTO(deliveryPeopleDto);

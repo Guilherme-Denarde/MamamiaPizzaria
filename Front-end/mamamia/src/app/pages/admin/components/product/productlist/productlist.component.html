@@ -1,1 +1,53 @@
-<p>productlist works!</p>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h3 class="text-primary">List of Products</h3>
+        <button class="btn btn-primary" (click)="addProduct(modal1)">Add Product</button>
+    </div>
+    
+    <div class="table-responsive mt-4">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Flavor</th>
+                    <th>Quantity</th>
+                    <th>Image</th>
+                    <th>Rating</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products; let i = index">
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price | currency }}</td>
+                    <td>{{ product.flavor.flavorName }}</td> 
+                    <td>{{ product.quantity }}</td>
+                    <td><img [src]="product.imageUrl" alt="Product image" width="50"></td> 
+                    <td>{{ product.stars }}</td> 
+                    <td>
+                        <button class="btn btn-sm btn-primary mr-2" (click)="editProduct(modal1, product, i)">Edit</button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template #modal1 let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">Product Details</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <app-productdetails [product]="selectedProductForEdit" (retorno)="saveOrUpdateProduct($event)"></app-productdetails>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </ng-template>
+</div>

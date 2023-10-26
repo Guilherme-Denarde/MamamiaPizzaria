@@ -1,6 +1,6 @@
-export interface Flavor {
-    id: number;
-    name: string;
-    price: number;
-    ingredients: string;
+export class Flavor {
+    id!: number;
+    flavorName!: string;
+    flavorPrice!: number;
+    flavorIngredients!: string;
 }

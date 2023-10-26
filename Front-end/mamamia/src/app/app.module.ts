@@ -28,6 +28,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { PedidoFormComponent } from './pages/shared/layout/pedido-form/pedido-form.component';
+import { RegisterUserDetailsComponent } from './pages/admin/components/register-user/register-userdetails/register-userdetails.component';
+import { RegisterUserlistComponent } from './pages/admin/components/register-user/register-userlist/register-userlist.component';
+import { ProductListComponent } from './pages/admin/components/product/productlist/productlist.component';
+import { OrderlistComponent } from './pages/admin/components/order/orderlist/orderlist.component';
+import { ProductDetailsComponent } from './pages/admin/components/product/productdetails/productdetails.component';
+import { OrderdetailsComponent } from './pages/admin/components/order/orderdetails/orderdetails.component';
+import { EmploylistComponent } from './pages/admin/components/employ/employlist/employlist.component';
+import { EmploydetailsComponent } from './pages/admin/components/employ/employdetails/employdetails.component';
+import { DeliveryBoylistComponent } from './pages/admin/components/delivery-boy/delivery-boylist/delivery-boylist.component';
+import { DeliveryBoydetailsComponent } from './pages/admin/components/delivery-boy/delivery-boydetails/delivery-boydetails.component';
+import { ClientlistComponent } from './pages/admin/components/client/clientlist/clientlist.component';
+import { ClientdetailsComponent } from './pages/admin/components/client/clientdetails/clientdetails.component';
+import { AddresslistComponent } from './pages/admin/components/address/addresslist/addresslist.component';
+import { AddressdetailsComponent } from './pages/admin/components/address/addressdetails/addressdetails.component';
+import { ReviewlistComponent } from './pages/admin/components/review/reviewlist/reviewlist.component';
+import { ReviewdetailsComponent } from './pages/admin/components/review/reviewdetails/reviewdetails.component';
+import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/flavorlist.component';
+import { FlavorDetailsComponent } from './pages/admin/components/flavor/flavordetails/flavordetails.component';
 
 @NgModule({
   declarations: [
@@ -41,11 +59,30 @@ import { PedidoFormComponent } from './pages/shared/layout/pedido-form/pedido-fo
     EntrarComponent,
     CadastrarComponent,
     ProductCardComponent,
+
     SearchBarComponent,
     FoodItemSliderComponent,
     StoreListComponent,
     OrdersListComponent,
     PedidoFormComponent
+    RegisterUserDetailsComponent,
+    RegisterUserlistComponent,
+    ProductListComponent,
+    ProductDetailsComponent,
+    OrderlistComponent,
+    OrderdetailsComponent,
+    FlavorListComponent,
+    FlavorDetailsComponent,
+    EmploylistComponent,
+    EmploydetailsComponent,
+    DeliveryBoylistComponent,
+    DeliveryBoydetailsComponent,
+    ClientlistComponent,
+    ClientdetailsComponent,
+    AddresslistComponent,
+    AddressdetailsComponent,
+    ReviewlistComponent,
+    ReviewdetailsComponent,
   ],
   imports: [
     BrowserModule,
