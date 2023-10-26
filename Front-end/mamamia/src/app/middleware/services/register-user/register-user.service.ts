@@ -1,6 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { LoginUser, User } from 'src/app/models/user/user';
 
 @Injectable({
@@ -8,37 +9,46 @@ import { LoginUser, User } from 'src/app/models/user/user';
 })
 export class RegisterUserService {
 
-  API: string = 'http://localhost:8080/api/users'; 
+  private readonly API: string = 'http://localhost:8080/api/users'; 
 
   constructor(private http: HttpClient) { }
   
   registerUser(user: User): Observable<User> {
-    return this.http.post<User>(this.API + '/register', user);
+    return this.http.post<User>(this.API, user).pipe(
+      catchError(this.handleError)
+    );
   }
   
   login(user: LoginUser): Observable<any> {
-    const loginEndpoint = `${this.API}/login`;
-    return this.http.post(loginEndpoint, user);
+    return this.http.post(`${this.API}/login`, user).pipe(
+      catchError(this.handleError)
+    );
   }
 
   listAll(): Observable<User[]> {
-    return this.http.get<User[]>(this.API + '/findAll');
+    return this.http.get<User[]>(`${this.API}/findAll`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   save(user: User): Observable<User> {
-    return this.http.post<User>(this.API, user);
-  }
-
-  exemploErro(): Observable<User[]> {
-    return this.http.get<User[]>(this.API + '/erro');
+    return this.registerUser(user);
   }
 
   edit(user: User): Observable<User> {
-    return this.http.put<User>(`${this.API}/${user.id}`, user);
+    return this.http.put<User>(`${this.API}/update?id=${user.userId}`, user).pipe(
+      catchError(this.handleError)
+    );
   }
     
   delete(userId: number): Observable<void> {
-    return this.http.delete<void>(`${this.API}/${userId}`);
+    return this.http.delete<void>(`${this.API}/delete?id=${userId}`, { responseType: 'text' as 'json' }).pipe(
+      catchError(this.handleError)
+    );
   }
 
+  private handleError(error: any): Observable<never> {
+    console.error('An error occurred:', error);
+    return throwError('Something went wrong; please try again later.');
+  }
 }

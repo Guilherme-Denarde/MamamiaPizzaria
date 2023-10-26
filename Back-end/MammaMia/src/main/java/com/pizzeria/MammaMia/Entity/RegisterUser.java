@@ -43,7 +43,7 @@ public class RegisterUser {
     public RegisterUser(Integer userId, String name, String email, String password, String salt, Boolean isActive, Timestamp lastLogin) {
         this.userId = userId;
         this.name = name;
-        setEmail(email);  // Use the setter to validate
+        setEmail(email);
         this.password = password;
         this.salt = salt;
         this.isActive = isActive;

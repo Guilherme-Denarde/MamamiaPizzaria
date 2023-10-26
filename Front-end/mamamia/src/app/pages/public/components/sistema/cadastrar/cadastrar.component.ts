@@ -14,7 +14,7 @@ import { RegisterUserService } from 'src/app/middleware/services/register-user/r
 export class CadastrarComponent {
 
   user: User = {
-    id: 1,
+    userId: 1,
     name: '',
     email: '',
     password: '',

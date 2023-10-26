@@ -50,7 +50,7 @@ public class OrderController {
 
     @PutMapping("/update")
     public ResponseEntity<Object> updateOrder(@RequestParam("id") Long id, @RequestBody OrderDTO orderDTO) {
-            if (!id.equals(orderDTO.getId())) {
+            if (!id.equals(Long.valueOf(orderDTO.getId()))) {
                 return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
             }
             Order updatedOrder = orderService.updateOrderFromDTO(orderDTO);
