@@ -50,7 +50,7 @@ public class ClientController {
     @PutMapping("/update")
     public ResponseEntity<?> updateClient(@RequestParam("id") Long id, @RequestBody ClientDTO clientDto) {
         try {
-            if (!id.equals(clientDto.getId())) {
+            if (!id.equals(Long.valueOf(clientDto.getId()))) {
                 return ResponseEntity.badRequest().build();
             }
             Client updatedClient = clientService.updateClientFromDTO(clientDto);

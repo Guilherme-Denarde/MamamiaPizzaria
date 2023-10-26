@@ -20,15 +20,20 @@ export class RegisterUserDetailsComponent {
     this.registerUser.isActive = true; 
     this.registerUser.lastLogin = new Date().toISOString(); 
     
-    this.userService.save(this.registerUser).subscribe({  
-      next: user => { 
-        this.retorno.emit(user);
-      },
-      error: erro => { 
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
-        console.error(erro);
-      }
+    const userObservable = this.registerUser.userId ? 
+                           this.userService.edit(this.registerUser) :
+                           this.userService.save(this.registerUser);
+
+    userObservable.subscribe({  
+        next: user => { 
+            this.retorno.emit(user);
+        },
+        error: erro => { 
+            alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+            console.error(erro);
+        }
     });
-  }
+}
+
   
 }

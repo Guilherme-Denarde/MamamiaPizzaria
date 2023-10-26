@@ -61,11 +61,12 @@ public class RegisterUserController {
 
     @PutMapping("/update")
     public ResponseEntity<Object> updateRegisterUser(@RequestParam("id") Long id, @RequestBody RegisterUserDTO registerUserDTO) {
-        if (!id.equals(registerUserDTO.getUserId())) {
+        if (!id.equals(Long.valueOf(registerUserDTO.getUserId()))) {
             return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
         }
-        RegisterUser updateRegisterUser = registerUserService.updateRegisterUserFromDTO(registerUserDTO);
-        return ResponseEntity.ok(updateRegisterUser.toDTO());
+
+        RegisterUser updatedRegisterUser = registerUserService.updateRegisterUserFromDTO(registerUserDTO);
+        return ResponseEntity.ok(updatedRegisterUser.toDTO());
     }
 
 

@@ -51,7 +51,7 @@ public class FlavorController {
     @PutMapping("/update")
     public ResponseEntity<Object> updateFlavor(@RequestParam("id") Long id, @RequestBody FlavorDTO flavorDTO) {
         try {
-            if (!id.equals(flavorDTO.getId())) {
+            if (!id.equals(Long.valueOf(flavorDTO.getId()))) {
                 return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
             }
             Flavor updatedFlavor = flavorService.updateFlavorFromDTO(flavorDTO);
