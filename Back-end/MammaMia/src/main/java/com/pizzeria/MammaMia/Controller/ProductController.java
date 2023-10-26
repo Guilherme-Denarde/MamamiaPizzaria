@@ -49,7 +49,7 @@ public class ProductController {
 
     @PutMapping("/update")
     public ResponseEntity<Object> updateProduct(@RequestParam("id") Long id, @RequestBody ProductDTO productDTO) {
-        if (!id.equals(productDTO.getId())) {
+        if (!id.equals(Long.valueOf(productDTO.getId()))) {
             return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
         }
         Product updatedProduct = productService.updateProductFromDTO(productDTO);

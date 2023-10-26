@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
   fetchProducts(): void {
-    this.http.get<Product[]>('http://localhost:8080/api/product').subscribe(data => {
+    this.http.get<Product[]>('http://localhost:8080/api/products/findAll').subscribe(data => {
         this.products = data;
         this.itemCount = this.products.length;
         this.totalPrice = this.products.reduce((acc, curr) => acc + curr.price, 0);

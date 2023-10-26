@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/middleware/services/user/user.service';
+import { RegisterUserService } from 'src/app/middleware/services/register-user/register-user.service';
 import { LoginUser } from 'src/app/models/user/user';
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginComponent {
   };
 
   constructor(
-    private userService: UserService,
+    private userService: RegisterUserService,
     private router: Router,
     private toastr: ToastrService
   ) {}

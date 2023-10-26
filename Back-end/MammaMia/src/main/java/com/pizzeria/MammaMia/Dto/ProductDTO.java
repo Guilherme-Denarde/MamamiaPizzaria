@@ -18,5 +18,5 @@ public class ProductDTO {
     private int quantity;
     private Flavor flavor;
     private String imageUrl;
-    private int stars;
+    private Integer  stars;
 }

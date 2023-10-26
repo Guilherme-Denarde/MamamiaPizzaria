@@ -29,7 +29,7 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl;
 
-    private int stars;
+    private Integer  stars;
 
     @ManyToOne
     @JoinColumn(name = "product_flavor")
@@ -38,6 +38,6 @@ public class Product {
     private int quantity;
 
     public ProductDTO toDTO() {
-        return new ProductDTO(id, name, description, price, quantity, flavor, imageUrl, stars); // Add imageUrl and stars
+        return new ProductDTO(id, name, description, price, quantity, flavor, imageUrl, stars);
     }
 }

@@ -8,14 +8,14 @@ import { Product } from 'src/app/models/product/product';
 })
 export class ProductService {
 
-  API: string = 'http://localhost:8080/api/produto';
+  API: string = 'http://localhost:8080/api/products';
   http = inject(HttpClient);
 
   constructor() { }
 
 
   listAll(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.API);
+    return this.http.get<Product[]>(this.API + '/findAll');
   }
 
   save(produto: Product): Observable<Product> {

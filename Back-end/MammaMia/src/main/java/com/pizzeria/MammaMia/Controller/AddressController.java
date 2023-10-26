@@ -51,7 +51,7 @@ public class AddressController {
     @PutMapping("/update")
     public ResponseEntity<Object> updateAddress(@RequestParam("id") Long id, @RequestBody AddressDTO addressDto) {
         try {
-            if (!id.equals(addressDto.getId())) {
+            if (!id.equals(Long.valueOf(addressDto.getId()))) {
                 return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
             }
             Address updatedAddress= addressService.updateAddressFromDTO(addressDto);
