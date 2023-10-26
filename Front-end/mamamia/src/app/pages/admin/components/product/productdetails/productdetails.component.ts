@@ -12,7 +12,7 @@ export class ProductDetailsComponent {
   @Input() product: Product = new Product();
   @Output() retorno = new EventEmitter<Product>(); 
 
-  constructor(private productService: ProductService) { } // Use ProductService instead of FlavorService
+  constructor(private productService: ProductService) { }
 
   saveProduct() {
     const productObservable = this.product.id ? 
