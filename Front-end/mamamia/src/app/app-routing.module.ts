@@ -6,6 +6,8 @@ import { CadastrarComponent } from './pages/public/components/sistema/cadastrar/
 import { HomePageComponent } from './pages/shared/components/home-page/home-page.component';
 import { IndexComponent } from './pages/shared/layout/index/index.component';
 import { RegisterUserlistComponent } from './pages/admin/components/register-user/register-userlist/register-userlist.component';
+import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/flavorlist.component';
+import { ProductListComponent } from './pages/admin/components/product/productlist/productlist.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "entrar", pathMatch: 'full' },
@@ -16,6 +18,8 @@ const routes: Routes = [
   {
     path: "admin", component: IndexComponent, children: [
       { path: "registeruser", component: RegisterUserlistComponent },
+      { path: "flavor", component: FlavorListComponent },
+      { path: "product", component: ProductListComponent },
     ]
   },
   {

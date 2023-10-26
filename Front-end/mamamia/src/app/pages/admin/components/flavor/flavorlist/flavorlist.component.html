@@ -1,1 +1,45 @@
-<p>flavorlist works!</p>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h3 class="text-primary">List of Flavors</h3>
+        <button class="btn btn-primary" (click)="addFlavor(modal1)">Add Flavor</button>
+    </div>
+    
+    <div class="table-responsive mt-4">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Ingredients</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let flavor of flavors; let i = index">
+                    <td>{{ flavor.id }}</td>
+                    <td>{{ flavor.flavorName }}</td>
+                    <td>{{ flavor.flavorPrice | currency }}</td>
+                    <td>{{ flavor.flavorIngredients }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary mr-2" (click)="editFlavor(modal1, flavor, i)">Edit</button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteFlavor(flavor)">Delete</button>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template #modal1 let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">Flavor Details</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <app-flavordetails [flavor]="selectedFlavorForEdit" (retorno)="saveOrUpdateFlavor($event)"></app-flavordetails>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </ng-template>
+</div>
