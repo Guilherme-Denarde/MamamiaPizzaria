@@ -8,14 +8,14 @@ import { Product } from 'src/app/models/product/product';
 })
 export class ProductService {
 
-  API: string = 'http://localhost:8080/api/products';
+  API = 'http://localhost:8080/api/products';
   http = inject(HttpClient);
 
   constructor() { }
 
 
   listAll(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.API);
+    return this.http.get<Product[]>(this.API + '/findAll');
   }
 
   save(produto: Product): Observable<Product> {
@@ -25,31 +25,5 @@ export class ProductService {
   exemploErro(): Observable<Product[]> {
     return this.http.get<Product[]>(this.API + '/erro');
   }
-
-
-
-  /*
-  CASO PRECISE ENVIAR REQUEST PARAMS, BASTA DECLARAR ASSIM E INCLUIR NA REQUISIÇÃO HTTP
-
-  let params = new HttpParams()
-      .set('empresaId', empresaId.toString())
-
-  return this.http.get<Pessoa[]>(this.API, { params: params});
-
-  
-  
-  SE PRECISAR COLOCAR COISAS NO HEADER DA REQUISIÇÃO
-
-
-      let headers = new HttpHeaders()
-      .set("Content-Type", "application/json");
-
-
-        return this.http.get<Pessoa[]>(this.API, { headers: headers});
-
-
-
-  */
-
 
 }

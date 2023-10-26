@@ -7,4 +7,7 @@ export interface Product {
     price: number;
     flavor: Flavor;
     quantity: number;
+    imageUrl: string;
+    stars:number;
+    category: string;
 }

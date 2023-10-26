@@ -1,0 +1,66 @@
+body {
+  background-color: #666;  /* Cor de fundo similar ao da imagem */
+}
+
+.form-container {
+  background-color: #333;  /* Cor de fundo do formulário */
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  margin: 50px auto;
+}
+
+.txt-center {
+  font-size: 24px;
+  color: #fff;  /* Cor do texto do título */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;  /* Cor de fundo do campo de input */
+  font-size: 16px;
+}
+
+.custom-btn, .custom-btn-cancel {
+  font-weight: bold;
+  border: none;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 5px;
+}
+
+.custom-btn {
+  background-color: #ffcc00;  /* Cor de fundo do botão 'Concluir' */
+}
+
+.custom-btn-cancel {
+  background-color: #ff0000;  /* Cor de fundo do botão 'Fechar' */
+}
+
+.dialog-icon {
+  color: #fff;
+  margin-right: 8px;
+}
+
+.price-section {
+  font-size: 24px;
+  color: #fff;  /* Cor do preço */
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn-dialog {
+  display: flex;
+  justify-content: center;
+  gap: 10px;  /* Espaçamento entre os botões */
+  margin-top: 20px;
+}

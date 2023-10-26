@@ -31,6 +31,15 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDTO>> searchProductsByName(@RequestParam("name") String name) {
+        List<ProductDTO> products = productService.getProductsByName(name)
+                .stream()
+                .map(Product::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(products);
+    }
+
     @GetMapping
     public ResponseEntity<ResponseWrapper<ProductDTO>> getProductById(@RequestParam("id") Long id) {
         return productService.getProductById(id)

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from 'src/app/models/orders/orders';
 import { Product } from 'src/app/models/product/product';
+import { MatDialog } from '@angular/material/dialog';
+import { OrdersService } from 'src/app/middleware/services/orders/orders.service';
+import { OrdersListComponent } from '../../../public/components/orders-list/orders-list.component';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +14,10 @@ import { Product } from 'src/app/models/product/product';
 export class HeaderComponent implements OnInit {
   order!: Order;
   products: Product[] = [];
-  totalPrice: number = 0;
-  itemCount: number = 0;
+  totalPrice = 0;
+  itemCount = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private dialog: MatDialog, private ordersService: OrdersService) {}
 
   ngOnInit(): void {
     this.fetchProducts();
@@ -27,4 +30,13 @@ export class HeaderComponent implements OnInit {
         this.totalPrice = this.products.reduce((acc, curr) => acc + curr.price, 0);
     });
   }
+
+  openOrdersList() {
+    const orders = this.ordersService.getPedidos();
+    const dialogRef = this.dialog.open(OrdersListComponent, {
+        width: '400px',
+        data: { orders: orders }
+    });
+}
+
 }
