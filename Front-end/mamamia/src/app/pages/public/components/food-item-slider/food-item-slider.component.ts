@@ -20,7 +20,7 @@ export class FoodItemSliderComponent implements OnInit {
   }
 
   listAll() {
-    this.productService.listAll().subscribe({
+    this.productService.getAllProducts().subscribe({
       next: data => {
         console.log('Data:', data);
         this.lista = data;
