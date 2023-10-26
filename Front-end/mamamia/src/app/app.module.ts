@@ -96,8 +96,10 @@ import { PedidoFormComponent } from './pages/shared/layout/pedido-form/pedido-fo
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    
  ],
+ 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
