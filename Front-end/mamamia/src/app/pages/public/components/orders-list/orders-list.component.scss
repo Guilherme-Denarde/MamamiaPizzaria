@@ -1,0 +1,84 @@
+.orders-modal {
+    width: 80%;
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+
+    span {
+        font-weight: bold;
+    }
+}
+
+.order-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.order-list {
+    .order-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 1rem;
+
+        span {
+            flex: 1;
+            font-weight: bold;
+        }
+    }
+
+    .order-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+
+        .delete-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: red;
+        }
+    }
+}
+
+.total {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+
+    button {
+        flex: 1;
+        margin: 0 0.5rem;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:first-child {
+            background-color: #fbc02d;
+        }
+
+        &:last-child {
+            background-color: #e53935;
+            color: #fff;
+        }
+    }
+}

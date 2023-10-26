@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
@@ -35,6 +35,17 @@ import { ReviewlistComponent } from './pages/admin/components/review/reviewlist/
 import { ReviewdetailsComponent } from './pages/admin/components/review/reviewdetails/reviewdetails.component';
 import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/flavorlist.component';
 import { FlavorDetailsComponent } from './pages/admin/components/flavor/flavordetails/flavordetails.component';
+import { SearchBarComponent } from './pages/public/components/search-bar/search-bar.component';
+import { FoodItemSliderComponent } from './pages/public/components/food-item-slider/food-item-slider.component';
+import { StoreListComponent } from './pages/public/components/store-list/store-list.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { OrdersListComponent } from './pages/public/components/orders-list/orders-list.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { PedidoFormComponent } from './pages/shared/layout/pedido-form/pedido-form.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +77,11 @@ import { FlavorDetailsComponent } from './pages/admin/components/flavor/flavorde
     AddressdetailsComponent,
     ReviewlistComponent,
     ReviewdetailsComponent,
+    SearchBarComponent,
+    FoodItemSliderComponent,
+    StoreListComponent,
+    OrdersListComponent,
+    PedidoFormComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +91,14 @@ import { FlavorDetailsComponent } from './pages/admin/components/flavor/flavorde
     HttpClientModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
-  ],
+    MatTabsModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
+ ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

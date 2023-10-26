@@ -1,0 +1,11 @@
+<div class="food-slider">
+    <button class="prev-slide" (click)="move('prev')">❮</button>
+    <div class="items-container" #foodSlider>
+        <div *ngFor="let product of lista" class="food-item col-md-1 mb-2" [ngClass]="'item-'">
+            <!-- <div *ngFor="let product of lista" class="food-item col-md-1 mb-2" [ngClass]="'item-' + product.category.toLowerCase()"> -->
+            <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid"> 
+            <span>{{ product.name }}</span>
+        </div>
+    </div>
+    <button class="next-slide" (click)="move('next')">❯</button>
+</div>
