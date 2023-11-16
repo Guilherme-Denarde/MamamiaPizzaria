@@ -1,4 +1,4 @@
-package com.pizzeria.MammaMia.Entity;
+package com.pizzeria.MammaMia.Enums;
 
 public enum OrderSize {
     P(0),

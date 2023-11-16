@@ -2,9 +2,7 @@ package com.pizzeria.MammaMia.Service;
 
 
 import com.pizzeria.MammaMia.Dto.EmployDTO;
-import com.pizzeria.MammaMia.Entity.DeliveryPeople;
 import com.pizzeria.MammaMia.Entity.Employ;
-import com.pizzeria.MammaMia.Entity.Permission;
 import com.pizzeria.MammaMia.Entity.RegisterUser;
 import com.pizzeria.MammaMia.Repository.EmployRepository;
 import com.pizzeria.MammaMia.Repository.RegisterUserRepository;

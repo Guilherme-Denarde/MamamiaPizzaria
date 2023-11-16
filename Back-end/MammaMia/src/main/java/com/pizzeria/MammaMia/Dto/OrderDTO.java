@@ -1,6 +1,7 @@
 package com.pizzeria.MammaMia.Dto;
 
 import com.pizzeria.MammaMia.Entity.*;
+import com.pizzeria.MammaMia.Enums.OrderSize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

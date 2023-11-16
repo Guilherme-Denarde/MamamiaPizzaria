@@ -1,6 +1,5 @@
 package com.pizzeria.MammaMia.Dto;
 
-import com.pizzeria.MammaMia.Entity.Permission;
 import com.pizzeria.MammaMia.Entity.RegisterUser;
 import lombok.Data;
 
