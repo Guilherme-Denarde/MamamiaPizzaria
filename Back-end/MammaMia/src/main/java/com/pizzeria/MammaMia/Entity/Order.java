@@ -2,6 +2,7 @@ package com.pizzeria.MammaMia.Entity;
 
 import com.pizzeria.MammaMia.Dto.OrderDTO;
 import com.pizzeria.MammaMia.Enums.OrderSize;
+import com.pizzeria.MammaMia.Enums.ProcessingStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,13 +21,13 @@ public class Order {
     private Integer id;
 
     @Enumerated(EnumType.STRING)
-    private Payment payment;
+    private PaymentMethod payment;
 
     @Enumerated(EnumType.STRING)
     private OrderSize orderSize;
 
     @Enumerated(EnumType.STRING)
-    private OrderState orderState;
+    private ProcessingStatus orderState;
 
     @Column(name = "must_deliver")
     private boolean mustDeliver;
@@ -48,11 +49,7 @@ public class Order {
     @JoinColumn(name = "client")
     private Client client;
 
-    @ManyToOne
-    @JoinColumn(name = "employ")
-    private Employ employ;
-
     public OrderDTO toDTO() {
-        return new OrderDTO(id, payment, orderSize, orderState, mustDeliver, orderTime, deliveryTime, priceTotal, deliveryPeople, client, employ);
+        return new OrderDTO(id, payment, orderSize, orderState, mustDeliver, orderTime, deliveryTime, priceTotal, deliveryPeople, client);
     }
 }
