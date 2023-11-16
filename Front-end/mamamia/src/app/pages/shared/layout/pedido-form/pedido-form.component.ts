@@ -48,6 +48,6 @@ export class PedidoFormComponent  {
 
     const textoURI = encodeURIComponent(texto);
 
-    window.open(`https://api.whatsapp.com/send?phone=5545998381297&text=${textoURI}${this.pedidoService.pedidoURI}`);
+    window.open(`https://api.whatsapp.com/send?phone=554535226060&text=${textoURI}${this.pedidoService.pedidoURI}`);
   }
 }

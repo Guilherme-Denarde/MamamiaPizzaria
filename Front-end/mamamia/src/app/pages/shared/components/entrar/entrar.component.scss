@@ -1,65 +1,114 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
 .delivery-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* This will align items to the top of the container */
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-    padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-content {
+  flex: 1;
+  padding-right: 30px;
+  
+  p {
+    margin: 10px 0;
+    color: #777;
+    line-height: 1.5;
+  }
+}
+
+.food-images {
+  flex-basis: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  
+  img {
+    max-width: 90%;
+    height: auto;
     border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
-  .text-content {
-    flex: 1;
-    text-align: left;
-  }
-  
-  .food-images {
-    flex: 1;
-    text-align: right;
-  
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-  }
-  
-  .header h1 {
+}
+
+.header {
+  margin-bottom: 20px;
+
+  h1 {
     font-family: 'Poppins', sans-serif;
-    font-weight: bold; 
-    color: #f57c00; 
+    font-weight: bold;
+    color: #f57c00;
+    margin-bottom: 10px;
+    font-size: 4rem;  
   }
-  
-  .header h2 {
-    color: #2F2F2F; 
+
+  h2 {
+    color: #2F2F2F;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
   }
+}
+
+.actions {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
   
-  .actions button {
+  button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin-right: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+    
+    &:hover {
+      transform: translateY(-3px);
+    }
   }
-  
-  .register {
-    background-color: #333;
-    color: #fff;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+
+  span {
+    font-size: 24px;
+    margin-right: 5px;
   }
-  
-  .register:hover {
+
+  p {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    color: #777;
+  }
+}
+
+.register {
+  background-color: #333;
+  color: #fff;
+
+  &:hover {
     background-color: #555;
   }
-  
-  .login {
-    background-color: #f57c00;
-    color: #fff;
+}
+
+.login {
+  background-color: #f57c00;
+  color: #fff;
+
+  &:hover {
+    background-color: #e56b00;
   }
-  
-  .login:hover {
-    background-color: #e56b00; /* Approximated darken value */
-  }
-  
-  .rating span {
-    font-size: 24px;
-  }
-  
+}
