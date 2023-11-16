@@ -7,7 +7,7 @@ import java.io.Serial;
 
 @Data
 public class AddressDTO {
-    private Integer id;
+    private Long id;
     private String streetName;
     private int streetNum;
     private String addressReference;
@@ -17,7 +17,7 @@ public class AddressDTO {
 
     public AddressDTO(){}
 
-    public AddressDTO(Integer id, String streetName, int streetNum, String addressReference, String city, String state, String postalCode) {
+    public AddressDTO(Long id, String streetName, int streetNum, String addressReference, String city, String state, String postalCode) {
         this.id = id;
         this.streetName = streetName;
         this.streetNum = streetNum;
@@ -27,6 +27,6 @@ public class AddressDTO {
         this.postalCode = postalCode;
     }
 
-    public AddressDTO(Serial id, RegisterUser registerUser, String cpf, String name, String phone, Permission permission, int salary) {
+    public AddressDTO(Serial id, RegisterUser registerUser, String cpf, String name, String phone, int salary) {
     }
 }
