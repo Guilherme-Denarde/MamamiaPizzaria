@@ -6,24 +6,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
-public class Restaurant {
+public class Restaurant extends AbstractEntity{
 
     private String name;
     private String email;
     private String phone;
     private String description;
     private Float rating_average;
-
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created_at;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updated_at;
+    @OneToMany(mappedBy = "restaurant")
+    private Set<RestaurantImage> restaurantImages;
+    @OneToMany(mappedBy = "restaurant")
+    private Set<RestaurantHours> restaurantHours;
+    @ManyToMany
+    @JoinTable(
+            name = "restaurant_restaurant_category",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<RestaurantCategory> categories;
 
 }

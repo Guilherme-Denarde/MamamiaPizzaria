@@ -1,15 +1,12 @@
 package com.pizzeria.MammaMia.Entity;
 
-import com.pizzeria.MammaMia.Enums.StatusType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 
@@ -25,15 +22,12 @@ public abstract class AbstractEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    @Enumerated(EnumType.STRING)
-    private StatusType status;
+    private Boolean status;
 
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
-        if (status == null) { // Define um valor padrão para status, se necessário
-            status = StatusType.ATIVO;
-        }
+        status = true;
     }
 
     @PreUpdate
