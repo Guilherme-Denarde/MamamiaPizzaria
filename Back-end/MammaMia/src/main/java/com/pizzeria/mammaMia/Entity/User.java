@@ -10,14 +10,21 @@ import java.util.Set;
 @Data
 @Table(name = "\"user\"")
 public class User extends AbstractEntity {
+    @Column
     private String name;
+    @Column
     private String email;
+    @Column
     private String password;
+    @Column
     private String phone;
-    private String profile_picture;
+    @Column(name = "profile_picture")
+    private String profilePicture;
+    @Column
     private String cpf;
     @Temporal(TemporalType.DATE)
-    private Date date_of_birth;
+    @Column(name = "date_of_birth")
+    private Date dateOfBirth;
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;

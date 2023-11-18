@@ -1,16 +1,15 @@
 package com.pizzeria.mammaMia.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
 
 
 @Entity
 @Data
+@Table(name = "voucher")
 public class Voucher extends AbstractEntity {
+    @Column
     private String description;
     @Column(name = "discount_rate")
     private Float discountRate;
