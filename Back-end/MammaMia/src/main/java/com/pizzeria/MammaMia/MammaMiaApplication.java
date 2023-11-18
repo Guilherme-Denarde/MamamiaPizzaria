@@ -1,4 +1,4 @@
-package com.pizzeria.MammaMia;
+package com.pizzeria.mammaMia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

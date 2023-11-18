@@ -1,4 +1,4 @@
-package com.pizzeria.MammaMia;
+package com.pizzeria.mammaMia;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

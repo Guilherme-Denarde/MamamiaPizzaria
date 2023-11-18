@@ -1,4 +1,4 @@
-package com.pizzeria.MammaMia.Exceptions;
+package com.pizzeria.mammaMia.Exceptions;
 
 import lombok.Data;
 

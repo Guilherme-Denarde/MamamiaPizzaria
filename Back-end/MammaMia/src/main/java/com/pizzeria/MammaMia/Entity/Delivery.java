@@ -1,10 +1,9 @@
-package com.pizzeria.MammaMia.Entity;
+package com.pizzeria.mammaMia.Entity;
 
-import com.pizzeria.MammaMia.Enums.DeliveryStatus;
+import com.pizzeria.mammaMia.Enums.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.security.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity

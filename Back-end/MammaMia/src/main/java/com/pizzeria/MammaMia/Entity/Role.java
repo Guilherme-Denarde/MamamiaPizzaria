@@ -1,6 +1,6 @@
-package com.pizzeria.MammaMia.Entity;
+package com.pizzeria.mammaMia.Entity;
 
-import com.pizzeria.MammaMia.Enums.Roles;
+import com.pizzeria.mammaMia.Enums.Roles;
 import jakarta.persistence.*;
 import lombok.Data;
 

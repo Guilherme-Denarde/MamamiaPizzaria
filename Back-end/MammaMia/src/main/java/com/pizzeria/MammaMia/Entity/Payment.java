@@ -1,8 +1,6 @@
-package com.pizzeria.MammaMia.Entity;
+package com.pizzeria.mammaMia.Entity;
 
-import com.pizzeria.MammaMia.Enums.PaymentMethodType;
-import com.pizzeria.MammaMia.Enums.PaymentStatusEnum;
-import com.pizzeria.MammaMia.Enums.ProcessingStatus;
+import com.pizzeria.mammaMia.Enums.PaymentStatusEnum;
 import jakarta.persistence.*;
 
 @Entity

@@ -1,4 +1,4 @@
-package com.pizzeria.MammaMia.Response;
+package com.pizzeria.mammaMia.Response;
 
 import lombok.Data;
 

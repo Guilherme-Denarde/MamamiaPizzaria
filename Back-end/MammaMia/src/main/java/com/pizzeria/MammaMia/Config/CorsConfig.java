@@ -1,4 +1,4 @@
-package com.pizzeria.MammaMia.Config;
+package com.pizzeria.mammaMia.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
