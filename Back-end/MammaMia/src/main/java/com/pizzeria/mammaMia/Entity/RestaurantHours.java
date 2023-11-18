@@ -8,6 +8,7 @@ import java.sql.Time;
 
 @Entity
 @Data
+@Table(name = "restaurant_hours")
 public class RestaurantHours extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
