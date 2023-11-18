@@ -10,18 +10,22 @@ import java.util.Set;
 @Entity
 @Table(name = "order")
 public class Order extends AbstractEntity{
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @Column(name = "requires_delivery")
-    private boolean requiresDelivery;
     @ManyToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
+    @Column(name = "total_price")
+    private Float totalPrice;
+    @Column(name = "requires_delivery")
+    private boolean requiresDelivery;
     @ManyToOne
     @JoinColumn(name = "delivery_address_id")
     private Address deliveryAddress;
+    @Column(name = "order_date")
+    @Temporal(TemporalType.DATE)
+    private Date orderDate;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "order_time")
     private Date orderTime;
