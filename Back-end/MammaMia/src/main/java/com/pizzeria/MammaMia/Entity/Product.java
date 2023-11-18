@@ -1,43 +1,31 @@
 package com.pizzeria.MammaMia.Entity;
 
-import com.pizzeria.MammaMia.Dto.ProductDTO;
+import com.pizzeria.MammaMia.Enums.OrderSize;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "product")
-@AllArgsConstructor
-@NoArgsConstructor
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Product extends AbstractEntity{
 
-    @Column(name = "product_name")
     private String name;
-
-    @Column(name = "product_description")
     private String description;
-
-    private BigDecimal price;
-
-    @Column(name = "image_url")
-    private String imageUrl;
-
-    private Integer  stars;
-
+    private Float price;
+    private int like;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "size")
+    private OrderSize size;
     @ManyToOne
-    @JoinColumn(name = "product_flavor")
-    private Flavor flavor;
+    @JoinColumn(name = "category_id")
+    private ProductCategory category;
+    private Boolean available;
+    @OneToMany(mappedBy = "product")
+    private Set<ProductImage> productImages;
+    @OneToMany(mappedBy = "product")
+    private Set<OrderItem> orderItems;
 
-    private int quantity;
 
-    public ProductDTO toDTO() {
-        return new ProductDTO(id, name, description, price, quantity, flavor, imageUrl, stars);
-    }
 }
