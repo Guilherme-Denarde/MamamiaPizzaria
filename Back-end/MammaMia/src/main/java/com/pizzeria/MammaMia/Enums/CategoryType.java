@@ -1,4 +1,4 @@
-package com.pizzeria.MammaMia.Enums;
+package com.pizzeria.mammaMia.Enums;
 
 public enum CategoryType {
     BRASILEIRA, ITALIANA, JAPONESA, CHINESA, FAST_FOOD, VEGETARIANA, VEGANA, SOBREMESAS, LANCHES, PIZZA, MARISQUEIRA, PADARIA, CAFETERIA, MEXICANA, BEBIDA

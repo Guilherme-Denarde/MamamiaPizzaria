@@ -1,4 +1,4 @@
-package com.pizzeria.MammaMia.Exceptions;
+package com.pizzeria.mammaMia.Exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

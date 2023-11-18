@@ -1,3 +1,3 @@
-package com.pizzeria.MammaMia.Enums;
+package com.pizzeria.mammaMia.Enums;
 
 public enum ReviewableType { PRODUTO, RESTAURANTE }

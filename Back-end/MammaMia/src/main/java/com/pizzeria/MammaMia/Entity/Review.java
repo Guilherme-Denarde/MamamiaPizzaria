@@ -1,7 +1,6 @@
-package com.pizzeria.MammaMia.Entity;
+package com.pizzeria.mammaMia.Entity;
 
 
-import com.pizzeria.MammaMia.Enums.ReviewableType;
 import jakarta.persistence.*;
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.pizzeria.MammaMia.Entity;
+package com.pizzeria.mammaMia.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;

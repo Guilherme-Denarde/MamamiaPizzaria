@@ -1,7 +1,6 @@
-package com.pizzeria.MammaMia.Entity;
+package com.pizzeria.mammaMia.Entity;
 
-import com.pizzeria.MammaMia.Enums.ProcessingStatus;
-import com.pizzeria.MammaMia.Enums.StatusOrder;
+import com.pizzeria.mammaMia.Enums.StatusOrder;
 import jakarta.persistence.*;
 import lombok.Data;
 
