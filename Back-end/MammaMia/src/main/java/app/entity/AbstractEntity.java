@@ -9,7 +9,6 @@ import java.util.Date;
 @Data
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,6 +33,5 @@ public abstract class AbstractEntity implements Serializable {
     protected void onUpdate() {
         updatedAt = new Date();
     }
-
 
 }
