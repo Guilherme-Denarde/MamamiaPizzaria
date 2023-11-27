@@ -47,6 +47,8 @@ public class ClientController {
         return ResponseEntity.ok(client.toDTO());
     }
 
+
+
     @PutMapping("/update")
     public ResponseEntity<?> updateClient(@RequestParam("id") Long id, @RequestBody ClientDTO clientDto) {
         try {

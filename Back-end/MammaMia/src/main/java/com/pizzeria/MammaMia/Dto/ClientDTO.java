@@ -1,7 +1,7 @@
 package com.pizzeria.MammaMia.Dto;
 
 import com.pizzeria.MammaMia.Entity.Address;
-import com.pizzeria.MammaMia.Entity.RegisterUser;
+import com.pizzeria.MammaMia.security.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ClientDTO {
     private Integer id;
-    private RegisterUser registerUserId;
+    private User registerUserId;
     private Address addressId;
     private String cpf;
     private String name;
