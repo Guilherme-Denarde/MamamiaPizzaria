@@ -8,9 +8,9 @@ import lombok.*;
 @Table(name = "address")
 public class Address extends AbstractEntity {
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
     @Column(name = "street_name")
     private String streetName;
     @Column(name = "street_num")

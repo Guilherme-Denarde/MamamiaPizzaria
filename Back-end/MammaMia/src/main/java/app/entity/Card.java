@@ -10,9 +10,9 @@ import java.util.Set;
 @Entity
 @Table(name = "card")
 public class Card extends AbstractEntity{
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
     @Column(name = "card_number")
     private String cardNumber;
     @Column(name = "cardholder_name")

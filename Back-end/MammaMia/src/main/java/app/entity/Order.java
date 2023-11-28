@@ -2,7 +2,9 @@ package app.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,9 +12,9 @@ import java.util.Set;
 @Entity
 @Table(name = "order")
 public class Order extends AbstractEntity{
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
     @ManyToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
@@ -33,4 +35,9 @@ public class Order extends AbstractEntity{
     private Set<OrderItem> orderItems;
     @OneToMany(mappedBy = "order")
     private Set<OrderStatus> orderStatus;
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return null;
+//    }
 }
