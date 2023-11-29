@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @Entity
@@ -21,8 +22,6 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private Payment payment;
 
-    @Enumerated(EnumType.STRING)
-    private OrderSize orderSize;
 
     @Enumerated(EnumType.STRING)
     private OrderState orderState;
@@ -51,7 +50,13 @@ public class Order {
     @JoinColumn(name = "employ")
     private Employ employ;
 
+    @ManyToMany
+    private List<Product> items;
+
+
+
+
     public OrderDTO toDTO() {
-        return new OrderDTO(id, payment, orderSize, orderState, mustDeliver, orderTime, deliveryTime, priceTotal, deliveryPeople, client, employ);
+        return new OrderDTO(id, payment, orderState, mustDeliver, orderTime, deliveryTime, priceTotal, deliveryPeople, client, employ,items);
     }
 }

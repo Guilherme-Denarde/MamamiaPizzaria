@@ -7,6 +7,10 @@ import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
 import com.pizzeria.MammaMia.Exceptions.ResourceNotFoundException;
 import com.pizzeria.MammaMia.Response.ResponseWrapper;
 import com.pizzeria.MammaMia.Service.ClientService;
+import com.pizzeria.MammaMia.security.config.JwtService;
+import com.pizzeria.MammaMia.security.user.User;
+import com.pizzeria.MammaMia.security.user.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,6 +28,13 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+
     @GetMapping("/findAll")
     @PreAuthorize("hasAnyRole('MANAGER')")
     public ResponseEntity<List<ClientDTO>> getAllClients() {
@@ -31,6 +43,32 @@ public class ClientController {
                 .map(Client::toDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(client);
+    }
+
+
+
+    @GetMapping("/me")
+
+    public ResponseEntity<ResponseWrapper<ClientDTO>> GetAllMe (
+
+            HttpServletRequest request
+    ) {
+        final String userEmail;
+        final String jwt;
+        final String authHeader = request.getHeader("Authorization");
+        jwt = authHeader.substring(7);
+        userEmail = jwtService.extractUsername(jwt);
+        Optional<User> user = userRepository.findByEmail(userEmail);
+
+        return clientService.getAllMe(user.get())
+                .map(Client::toDTO)
+                .map(dto -> ResponseEntity.ok(new ResponseWrapper<>(dto)))
+                .orElseGet(() -> ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseWrapper<>("Adress  not found.")));
+
+
+
     }
 
     @GetMapping

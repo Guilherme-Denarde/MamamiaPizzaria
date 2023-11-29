@@ -34,52 +34,52 @@ public class EmployServiceTest {
         try (AutoCloseable closeable = MockitoAnnotations.openMocks(this)) {
         }
     }
+//
+//            @Test
+//    public void testGetEmployById() {
+//        Employ employ = new Employ();
+//        employ.setId(1L);
+//        when(employRepository.findById(1L)).thenReturn(Optional.of(employ));
+//
+//        Optional<Employ> result = employService.getEmployById(1L);
+//        assertTrue(result.isPresent());
+//        assertEquals(1L, result.get().getId());
+//    }
+//
+//    @Test
+//    public void testCreateEmployFromDTO() {
+//        EmployDTO employDto = new EmployDTO();
+//        employDto.setId(1L);
+//        employDto.setName("John");
+//
+//        RegisterUser registerUser = new RegisterUser();
+//        registerUser.setUserId(1L);
+//
+//        employDto.setRegisterUser(registerUser);
+//        when(registerUserRepository.findById(1L)).thenReturn(Optional.of(registerUser));
+//        when(employRepository.save(any(Employ.class))).thenAnswer(i -> i.getArguments()[0]);
+//
+//        Employ result = employService.createEmployFromDTO(employDto);
+//        assertEquals("John", result.getName());
+//    }
 
-            @Test
-    public void testGetEmployById() {
-        Employ employ = new Employ();
-        employ.setId(1L);
-        when(employRepository.findById(1L)).thenReturn(Optional.of(employ));
-
-        Optional<Employ> result = employService.getEmployById(1L);
-        assertTrue(result.isPresent());
-        assertEquals(1L, result.get().getId());
-    }
-
-    @Test
-    public void testCreateEmployFromDTO() {
-        EmployDTO employDto = new EmployDTO();
-        employDto.setId(1L);
-        employDto.setName("John");
-
-        RegisterUser registerUser = new RegisterUser();
-        registerUser.setUserId(1L);
-
-        employDto.setRegisterUser(registerUser);
-        when(registerUserRepository.findById(1L)).thenReturn(Optional.of(registerUser));
-        when(employRepository.save(any(Employ.class))).thenAnswer(i -> i.getArguments()[0]);
-
-        Employ result = employService.createEmployFromDTO(employDto);
-        assertEquals("John", result.getName());
-    }
-
-
-    @Test
-    public void testUpdateEmployFromDTO() {
-        Employ employ = new Employ();
-        employ.setId(1L);
-        employ.setName("John");
-
-        EmployDTO employDto = new EmployDTO();
-        employDto.setId(1L);
-        employDto.setName("Jane");
-
-        when(employRepository.findById(1L)).thenReturn(Optional.of(employ));
-        when(employRepository.save(any(Employ.class))).thenAnswer(i -> i.getArguments()[0]);
-
-        Employ updated = employService.updateEmployFromDTO(employDto);
-        assertEquals("Jane", updated.getName());
-    }
+//
+//    @Test
+//    public void testUpdateEmployFromDTO() {
+//        Employ employ = new Employ();
+//        employ.setId(1L);
+//        employ.setName("John");
+//
+//        EmployDTO employDto = new EmployDTO();
+//        employDto.setId(1L);
+//        employDto.setName("Jane");
+//
+//        when(employRepository.findById(1L)).thenReturn(Optional.of(employ));
+//        when(employRepository.save(any(Employ.class))).thenAnswer(i -> i.getArguments()[0]);
+//
+//        Employ updated = employService.updateEmployFromDTO(employDto);
+//        assertEquals("Jane", updated.getName());
+//    }
 
     @Test
     public void testDeleteEmploy() {

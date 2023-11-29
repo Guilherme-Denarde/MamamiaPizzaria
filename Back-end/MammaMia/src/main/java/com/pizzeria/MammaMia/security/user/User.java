@@ -68,6 +68,8 @@ public class User implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
+
+
 }
 
 //TODO  ao criar um novo user :  CLiente  ?  -sim-> criar e vincular a uma classe cliente -> vai poder ter as informacoes alteradas

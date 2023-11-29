@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,13 +32,20 @@ public class Product {
 
     private Integer  stars;
 
-    @ManyToOne
-    @JoinColumn(name = "product_flavor")
-    private Flavor flavor;
+    @Enumerated(EnumType.ORDINAL)
+    private Categoria categoria;
 
-    private int quantity;
+    private Boolean pizza;
+
+    @ManyToOne
+    @JoinColumn(name = "tamanho_id")
+    private Size tamanho;
+
+    @ManyToMany
+    private List<Sabor> sabor;
+
 
     public ProductDTO toDTO() {
-        return new ProductDTO(id, name, description, price, quantity, flavor, imageUrl, stars);
+        return new ProductDTO(id, name, description, price,imageUrl,stars,categoria,pizza,tamanho,sabor);
     }
 }

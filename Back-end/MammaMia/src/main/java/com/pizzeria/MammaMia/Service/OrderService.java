@@ -9,6 +9,7 @@ import com.pizzeria.MammaMia.Repository.ClientRepository;
 import com.pizzeria.MammaMia.Repository.DeliveryPeopleRepository;
 import com.pizzeria.MammaMia.Repository.EmployRepository;
 import com.pizzeria.MammaMia.Repository.OrderRepository;
+import com.pizzeria.MammaMia.security.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -140,5 +141,15 @@ public class OrderService {
     }
 
 
+    public List<Order> getAllMe(User user) {
+        Optional<Client> client =  clientRepository.findByUser(user);
+
+        List<Order> orders = orderRepository.findAllByClient(client.get());
+
+        return orders;
+
+
+
+    }
 }
 
