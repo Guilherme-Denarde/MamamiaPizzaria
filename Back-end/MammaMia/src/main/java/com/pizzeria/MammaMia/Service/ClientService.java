@@ -46,7 +46,7 @@ public class ClientService {
     public Client createClientFromDTO(ClientDTO clientDTO) {
         Client client = new Client();
         client.setId(clientDTO.getId());
-        client.setRegisterUser(clientDTO.getRegisterUserId());
+        client.setUser(clientDTO.getRegisterUserId());
         client.setAddress(clientDTO.getAddressId());
         client.setCpf(clientDTO.getCpf());
         client.setName(clientDTO.getName());
@@ -55,7 +55,7 @@ public class ClientService {
         if (clientDTO.getRegisterUserId() != null) {
             User registerUser = userRepository.findById(clientDTO.getRegisterUserId().getId())
                     .orElseThrow(() -> new EntityNotFoundException("RegisterUser não encontrado"));
-            client.setRegisterUser(registerUser);
+            client.setUser(registerUser);
         }
         if (clientDTO.getAddressId() != null) {
             Address address = addressRepository.findById(Long.valueOf(clientDTO.getAddressId().getId()))

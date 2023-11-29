@@ -16,7 +16,7 @@ public class Client {
     @OneToOne
     @Getter @Setter
     @JoinColumn(name = "user_id")
-    private User registerUser;
+    private User user;
     @ManyToOne
     @Getter @Setter
     @JoinColumn(name = "address_id")
@@ -31,13 +31,13 @@ public class Client {
     }
     public Client(Integer id, User registerUser, Address address, String cpf, String name, String phone) {
         this.id = id;
-        this.registerUser = registerUser;
+        this.user = registerUser;
         this.address = address;
         this.cpf = cpf;
         this.name = name;
         this.phone = phone;
     }
     public ClientDTO toDTO() {
-        return new ClientDTO(id, registerUser, address, cpf, name, phone);
+        return new ClientDTO(id, user, address, cpf, name, phone);
     }
 }
