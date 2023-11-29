@@ -24,16 +24,19 @@ export class LoginComponent {
 
   onLogin() {
     this.userService.login(this.loginUser).subscribe(response => {
+      // Assuming the response contains a token you need to store
+      localStorage.setItem('token', response.token);
       this.router.navigate(['/home']);
+      this.toastr.success('Logged in successfully');
     }, error => {
-      if (error.error && error.error.message) {
-        this.toastr.error(error.error.message, 'Login Error');
+      // More specific error handling if you have different cases to handle
+      if (error.status === 401) {
+        this.toastr.error('Incorrect email or password.', 'Authentication Failed');
       } else {
-        this.toastr.error('Login failed. Please try again.', 'Login Error');
-        console.error('Full error object:', error);
-
-
+        this.toastr.error('An unexpected error occurred. Please try again later.', 'Login Error');
       }
+      console.error('Login error response:', error);
     });
   }
+  
 }

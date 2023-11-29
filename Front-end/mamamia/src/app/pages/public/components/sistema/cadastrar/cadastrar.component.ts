@@ -27,7 +27,7 @@ export class CadastrarComponent {
       private userService: RegisterUserService,
       private router: Router,
       private toastr: ToastrService
-      ) { } 
+      ) {} 
 
   onSubmit() {
     this.user.salt = '';
@@ -57,7 +57,7 @@ export class CadastrarComponent {
       )
       .subscribe(response => {
         console.log('User registered successfully', response);
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       });
   }
 }

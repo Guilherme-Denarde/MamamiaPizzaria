@@ -13,13 +13,19 @@ const routes: Routes = [
   { path: "", redirectTo: "entrar", pathMatch: 'full' },
   { path: "entrar", component: EntrarComponent },
   { path: "login", component: LoginComponent },
-  { path: "cadastrar", component: CadastrarComponent },
+  { path: "signup", component: CadastrarComponent },
   { path: "home", component: HomePageComponent },
   {
-    path: "admin", component: IndexComponent, children: [
+    path: "admin", data: { roles: ['MANAGER'] }, component: IndexComponent, children: [
       { path: "registeruser", component: RegisterUserlistComponent },
       { path: "flavor", component: FlavorListComponent },
       { path: "product", component: ProductListComponent },
+    ]
+  },
+  {
+    path: "user", data: { roles: ['CLIENTE'] }, component: IndexComponent, children: [
+      { path: "registeruser", component: RegisterUserlistComponent },
+      { path: "flavor", component: FlavorListComponent },
     ]
   },
   {
