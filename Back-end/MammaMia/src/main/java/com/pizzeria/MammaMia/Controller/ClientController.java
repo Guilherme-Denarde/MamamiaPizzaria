@@ -10,6 +10,7 @@ import com.pizzeria.MammaMia.Service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping("/findAll")
+    @PreAuthorize("hasAnyRole('MANAGER')")
     public ResponseEntity<List<ClientDTO>> getAllClients() {
         List<ClientDTO> client = clientService.getAllClients()
                 .stream()
@@ -32,6 +34,7 @@ public class ClientController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
     public ResponseEntity<ResponseWrapper<ClientDTO>> getclientById(@RequestParam("id") Long id) {
         return clientService.getClientById(id)
                 .map(Client::toDTO)
@@ -42,6 +45,7 @@ public class ClientController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
     public ResponseEntity<ClientDTO> createclient(@RequestBody ClientDTO clientDto) {
         Client client = clientService.createClientFromDTO(clientDto);
         return ResponseEntity.ok(client.toDTO());
@@ -50,6 +54,7 @@ public class ClientController {
 
 
     @PutMapping("/update")
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
     public ResponseEntity<?> updateClient(@RequestParam("id") Long id, @RequestBody ClientDTO clientDto) {
         try {
             if (!id.equals(Long.valueOf(clientDto.getId()))) {
@@ -64,6 +69,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasAnyRole('MANAGER')")
     public ResponseEntity<String> deleteClient(@RequestParam("id") Long id) {
         boolean isDeleted = clientService.deleteClient(id);
 

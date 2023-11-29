@@ -8,6 +8,7 @@ import com.pizzeria.MammaMia.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping("/findAll")
+    @PreAuthorize("hasAnyRole('MANAGER')")
+
     public ResponseEntity<List<OrderDTO>> getAllOrders() {
         List<OrderDTO> orders = orderService.getAllOrders()
                 .stream()
@@ -30,9 +33,8 @@ public class OrderController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
     public ResponseEntity<ResponseWrapper<OrderDTO>> getOrderById(@RequestParam("id") Long id) {
-
-
         return orderService.getOrderById(id)
                 .map(Order::toDTO)
                 .map(dto -> ResponseEntity.ok(new ResponseWrapper<>(dto)))
@@ -41,13 +43,18 @@ public class OrderController {
                         .body(new ResponseWrapper<>("Order with ID " + id + " not found.")));
     }
 
+    //TODO criar um endpoint que lista todas as orders daquele cliente
+
     @PostMapping
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
     public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDto) {
         Order orders = orderService.createOrderFromDTO(orderDto);
         return ResponseEntity.ok(orders.toDTO());
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
     public ResponseEntity<Object> updateOrder(@RequestParam("id") Long id, @RequestBody OrderDTO orderDTO) {
             if (!id.equals(Long.valueOf(orderDTO.getId()))) {
                 return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
@@ -57,6 +64,8 @@ public class OrderController {
     }
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
     public ResponseEntity<String> deleteOrder(@RequestParam("id") Long id) {
         boolean isDeleted = orderService.deleteOrder(id);
 

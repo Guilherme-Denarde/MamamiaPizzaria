@@ -1,8 +1,6 @@
 package com.pizzeria.MammaMia.Controller;
 
-import com.pizzeria.MammaMia.Dto.EmployDTO;
 import com.pizzeria.MammaMia.Dto.FlavorDTO;
-import com.pizzeria.MammaMia.Entity.Employ;
 import com.pizzeria.MammaMia.Entity.Flavor;
 import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
 import com.pizzeria.MammaMia.Response.ResponseWrapper;
@@ -11,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +23,8 @@ public class FlavorController {
     private FlavorService flavorService;
 
     @GetMapping("/findAll")
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
     public ResponseEntity<List<FlavorDTO>> getAllFlavors() {
         List<FlavorDTO> flavors = flavorService.getAllFlavors()
                 .stream()
@@ -33,6 +34,8 @@ public class FlavorController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
     public ResponseEntity<ResponseWrapper<FlavorDTO>> getFlavorById(@RequestParam("id") Long id) {
         return flavorService.getFlavorById(id)
                 .map(flavor -> new FlavorDTO(flavor.getId(), flavor.getName(), flavor.getPrice(), flavor.getIngredients()))
@@ -43,12 +46,16 @@ public class FlavorController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole( 'MANAGER')")
+
     public ResponseEntity<FlavorDTO> createFlavor(@RequestBody FlavorDTO flavorDto) {
         Flavor flavor = flavorService.createFlavor(flavorDto);
         return ResponseEntity.ok(new FlavorDTO(flavor.getId(), flavor.getName(), flavor.getPrice(), flavor.getIngredients()));
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasAnyRole( 'MANAGER')")
+
     public ResponseEntity<Object> updateFlavor(@RequestParam("id") Long id, @RequestBody FlavorDTO flavorDTO) {
         try {
             if (!id.equals(Long.valueOf(flavorDTO.getId()))) {
@@ -62,6 +69,8 @@ public class FlavorController {
     }
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasAnyRole( 'MANAGER')")
+
     public ResponseEntity<String> deleteFlavor(@RequestParam("id") Long id) {
         boolean isDeleted = flavorService.deleteFlavor(id);
 
