@@ -18,9 +18,10 @@ export class CadastrarComponent {
     name: '',
     email: '',
     password: '',
-    salt: '',
+    lastLogin: '',
     isActive: false,
-    lastLogin: ''
+    role: 'CLIENTE'
+
   };
 
   constructor(
@@ -30,8 +31,6 @@ export class CadastrarComponent {
       ) {} 
 
   onSubmit() {
-    this.user.salt = '';
-    this.user.isActive = true;
     this.user.lastLogin = new Date().toISOString();
   
     this.userService.registerUser(this.user)

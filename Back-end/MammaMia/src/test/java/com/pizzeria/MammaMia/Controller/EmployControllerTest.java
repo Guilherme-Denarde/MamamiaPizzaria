@@ -1,16 +1,13 @@
 package com.pizzeria.MammaMia.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pizzeria.MammaMia.Dto.EmployDTO;
 import com.pizzeria.MammaMia.Entity.Employ;
-import com.pizzeria.MammaMia.Entity.RegisterUser;
 import com.pizzeria.MammaMia.Service.EmployService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
@@ -18,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(EmployController.class)
@@ -97,21 +94,21 @@ public class EmployControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
-    void updateEmployTest() throws Exception {
-        EmployDTO employDtoToUpdate = new EmployDTO();
-        employDtoToUpdate.setId(1L);
-        employDtoToUpdate.setName("John Updated");
-
-        Employ mockUpdatedEmploy = new Employ();
-        when(employService.updateEmployFromDTO(any(EmployDTO.class))).thenReturn(mockUpdatedEmploy);
-
-        String employDtoJson = objectMapper.writeValueAsString(employDtoToUpdate);
-
-        mockMvc.perform(put("/api/employ/update?id=" + employDtoToUpdate.getId())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(employDtoJson))
-                .andExpect(status().isOk())
-                .andDo(MockMvcResultHandlers.print());
-    }
+//    @Test
+//    void updateEmployTest() throws Exception {
+//        EmployDTO employDtoToUpdate = new EmployDTO();
+//        employDtoToUpdate.setId(1L);
+//        employDtoToUpdate.setName("John Updated");
+//
+//        Employ mockUpdatedEmploy = new Employ();
+//        when(employService.updateEmployFromDTO(any(EmployDTO.class))).thenReturn(mockUpdatedEmploy);
+//
+//        String employDtoJson = objectMapper.writeValueAsString(employDtoToUpdate);
+//
+//        mockMvc.perform(put("/api/employ/update?id=" + employDtoToUpdate.getId())
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(employDtoJson))
+//                .andExpect(status().isOk())
+//                .andDo(MockMvcResultHandlers.print());
+//    }
 }

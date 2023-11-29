@@ -16,8 +16,6 @@ export class RegisterUserDetailsComponent {
   constructor(private userService: RegisterUserService) { }
 
   save() {
-    this.registerUser.salt = ''; 
-    this.registerUser.isActive = true; 
     this.registerUser.lastLogin = new Date().toISOString(); 
     
     const userObservable = this.registerUser.userId ? 

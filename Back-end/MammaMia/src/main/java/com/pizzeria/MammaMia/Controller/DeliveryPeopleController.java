@@ -9,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,9 @@ public class DeliveryPeopleController {
     private DeliveryPeopleService deliveryPeopleService;
 
     @GetMapping("/findAll")
+    @PreAuthorize("hasAnyRole('MANAGER')")
+
+
     public ResponseEntity<List<DeliveryPeopleDTO>> getAllDeliveryPeople() {
         List<DeliveryPeopleDTO> deliveryPeopleList = deliveryPeopleService.getAllDeliveryPeople()
                 .stream()
@@ -31,6 +35,8 @@ public class DeliveryPeopleController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
     public ResponseEntity<ResponseWrapper<DeliveryPeopleDTO>> getDeliveryPeopleById(@RequestParam("id") Long id) {
         return deliveryPeopleService.getDeliveryPeopleById(id)
                 .map(DeliveryPeople::toDTO)
@@ -41,12 +47,16 @@ public class DeliveryPeopleController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole( 'MANAGER')")
+
     public ResponseEntity<DeliveryPeopleDTO> createDeliveryPeople(@RequestBody DeliveryPeopleDTO deliveryPeopleDto) {
         DeliveryPeople deliveryPeople = deliveryPeopleService.createDeliveryPeopleFromDTO(deliveryPeopleDto);
         return ResponseEntity.ok(deliveryPeople.toDTO());
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasAnyRole( 'MANAGER')")
+
     public ResponseEntity<Object> updateDeliveryPeople(@RequestParam("id") Long id, @RequestBody DeliveryPeopleDTO deliveryPeopleDto) {
         try {
             if (!id.equals(Long.valueOf(deliveryPeopleDto.getId()))) {
@@ -62,6 +72,7 @@ public class DeliveryPeopleController {
 
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
     public ResponseEntity<String> deleteDeliveryPeople(@RequestParam("id") Long id) {
 
         boolean isDeleted = deliveryPeopleService.deleteDeliveryPeople(id);

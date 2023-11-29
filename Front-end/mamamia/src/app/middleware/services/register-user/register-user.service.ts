@@ -14,13 +14,13 @@ export class RegisterUserService {
   constructor(private http: HttpClient) { }
   
   registerUser(user: User): Observable<User> {
-    return this.http.post<User>(this.API, user).pipe(
+    return this.http.post<User>(`${this.API}/register`, user).pipe(
       catchError(this.handleError)
     );
   }
   
   login(user: LoginUser): Observable<any> {
-    return this.http.post(`${this.API}/login`, user).pipe(
+    return this.http.post(`${this.API}/authenticate`, user).pipe(
       catchError(this.handleError)
     );
   }
