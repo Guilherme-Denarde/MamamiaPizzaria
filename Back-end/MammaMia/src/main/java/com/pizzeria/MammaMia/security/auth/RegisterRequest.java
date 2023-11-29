@@ -1,8 +1,11 @@
 package com.pizzeria.MammaMia.security.auth;
 
-import com.pizzeria.MammaMia.Entity.Address;
+import com.pizzeria.MammaMia.Dto.AddressDTO;
 import com.pizzeria.MammaMia.security.user.Role;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
@@ -13,7 +16,7 @@ public class RegisterRequest {
 
 
   // CLIENT
-  private Address address;
+  private AddressDTO address;
   private String cpf;
   private String name;
   private String phone;

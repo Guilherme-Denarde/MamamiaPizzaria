@@ -2,7 +2,9 @@ package com.pizzeria.MammaMia.security.auth;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pizzeria.MammaMia.Entity.Address;
 import com.pizzeria.MammaMia.Entity.Client;
+import com.pizzeria.MammaMia.Repository.AddressRepository;
 import com.pizzeria.MammaMia.Repository.ClientRepository;
 import com.pizzeria.MammaMia.security.config.JwtService;
 import com.pizzeria.MammaMia.security.token.Token;
@@ -31,10 +33,9 @@ public class AuthenticationService {
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
   private final ClientRepository clientRepository;
+  private final AddressRepository addressRepository;
 
   public AuthenticationResponse register(RegisterRequest request) {
-
-
 
 
     var user = User.builder()
@@ -53,7 +54,13 @@ public class AuthenticationService {
 
     if ( request.getRole() == Role.CLIENTE){
       Client cliente = new Client();
-      cliente.setAddress(request.getAddress());
+      if (request.getAddress() != null  ) {
+        Address address_novo = Address.fromDTO(request.getAddress());
+        addressRepository.save(address_novo);
+        cliente.setAddress(address_novo);
+
+      }
+
       cliente.setName(request.getName());
       cliente.setCpf(request.getCpf());
       cliente.setPhone(request.getPhone());
