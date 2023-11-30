@@ -49,9 +49,17 @@ export class LoginComponent implements OnInit {
         const decodedToken = jwtDecode<any>(token as string);
         console.log(decodedToken);
         console.log("Login response:", response);
+        const role = this.userService.getRole();
+        if (role === 'ADMIN' || role === 'MANAGER') {      
+          this.router.navigate(['/admin/product']);
+        } else if (role === 'CLIENTE') {
+          this.router.navigate(['/home']);
+        } else {
+          this.router.navigate(['/entrar']);
+        }
 
 
-        this.router.navigate(['/home']);
+        // this.router.navigate(['/home']);
 
         this.toastr.success('Logged in successfully');
       } else {
