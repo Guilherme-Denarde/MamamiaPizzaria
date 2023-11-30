@@ -13,11 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class ProductService {
   products: Product[] = [];
 
-<<<<<<< HEAD
-  private readonly API: string = 'http://localhost:8081/api/products';
-=======
   public API = 'http://localhost:8080/api/products';
->>>>>>> 3b11b6213f5efe124643a8c2daea6ed55c8323ae
 
   constructor(private cookieService: CookieService,private http: HttpClient) { }
 
@@ -52,12 +48,12 @@ export class ProductService {
     );
   }
 
-  
   createProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.API, product,  { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
+
 // In ProductService
 getAllProducts(): Observable<Product[]> {
   return this.http.get<Product[]>(`${this.API}/findAll`, { headers: this.getHeaders() }).pipe(
