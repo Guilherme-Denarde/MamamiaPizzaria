@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class FlavorService {
 
-  private readonly API: string = 'http://localhost:8080/sabor';
+  public readonly API: string = 'http://localhost:8080/sabor';
 
   constructor(private cookieService: CookieService,private http: HttpClient) { }
 
