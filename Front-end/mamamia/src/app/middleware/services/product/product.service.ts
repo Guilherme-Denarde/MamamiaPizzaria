@@ -48,12 +48,12 @@ export class ProductService {
     );
   }
 
+  
   createProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.API, product,  { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
-
 // In ProductService
 getAllProducts(): Observable<Product[]> {
   return this.http.get<Product[]>(`${this.API}/findAll`, { headers: this.getHeaders() }).pipe(
