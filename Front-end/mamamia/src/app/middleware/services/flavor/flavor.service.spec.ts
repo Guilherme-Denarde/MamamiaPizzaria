@@ -32,13 +32,13 @@ describe('FlavorService', () => {
   it('should create a flavor', () => {
     const flavor: Flavor = {
       id: 1,
-      flavorName: 'Flavor 1',
-      flavorPrice: 5.99,
-      flavorIngredients: 'Ingredient 1, Ingredient 2',
+      nome: 'Flavor 1',
+      preco_adicional: 5.99,
+      descricao: 'Ingredient 1, Ingredient 2',
     };
 
-    service.create(flavor).subscribe((createdFlavor) => {
-      expect(createdFlavor).toEqual(flavor);
+    service.createFlavor(flavor).subscribe((createFlavor) => {
+      expect(createFlavor).toEqual(flavor);
     });
 
     const req = httpMock.expectOne(service.API);
@@ -50,19 +50,19 @@ describe('FlavorService', () => {
     const mockFlavors: Flavor[] = [
       {
         id: 1,
-        flavorName: 'Flavor 1',
-        flavorPrice: 5.99,
-        flavorIngredients: 'Ingredient 1, Ingredient 2',
+        nome: 'Flavor 1',
+        preco_adicional: 5.99,
+        descricao: 'Ingredient 1, Ingredient 2',
       },
       {
         id: 2,
-        flavorName: 'Flavor 2',
-        flavorPrice: 6.99,
-        flavorIngredients: 'Ingredient 3, Ingredient 4',
+        nome: 'Flavor 2',
+        preco_adicional: 6.99,
+        descricao: 'Ingredient 3, Ingredient 4',
       },
     ];
 
-    service.getAll().subscribe((flavors) => {
+    service.getAllFlavors().subscribe((flavors) => {
       expect(flavors).toEqual(mockFlavors);
     });
 
@@ -74,12 +74,12 @@ describe('FlavorService', () => {
   it('should update a flavor', () => {
     const flavor: Flavor = {
       id: 1,
-      flavorName: 'Updated Flavor',
-      flavorPrice: 7.99,
-      flavorIngredients: 'New Ingredient 1, New Ingredient 2',
+      nome: 'Updated Flavor',
+      preco_adicional: 7.99,
+      descricao: 'New Ingredient 1, New Ingredient 2',
     };
 
-    service.update(flavor).subscribe((updatedFlavor) => {
+    service.updateFlavor(flavor).subscribe((updatedFlavor) => {
       expect(updatedFlavor).toEqual(flavor);
     });
 
@@ -91,7 +91,7 @@ describe('FlavorService', () => {
   it('should delete a flavor', () => {
     const flavorId = 1;
 
-    service.delete(flavorId).subscribe((message) => {
+    service.deleteFlavor(flavorId).subscribe((message) => {
       expect(message).toBe('Flavor deleted');
     });
 

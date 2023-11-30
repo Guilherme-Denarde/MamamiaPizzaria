@@ -29,9 +29,9 @@ describe('ProductdetailsComponent', () => {
 
     const mockFlavor: Flavor = {
       id: 1,
-      flavorName: 'Margarita',
-      flavorPrice: 5.50,
-      flavorIngredients: 'Tomate, Queijo, Manjericão'
+      nome: 'Margarita',
+      preco_adicional: 5.50,
+      descricao: 'Tomate, Queijo, Manjericão'
     };
 
     const mockProduct: Product = {
