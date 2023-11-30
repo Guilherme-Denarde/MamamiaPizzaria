@@ -37,7 +37,7 @@ public class AddressService {
     }
 
     public Address createAddressFromDTO(AddressDTO addressDto) {
-        Address address = new Address(addressDto.getId(), addressDto.getStreetName(), addressDto.getStreetNum(),
+        Address address = new Address( addressDto.getStreetName(), addressDto.getStreetNum(),
                 addressDto.getAddressReference(), addressDto.getCity(),
                 addressDto.getState(), addressDto.getPostalCode());
         return addressRepository.save(address);

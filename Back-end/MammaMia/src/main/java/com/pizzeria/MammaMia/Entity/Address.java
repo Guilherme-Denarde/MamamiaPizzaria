@@ -5,9 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serial;
-import java.math.BigInteger;
-
 @Entity
 @Table(name = "address")
 public class Address {
@@ -32,8 +29,7 @@ public class Address {
     private String postalCode;
     public Address(){
     }
-    public Address(Integer id, String streetName, int streetNum, String addressReference, String city, String state, String postalCode) {
-        this.id = id;
+    public Address( String streetName, int streetNum, String addressReference, String city, String state, String postalCode) {
         this.streetName = streetName;
         this.streetNum = streetNum;
         this.addressReference = addressReference;
@@ -43,7 +39,7 @@ public class Address {
     }
 
     public static Address fromDTO(AddressDTO addressDto) {
-        return new Address(addressDto.getId(), addressDto.getStreetName(), addressDto.getStreetNum(),
+        return new Address( addressDto.getStreetName(), addressDto.getStreetNum(),
                 addressDto.getAddressReference(), addressDto.getCity(),
                 addressDto.getState(), addressDto.getPostalCode());
     }

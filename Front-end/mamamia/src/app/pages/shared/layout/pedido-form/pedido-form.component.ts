@@ -4,7 +4,7 @@ import { Order } from 'src/app/models/orders/orders';
 import { OrdersService } from 'src/app/middleware/services/orders/orders.service';
 import { Product } from 'src/app/models/product/product';
 import { PaymentFormComponent } from '../../components/payment-form/payment-form.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pedido-form',
@@ -24,7 +24,7 @@ export class PedidoFormComponent  {
   pedidos: Order[] = [];
   produtosSelecionados: Product[] = [];
   
-  constructor(private pedidoService: PedidoService, private ordersService: OrdersService,public dialog: MatDialog) {
+  constructor(private dialogRef: MatDialogRef<PedidoFormComponent>,private pedidoService: PedidoService, private ordersService: OrdersService,public dialog: MatDialog) {
     this.produtosSelecionados = this.ordersService.getPedidos();
   }
 
@@ -34,6 +34,10 @@ export class PedidoFormComponent  {
       width: '500px',
       // ... any other configurations for your dialog
     });
+  }
+
+  close() {
+    this.dialogRef.close();
   }
   
 

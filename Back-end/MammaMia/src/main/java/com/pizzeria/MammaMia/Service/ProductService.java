@@ -1,6 +1,7 @@
 package com.pizzeria.MammaMia.Service;
 
 import com.pizzeria.MammaMia.Dto.ProductDTO;
+import com.pizzeria.MammaMia.Entity.Categoria;
 import com.pizzeria.MammaMia.Entity.Product;
 import com.pizzeria.MammaMia.Entity.Sabor;
 import com.pizzeria.MammaMia.Repository.ProductRepository;
@@ -16,9 +17,9 @@ import java.util.Optional;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
-
     @Autowired
     private SaborRepository saborRepository;
+
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -81,5 +82,15 @@ public class ProductService {
         } else {
             return false;
         }
+    }
+
+    public List<Product> getProductsByCategoria(String categoria) {
+        List<Product> produtos = productRepository.findByCategoria(Categoria.valueOf(categoria));
+
+        return produtos;
+
+
+
+
     }
 }
