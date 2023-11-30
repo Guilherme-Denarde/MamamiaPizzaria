@@ -1,27 +1,37 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Flavor } from 'src/app/models/flavor/flavor';
 import { Product } from 'src/app/models/product/product';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  products: Product[] = [];
 
   private readonly API: string = 'http://localhost:8080/api/products';
 
-  constructor(private http: HttpClient) { }
+  constructor(private cookieService: CookieService,private http: HttpClient) { }
+
+  public getHeaders(): HttpHeaders {
+    const token = this.cookieService.get('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
 
   createFlavor(flavor: Flavor): Observable<Flavor> {
-    return this.http.post<Flavor>(`${this.API}/flavors`, flavor).pipe(
+    return this.http.post<Flavor>(`${this.API}/flavors`, flavor, { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
 
   getAllFlavors(): Observable<Flavor[]> {
-    return this.http.get<Flavor[]>(`${this.API}/flavors/findAll`).pipe(
+    return this.http.get<Flavor[]>(`${this.API}/flavors/findAll`, { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
@@ -39,16 +49,17 @@ export class ProductService {
   }
 
   createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.API, product).pipe(
+    return this.http.post<Product>(this.API, product,  { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
 
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.API}/findAll`).pipe(
-      catchError(this.handleError)
-    );
-  }
+// In ProductService
+getAllProducts(): Observable<Product[]> {
+  return this.http.get<Product[]>(`${this.API}/findAll`, { headers: this.getHeaders() }).pipe(
+    catchError(this.handleError)
+  );
+}
 
   updateProduct(product: Product): Observable<Product> {
     return this.http.put<Product>(`${this.API}/update?id=${product.id}`, product).pipe(
