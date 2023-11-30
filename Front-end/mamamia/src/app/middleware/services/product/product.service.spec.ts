@@ -33,9 +33,9 @@ describe('ProductService', () => {
   it('should create a flavor', () => {
     const flavor: Flavor = {
       id: 1, 
-      flavorName: 'Sabor Teste', 
-      flavorPrice: 10.99,
-      flavorIngredients: 'Ingrediente 1, Ingrediente 2',
+      nome: 'Sabor Teste', 
+      preco_adicional: 10.99,
+      descricao: 'Ingrediente 1, Ingrediente 2',
     };
 
     service.createFlavor(flavor).subscribe((createdFlavor) => {
@@ -49,8 +49,8 @@ describe('ProductService', () => {
 
   it('should get all flavors', () => {
     const dummyFlavors: Flavor[] = [
-      { id: 1, flavorName: 'Flavor 1', flavorPrice: 10.99, flavorIngredients: 'Ingrediente 1, Ingrediente 2' },
-      { id: 2, flavorName: 'Flavor 2', flavorPrice: 9.99, flavorIngredients: 'Ingrediente 3, Ingrediente 4' },
+      { id: 1, nome: 'Flavor 1', preco_adicional: 10.99, descricao: 'Ingrediente 1, Ingrediente 2' },
+      { id: 2, nome: 'Flavor 2', preco_adicional: 9.99, descricao: 'Ingrediente 3, Ingrediente 4' },
     ];
 
     service.getAllFlavors().subscribe((flavors) => {
@@ -80,7 +80,7 @@ describe('ProductService', () => {
       name: 'Product Test',
       description: 'Test Description',
       price: 29.99,
-      flavor: { id: 2, flavorName: 'Flavor 2', flavorPrice: 7.99, flavorIngredients: 'Ingredient 3, Ingredient 4' },
+      flavor: { id: 2, nome: 'Flavor 2', preco_adicional: 7.99, descricao: 'Ingredient 3, Ingredient 4' },
       quantity: 5,
       imageUrl: 'test-image-url.jpg',
       stars: 4.0,
@@ -101,7 +101,7 @@ describe('ProductService', () => {
       name: 'Product Test',
       description: 'Test Description',
       price: 29.99,
-      flavor: { id: 2, flavorName: 'Flavor 2', flavorPrice: 7.99, flavorIngredients: 'Ingredient 3, Ingredient 4' },
+      flavor: { id: 2, nome: 'Flavor 2', preco_adicional: 7.99, descricao: 'Ingredient 3, Ingredient 4' },
       quantity: 5,
       imageUrl: 'test-image-url.jpg',
       stars: 4.0,
