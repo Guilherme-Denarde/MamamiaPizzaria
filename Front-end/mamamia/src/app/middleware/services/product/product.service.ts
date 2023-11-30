@@ -21,7 +21,7 @@ export class ProductService {
     const token = this.cookieService.get('token');
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`
-    });
+    }); 
   }
 
   createFlavor(flavor: Flavor): Observable<Flavor> {

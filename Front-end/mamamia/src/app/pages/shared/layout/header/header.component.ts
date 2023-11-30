@@ -8,6 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { OrdersService } from 'src/app/middleware/services/orders/orders.service';
 import { OrdersListComponent } from '../../../public/components/orders-list/orders-list.component';
 import { PaymentFormComponent } from '../../components/payment-form/payment-form.component';
+import { RegisterUserService } from 'src/app/middleware/services/register-user/register-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,10 +21,13 @@ export class HeaderComponent implements OnInit {
   products: Product[] = [];
   totalPrice = 0;
   itemCount = 0;
+  role: string | null = null;
 
-  constructor(private cookieService: CookieService,private http: HttpClient,private dialog: MatDialog, private ordersService: OrdersService) {}
+    constructor(private router: Router,private cookieService: CookieService,private http: HttpClient,private dialog: MatDialog, private ordersService: OrdersService, private userService: RegisterUserService) {}
 
   ngOnInit(): void {
+    this.role = this.userService.getRole();
+    console.log(this.role);
     this.fetchProducts();
   }
   
@@ -55,6 +60,10 @@ openPaymentMethodModal() {
 
 }
 
+logout(): void {
+  this.cookieService.deleteAll();
+  this.router.navigate(['/login']);
+}
 
 
 

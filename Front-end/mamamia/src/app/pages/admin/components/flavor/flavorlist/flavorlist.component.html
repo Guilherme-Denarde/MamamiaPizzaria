@@ -1,3 +1,4 @@
+<app-admin-header></app-admin-header>
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center">
         <h3 class="text-primary">List of Flavors</h3>
@@ -18,9 +19,9 @@
             <tbody>
                 <tr *ngFor="let flavor of flavors; let i = index">
                     <td>{{ flavor.id }}</td>
-                    <td>{{ flavor.flavorName }}</td>
-                    <td>{{ flavor.flavorPrice | currency }}</td>
-                    <td>{{ flavor.flavorIngredients }}</td>
+                    <td>{{ flavor.nome }}</td>
+                    <td>{{ flavor.preco_adicional | currency }}</td>
+                    <td>{{ flavor.descricao }}</td>
                     <td>
                         <button class="btn btn-sm btn-primary mr-2" (click)="editFlavor(modal1, flavor, i)">Edit</button>
                         <button class="btn btn-sm btn-danger" (click)="deleteFlavor(flavor)">Delete</button>

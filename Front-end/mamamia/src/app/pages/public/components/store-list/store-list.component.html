@@ -1,15 +1,15 @@
 <div class="stores-list">
     <h2>Produtos</h2>
     <div class="store-grid">
-        <div *ngFor="let product of lista" class="store">
+        <div *ngFor="let product of products" class="store">
             <img [src]="product.imageUrl" [alt]="product.name" class="store-img">
             <div class="store-info">
                 <div class="store-name">{{ product.name }}</div>
                 <div class="store-rating">{{ product.stars }} ★</div>
                 <div class="store-type">{{ product.description }}</div>
                 <div class="store-details">
-                    <span class="store-distance">{{ product.flavor.name }}</span> •
-                    <span class="store-time">{{ product.flavor.price }}</span> •
+                    <!-- <span class="store-distance">{{ product.flavor.name }}</span> • -->
+                    <!-- <span class="store-time">{{ product.flavor.price }}</span> • -->
                     <span class="store-price">{{ product.price }}</span>
                 </div>
                 <button (click)="addPedido(product)">Adicionar Pedido</button>

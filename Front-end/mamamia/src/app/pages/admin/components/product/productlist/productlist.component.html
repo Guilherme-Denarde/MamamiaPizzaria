@@ -1,3 +1,4 @@
+<app-admin-header></app-admin-header>
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center">
         <h3 class="text-primary">List of Products</h3>
@@ -25,7 +26,7 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.price | currency }}</td>
-                    <td>{{ product.flavor.flavorName }}</td> 
+                    <td>{{ product.flavor.nome }}</td> 
                     <td>{{ product.quantity }}</td>
                     <td><img [src]="product.imageUrl" alt="Product image" width="50"></td> 
                     <td>{{ product.stars }}</td> 

@@ -16,8 +16,8 @@ export class FlavorDetailsComponent {
 
   saveFlavor() {
     const flavorObservable = this.flavor.id ? 
-                             this.flavorService.update(this.flavor) :
-                             this.flavorService.create(this.flavor);
+                             this.flavorService.updateFlavor(this.flavor) :
+                             this.flavorService.createFlavor(this.flavor);
 
     flavorObservable.subscribe({  
         next: flavor => { 
