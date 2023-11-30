@@ -65,20 +65,6 @@
 //        assertNotNull(response);
 //        assertEquals(404, response.getStatusCodeValue());
 //    }
-<<<<<<< HEAD
-//
-//    @Test
-//    public void testCreateAddress() {
-//        AddressDTO dto = new AddressDTO(1L, "Rua A", 10, "Perto da loja B", "Cidade X", "Estado Y", "12345");
-//        Address address = Address.fromDTO(dto);
-//        when(addressService.createAddressFromDTO(any(AddressDTO.class))).thenReturn(address);
-//
-//        ResponseEntity<AddressDTO> response = addressController.createAddress(dto);
-//
-//        assertNotNull(response);
-//        assertEquals(200, response.getStatusCodeValue());
-//    }
-=======
 ////
 ////    @Test
 ////    public void testCreateAddress() {
@@ -91,7 +77,6 @@
 ////        assertNotNull(response);
 ////        assertEquals(200, response.getStatusCodeValue());
 ////    }
->>>>>>> 022ead6c79dc0878f18f7e2d597e8f01b4f20530
 //
 //    @Test
 //    public void testUpdateAddressSuccess() {
