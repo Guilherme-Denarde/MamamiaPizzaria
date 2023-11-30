@@ -49,6 +49,7 @@ import { PedidoFormComponent } from './pages/shared/layout/pedido-form/pedido-fo
 import { CategorySelectorComponent } from './pages/shared/components/category-selector/category-selector.component';
 import { PaymentFormComponent } from './pages/shared/components/payment-form/payment-form.component';
 import { AdminOrdersComponent } from './pages/shared/components/admin-orders/admin-orders.component';
+import { AdminHeaderComponent } from './pages/admin/components/admin-header/admin-header.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { AdminOrdersComponent } from './pages/shared/components/admin-orders/adm
     PedidoFormComponent,
     CategorySelectorComponent,
     PaymentFormComponent,
-    AdminOrdersComponent
+    AdminOrdersComponent,
+    AdminHeaderComponent,
   ],
   imports: [
     BrowserModule,

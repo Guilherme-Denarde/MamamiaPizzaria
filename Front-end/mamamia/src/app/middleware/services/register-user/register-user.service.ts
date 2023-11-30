@@ -3,15 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoginUser, User } from 'src/app/models/user/user';
+import { CookieService } from 'ngx-cookie-service';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterUserService {
 
-  public API = 'http://localhost:8080/api/users';
+  public readonly API: string = 'http://localhost:8080/api/users'; 
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  constructor(private http: HttpClient) { }
   
   registerUser(user: User): Observable<User> {
     return this.http.post<User>(`${this.API}/register`, user).pipe(
@@ -50,5 +52,21 @@ export class RegisterUserService {
   private handleError(error: any): Observable<never> {
     console.error('An error occurred:', error);
     return throwError('Something went wrong; please try again later.');
+  }
+
+  getRole(): string | null {
+    const token = this.cookieService.get('token');
+    if (!token) {
+      console.error('No token found in cookies.');
+      return null;
+    }
+
+    try {
+      const decodedToken = jwtDecode<any>(token);
+      return decodedToken.role;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
   }
 }

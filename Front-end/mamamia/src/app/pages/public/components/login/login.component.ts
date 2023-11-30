@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { RegisterUserService } from 'src/app/middleware/services/register-user/register-user.service';
 import { LoginUser } from 'src/app/models/user/user';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -37,23 +38,36 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(this.loginUser).subscribe(response => {
       // If the response contains the token object, log it and set the cookie
-      if (response && response.access_token) {
+      this.cookieService.set('token', response.access_token, { expires: 1, path: '/' }); 
+
+    const token = this.cookieService.get('token')
+      // console.log(this.userService.getRole);
+      
+      if (response) {       
+         console.log(token);
+
+        const decodedToken = jwtDecode<any>(token as string);
+        console.log(decodedToken);
         console.log("Login response:", response);
-        this.cookieService.set('token', response.access_token, { expires: 1, path: '/' }); 
+        const role = this.userService.getRole();
+        if (role === 'ADMIN' || role === 'MANAGER') {      
+          this.router.navigate(['/admin/product']);
+        } else if (role === 'CLIENTE') {
+          this.router.navigate(['/home']);
+        } else {
+          this.router.navigate(['/entrar']);
+        }
 
-        // Navigate to the home page
-        this.router.navigate(['/home']);
 
-        // Show a success message
+        // this.router.navigate(['/home']);
+
         this.toastr.success('Logged in successfully');
       } else {
-        // Handle unexpected response structure
         this.toastr.error('Unexpected response received from the server', 'Login Error');
         console.error('Unexpected login response:', response);
       }
       
     }, error => {
-      // Handle the error according to the HTTP status code
       if (error.error && error.error.message) {
         this.toastr.error(error.error.message, 'Login Error');
       } else {

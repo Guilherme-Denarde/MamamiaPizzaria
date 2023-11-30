@@ -1,6 +1,6 @@
 export class Flavor {
     id!: number;
-    flavorName!: string;
-    flavorPrice!: number;
-    flavorIngredients!: string;
+    nome!: string;
+    preco_adicional!: number;
+    descricao!: string;
 }

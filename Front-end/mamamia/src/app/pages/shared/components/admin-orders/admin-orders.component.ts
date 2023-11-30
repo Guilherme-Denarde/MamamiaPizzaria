@@ -23,7 +23,7 @@ export class AdminOrdersComponent implements OnInit {
   }
 
   listAllFlavors(): void {
-    this.flavorService.getAll().subscribe(
+    this.flavorService.getAllFlavors().subscribe(
       data => {
         this.flavors = data;
         this.flavors.sort((a, b) => b.id - a.id); 
@@ -45,14 +45,14 @@ export class AdminOrdersComponent implements OnInit {
   }
 
   saveOrUpdateFlavor(flavor: Flavor): void {
-    if (!flavor.flavorName) {
+    if (!flavor.nome) {
       alert('Please insert valid data.');
       return;
     }
 
     const flavorObservable = flavor.id ? 
-                             this.flavorService.update(flavor) : 
-                             this.flavorService.create(flavor);
+                             this.flavorService.updateFlavor(flavor) : 
+                             this.flavorService.createFlavor(flavor);
 
     flavorObservable.subscribe(
       responseFlavor => {
@@ -82,7 +82,7 @@ export class AdminOrdersComponent implements OnInit {
     }
 
     if (confirm('Are you sure you want to delete this flavor?')) {
-      this.flavorService.delete(flavor.id).subscribe(
+      this.flavorService.deleteFlavor(flavor.id).subscribe(
         () => {
           const index = this.flavors.findIndex(f => f.id === flavor.id);
           if (index !== -1) {
