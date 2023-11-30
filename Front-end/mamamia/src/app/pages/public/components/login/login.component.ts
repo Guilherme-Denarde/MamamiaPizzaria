@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     //Descomente e ele ira limpar os cookies 
-    // this.cookieService.deleteAll();
+    this.cookieService.deleteAll();
   }
 
   onLogin() {
