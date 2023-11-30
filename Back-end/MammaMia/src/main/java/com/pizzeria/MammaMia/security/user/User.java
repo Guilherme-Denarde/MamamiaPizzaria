@@ -28,14 +28,14 @@ private String email;
   private String password;
 
   @Enumerated(EnumType.STRING)
-  private Role role;
+  private Role Role;
 
   @OneToMany(mappedBy = "user")
   private List<Token> tokens;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return role.getAuthorities();
+    return Role.getAuthorities();
   }
 
   @Override
