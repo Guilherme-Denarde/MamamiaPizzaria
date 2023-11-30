@@ -9,7 +9,7 @@ import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/
 import { ProductListComponent } from './pages/admin/components/product/productlist/productlist.component';
 import { CookieService } from 'ngx-cookie-service';
 import { PageNotFoundComponent } from './pages/public/components/page-not-found/page-not-found.component';
-import { rotaguardGuard } from './guards/rotaguard.guard';
+import { RotaguardGuard } from './guards/rotaguard.guard';
 
 const routes: Routes = [
   { path: "", redirectTo: "signup", pathMatch: 'full' },
@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: "registeruser", component: RegisterUserlistComponent },
   {
     path: "admin",
-    canActivate: [rotaguardGuard],
+    // canActivate: [RotaguardGuard],
     // data: { roles: ['MANAGER', 'ADMIN'] },
     component: IndexComponent,
      children: [
@@ -34,8 +34,8 @@ const routes: Routes = [
   },
   {
     path: "user",
-    // canActivate: [AuthGuard],
-    // data: { roles: ['CLIENTE'] },
+    canActivate: [RotaguardGuard],
+    data: { roles: ['CLIENTE'] },
     component: IndexComponent,
       children: [
       { path: "registeruser", component: RegisterUserlistComponent },

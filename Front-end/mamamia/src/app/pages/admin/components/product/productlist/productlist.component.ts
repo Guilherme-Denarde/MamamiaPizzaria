@@ -1,5 +1,7 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core'; 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 import { ProductService } from 'src/app/middleware/services/product/product.service'; 
 import { Product } from 'src/app/models/product/product';
 
@@ -14,14 +16,17 @@ export class ProductListComponent implements OnInit {
   isValidName: boolean = true;
   selectedProductForEdit: Product = new Product();
 
-  constructor(private modalService: NgbModal, private productService: ProductService) { }
+  constructor(private modalService: NgbModal, private productService: ProductService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.listAllProducts();
   }
 
   listAllProducts(): void {
-    this.productService.getAllProducts().subscribe(
+    const token = this.cookieService.get('token')
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
+    this.productService.getAllProducts(headers).subscribe(
       data => {
         this.products = data;
         this.products.sort((a, b) => b.id - a.id);

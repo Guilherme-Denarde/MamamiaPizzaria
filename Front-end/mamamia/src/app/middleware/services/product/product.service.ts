@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Flavor } from 'src/app/models/flavor/flavor';
 import { Product } from 'src/app/models/product/product';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ProductService {
 
   private readonly API: string = 'http://localhost:8080/api/products';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   createFlavor(flavor: Flavor): Observable<Flavor> {
     return this.http.post<Flavor>(`${this.API}/flavors`, flavor).pipe(
@@ -20,8 +21,10 @@ export class ProductService {
     );
   }
 
-  getAllFlavors(): Observable<Flavor[]> {
-    return this.http.get<Flavor[]>(`${this.API}/flavors/findAll`).pipe(
+  getAllProducts(headers?: HttpHeaders): Observable<Product[]> {
+    
+    const httpOptions = headers ? { headers } : {};
+    return this.http.get<Product[]>(`${this.API}/findAll`, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -40,12 +43,6 @@ export class ProductService {
 
   createProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.API, product).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.API}/findAll`).pipe(
       catchError(this.handleError)
     );
   }
