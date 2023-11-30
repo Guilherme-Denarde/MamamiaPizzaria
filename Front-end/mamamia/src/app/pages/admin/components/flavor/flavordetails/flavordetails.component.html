@@ -1,15 +1,15 @@
 <form (ngSubmit)="saveFlavor()">
     <div class="mb-3">
         <label for="inputFlavorName" class="form-label">Flavor Name:</label>
-        <input type="text" class="form-control" name="inputFlavorName" [(ngModel)]="flavor.flavorName">
+        <input type="text" class="form-control" name="inputFlavorName" [(ngModel)]="flavor.nome">
     </div>
     <div class="mb-3">
         <label for="inputPrice" class="form-label">Price:</label>
-        <input type="number" step="0.01" class="form-control" name="inputPrice" [(ngModel)]="flavor.flavorPrice">
+        <input type="number" step="0.01" class="form-control" name="inputPrice" [(ngModel)]="flavor.preco_adicional">
     </div>
     <div class="mb-3">
         <label for="inputIngredients" class="form-label">Ingredients:</label>
-        <textarea class="form-control" name="inputIngredients" [(ngModel)]="flavor.flavorIngredients"></textarea>
+        <textarea class="form-control" name="inputIngredients" [(ngModel)]="flavor.descricao"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Save Flavor</button>
 </form>

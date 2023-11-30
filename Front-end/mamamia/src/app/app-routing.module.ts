@@ -20,12 +20,11 @@ const routes: Routes = [
   { path: "signup", component: CadastrarComponent },
   { path: "home", component: HomePageComponent },
   { path: '404', component: NotFoundComponent },
-  // { path: '**', redirectTo: '/404' },
   {
     path: "admin",
     canActivate: [AuthGuard],
     component: IndexComponent,
-      children: [
+    children: [
       { path: "registeruser", component: RegisterUserlistComponent },
       { path: "flavor", component: FlavorListComponent },
       { path: "product", component: ProductListComponent },
@@ -44,8 +43,9 @@ const routes: Routes = [
   {
     path: "restaurante", component: IndexComponent, children: [
     ]
-  }
-
+  },
+  { path: '**', redirectTo: '/404' },
+  
 ];
 
 @NgModule({

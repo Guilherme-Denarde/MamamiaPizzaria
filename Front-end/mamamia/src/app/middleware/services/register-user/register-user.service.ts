@@ -12,7 +12,9 @@ import { jwtDecode } from 'jwt-decode';
 export class RegisterUserService {
 
   private readonly API: string = 'http://localhost:8081/api/users'; 
+
   constructor(private http: HttpClient, private cookieService: CookieService) { }
+
   
   registerUser(user: User): Observable<User> {
     return this.http.post<User>(`${this.API}/register`, user).pipe(
