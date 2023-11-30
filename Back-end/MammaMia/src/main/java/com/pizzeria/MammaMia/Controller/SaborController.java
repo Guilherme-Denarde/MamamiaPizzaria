@@ -21,12 +21,16 @@ public class SaborController {
     private SaborService service;
 
     @GetMapping("/findall")
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
 
     public List<Sabor> Findall() {
         return service.Findall();
     }
 
     @GetMapping("/nome")
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
     public Sabor findByNome(@RequestParam String nome) {
         return service.findByNome(nome);
     }
