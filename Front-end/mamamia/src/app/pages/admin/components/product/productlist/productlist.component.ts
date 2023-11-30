@@ -54,7 +54,7 @@ export class ProductListComponent implements OnInit {
   }
 
   saveOrUpdateProduct(product: Product): void {
-    if (!product.name) {
+    if (!product.name) {      
       alert('Please insert valid data.');
       return;
     }
@@ -94,10 +94,7 @@ export class ProductListComponent implements OnInit {
     if (confirm('Are you sure you want to delete this product?')) {
       this.productService.deleteProduct(product.id).subscribe(
         () => {
-          const index = this.products.findIndex(p => p.id === product.id);
-          if (index !== -1) {
-            this.products.splice(index, 1);
-          }
+          this.products = this.products.filter(p => p.id !== product.id);
           alert('Product deleted successfully!');
         },
         error => {
