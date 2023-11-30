@@ -12,6 +12,7 @@ import { RegisterUserService } from 'src/app/middleware/services/register-user/r
 import { Router } from '@angular/router';
 import { Client } from 'src/app/models/client/client';
 import { ClientService } from '../../../../middleware/services/client/client.service';
+import eventService from 'src/app/pages/public/components/orders-list/event.service';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +27,15 @@ export class HeaderComponent implements OnInit {
   role: string | null = null;
   client! : Client;
 
-    constructor(private clientService : ClientService, private router: Router,private cookieService: CookieService,private http: HttpClient,private dialog: MatDialog, private ordersService: OrdersService, private userService: RegisterUserService) {}
+  
+
+    constructor(private clientService : ClientService, private router: Router,private cookieService: CookieService,private http: HttpClient,private dialog: MatDialog, private ordersService: OrdersService, private userService: RegisterUserService) {
+
+      eventService.listen("shop", (data) => {
+
+        this.shop();
+      }) ;
+    }
 
   ngOnInit(): void {
     this.role = this.userService.getRole();

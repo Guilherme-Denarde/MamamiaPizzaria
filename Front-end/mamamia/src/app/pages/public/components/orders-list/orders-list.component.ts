@@ -6,6 +6,7 @@ import { Product } from 'src/app/models/product/product';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PedidoFormComponent } from 'src/app/pages/shared/layout/pedido-form/pedido-form.component';
 import { PaymentFormComponent } from 'src/app/pages/shared/components/payment-form/payment-form.component';
+import eventService from './event.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { PaymentFormComponent } from 'src/app/pages/shared/components/payment-fo
 })
 export class OrdersListComponent {
 
+  constructor(
     @Inject(MAT_DIALOG_DATA) public data: { orders: Product[] },
     
     private dialogRef: MatDialogRef<OrdersListComponent>,private dialog: MatDialog
@@ -57,7 +59,7 @@ closeModal(): void {
 }
 
 shope () {
-
+eventService.emit("shop", true);
   
 }
 
