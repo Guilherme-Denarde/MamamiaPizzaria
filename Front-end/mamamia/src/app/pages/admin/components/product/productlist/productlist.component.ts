@@ -11,7 +11,7 @@ import { Product } from 'src/app/models/product/product';
 export class ProductListComponent implements OnInit {  
   
   products: Product[] = [];
-  isValidName: boolean = true;
+  isValidName = true;
   selectedProductForEdit: Product = new Product();
 
   constructor(private modalService: NgbModal, private productService: ProductService) { }

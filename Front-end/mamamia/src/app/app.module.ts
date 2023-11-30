@@ -48,6 +48,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PedidoFormComponent } from './pages/shared/layout/pedido-form/pedido-form.component';
 import { CategorySelectorComponent } from './pages/shared/components/category-selector/category-selector.component';
 import { PaymentFormComponent } from './pages/shared/components/payment-form/payment-form.component';
+import { AdminOrdersComponent } from './pages/shared/components/admin-orders/admin-orders.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { PaymentFormComponent } from './pages/shared/components/payment-form/pay
     OrdersListComponent,
     PedidoFormComponent,
     CategorySelectorComponent,
-    PaymentFormComponent
+    PaymentFormComponent,
+    AdminOrdersComponent
   ],
   imports: [
     BrowserModule,

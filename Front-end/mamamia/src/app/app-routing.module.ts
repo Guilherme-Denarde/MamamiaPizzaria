@@ -9,6 +9,7 @@ import { RegisterUserlistComponent } from './pages/admin/components/register-use
 import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/flavorlist.component';
 import { ProductListComponent } from './pages/admin/components/product/productlist/productlist.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AdminOrdersComponent } from './pages/shared/components/admin-orders/admin-orders.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "entrar", pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: "registeruser", component: RegisterUserlistComponent },
       { path: "flavor", component: FlavorListComponent },
       { path: "product", component: ProductListComponent },
+      {path: "orders", component: AdminOrdersComponent}
     ]
   },
   {
