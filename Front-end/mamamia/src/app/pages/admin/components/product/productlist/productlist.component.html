@@ -13,8 +13,6 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Price</th>
-                    <th>Flavor</th>
-                    <th>Quantity</th>
                     <th>Image</th>
                     <th>Rating</th>
                     <th>Actions</th>
@@ -26,8 +24,6 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.price | currency }}</td>
-                    <td>{{ product.flavor.nome }}</td> 
-                    <td>{{ product.quantity }}</td>
                     <td><img [src]="product.imageUrl" alt="Product image" width="50"></td> 
                     <td>{{ product.stars }}</td> 
                     <td>

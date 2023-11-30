@@ -1,5 +1,5 @@
 
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Injectable, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Order } from 'src/app/models/orders/orders';
 import { Product } from 'src/app/models/product/product';
@@ -15,12 +15,13 @@ import { PaymentFormComponent } from 'src/app/pages/shared/components/payment-fo
 })
 export class OrdersListComponent {
 
-  constructor(
     @Inject(MAT_DIALOG_DATA) public data: { orders: Product[] },
+    
     private dialogRef: MatDialogRef<OrdersListComponent>,private dialog: MatDialog
   ) { }
 
 products: Product[] = [];
+
 
 openPaymentMethodModal() {
   const dialogRef = this.dialog.open(PaymentFormComponent, {
@@ -53,6 +54,11 @@ deleteProduct(product: Product): void {
 
 closeModal(): void {
   this.dialogRef.close();
+}
+
+shope () {
+
+  
 }
 
 

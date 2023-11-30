@@ -15,11 +15,10 @@ export class ProductDetailsComponent {
   constructor(private productService: ProductService) { }
 
   saveProduct() {
-    const productObservable = this.product.id ? 
-                             this.productService.updateProduct(this.product) :
-                             this.productService.createProduct(this.product);
+                             
+                             
 
-    productObservable.subscribe({
+     this.productService.createProduct(this.product).subscribe({
         next: product => { 
             this.retorno.emit(product);
         },
