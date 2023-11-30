@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product/product';
 import { Order, Payment, OrderSize, OrderState } from '../../../models/orders/orders'; // <-- Importe a model Order
@@ -8,23 +8,39 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { ClientService } from '../client/client.service';
+import { Client } from 'src/app/models/client/client';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
   
-  API = 'http://localhost:8080/api/produto';
+
+  constructor(private _snackBar: MatSnackBar, private client : ClientService, private cookieService: CookieService) {}
+
+  API = 'http://localhost:8081/api/orders';
   http = inject(HttpClient);
+
+
+
+  
+
+  token = this.cookieService.get('token');
+  headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
+
+
 
   pedidoURI = '';
   formularioURI = '';
 
   orders: Order[] = [];  
   pedidos: Product[] = [];
+
   
 
-  constructor(private _snackBar: MatSnackBar) {}
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -70,8 +86,13 @@ getPedidos(): Product[] {
     return this.http.get<Product[]>(this.API);
   }
 
-  save(produto: Product): Observable<Product> {
-    return this.http.post<Product>(this.API, produto);
+  save(produto: any) {
+
+   
+
+
+
+    return this.http.post(`${this.API}`, produto, { headers: this.headers});
   }
 
   exemploErro(): Observable<Product[]> {
