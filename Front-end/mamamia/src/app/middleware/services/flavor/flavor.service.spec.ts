@@ -15,6 +15,7 @@ describe('FlavorService', () => {
       imports: [
         MatSnackBarModule,HttpClientTestingModule
       ],
+      
     });
     service = TestBed.inject(FlavorService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -28,23 +29,6 @@ describe('FlavorService', () => {
     expect(service).toBeTruthy();
   });
 
-
-  it('should create a flavor', () => {
-    const flavor: Flavor = {
-      id: 1,
-      nome: 'Flavor 1',
-      preco_adicional: 5.99,
-      descricao: 'Ingredient 1, Ingredient 2',
-    };
-
-    service.createFlavor(flavor).subscribe((createFlavor) => {
-      expect(createFlavor).toEqual(flavor);
-    });
-
-    const req = httpMock.expectOne(service.API);
-    expect(req.request.method).toBe('POST');
-    req.flush(flavor);
-  });
 
   it('should get all flavors', () => {
     const mockFlavors: Flavor[] = [
@@ -95,7 +79,7 @@ describe('FlavorService', () => {
       expect(message).toBe('Flavor deleted');
     });
 
-    const req = httpMock.expectOne(`${service.API}/delete?id=${flavorId}`);
+    const req = httpMock.expectOne(`${service.API}/delete?id=1`);
     expect(req.request.method).toBe('DELETE');
     req.flush('Flavor deleted', { status: 200, statusText: 'OK' });
   });

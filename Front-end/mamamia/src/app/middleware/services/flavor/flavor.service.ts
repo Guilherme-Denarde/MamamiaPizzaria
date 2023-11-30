@@ -28,7 +28,7 @@ export class FlavorService {
   }
 
   getAllFlavors(): Observable<Flavor[]> {
-    return this.http.get<Flavor[]>(`${this.API}/findall`, { headers: this.getHeaders() }).pipe(
+    return this.http.get<Flavor[]>(`${this.API}/findAll`, { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
@@ -40,7 +40,7 @@ export class FlavorService {
   }
     
   deleteFlavor(flavorId: number): Observable<string> {
-    return this.http.delete(`${this.API}?id=${flavorId}`, { responseType: 'text' }).pipe(
+    return this.http.delete(`${this.API}/delete?id=${flavorId}`, { responseType: 'text' }).pipe(
       catchError(this.handleError)
     );
   }
