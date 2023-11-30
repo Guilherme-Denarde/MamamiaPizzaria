@@ -1,9 +1,10 @@
 package com.pizzeria.MammaMia.Service;
 
 import com.pizzeria.MammaMia.Dto.ProductDTO;
-import com.pizzeria.MammaMia.Entity.*;
-import com.pizzeria.MammaMia.Repository.FlavorRepository;
+import com.pizzeria.MammaMia.Entity.Product;
+import com.pizzeria.MammaMia.Entity.Sabor;
 import com.pizzeria.MammaMia.Repository.ProductRepository;
+import com.pizzeria.MammaMia.Repository.SaborRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Autowired
-    private FlavorRepository flavorRepository;
+    private SaborRepository saborRepository;
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -36,15 +37,13 @@ public class ProductService {
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
-        product.setFlavor(productDto.getFlavor());
-        product.setQuantity(productDto.getQuantity());
+        product.setSabor(productDto.getSabor());
         product.setImageUrl(productDto.getImageUrl());
         product.setStars(productDto.getStars());
 
-        if (productDto.getFlavor() != null) {
-            Flavor flavor = flavorRepository.findById(Long.valueOf(productDto.getFlavor().getId()))
-                    .orElseThrow(() -> new EntityNotFoundException("Flavor não encontrado"));
-            product.setFlavor(flavor);
+        if (productDto.getSabor() != null) {
+            List<Sabor> sabor = productDto.getSabor();
+            product.setSabor(sabor);
         }
 
         return productRepository.save(product);
@@ -58,17 +57,15 @@ public class ProductService {
             product.setName(productDTO.getName());
             product.setDescription(productDTO.getDescription());
             product.setPrice(productDTO.getPrice());
-            product.setQuantity(productDTO.getQuantity());
-            product.setFlavor(productDTO.getFlavor());
+            product.setSabor(productDTO.getSabor());
             product.setImageUrl(productDTO.getImageUrl());
             product.setStars(productDTO.getStars());
 
-            if (productDTO.getFlavor() != null) {
-                Flavor flavor = flavorRepository.findById(Long.valueOf(productDTO.getFlavor().getId()))
-                        .orElseThrow(() -> new EntityNotFoundException("Flavor com o ID " + productDTO.getFlavor().getId() + " não encontrado"));
-                product.setFlavor(flavor);
+            if (productDTO.getSabor() != null) {
+                List<Sabor> sabor = productDTO.getSabor();
+                product.setSabor(sabor);
             } else {
-                throw new EntityNotFoundException("O ID de Flavor não foi fornecido");
+                throw new EntityNotFoundException("O ID de Sabor não foi fornecido");
             }
 
             return productRepository.save(product);

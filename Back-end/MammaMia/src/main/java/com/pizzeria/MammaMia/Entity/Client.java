@@ -1,6 +1,7 @@
 package com.pizzeria.MammaMia.Entity;
 
 import com.pizzeria.MammaMia.Dto.ClientDTO;
+import com.pizzeria.MammaMia.security.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ public class Client {
     @OneToOne
     @Getter @Setter
     @JoinColumn(name = "user_id")
-    private RegisterUser registerUser;
+    private User user;
     @ManyToOne
     @Getter @Setter
     @JoinColumn(name = "address_id")
@@ -28,15 +29,15 @@ public class Client {
     private String phone;
     public Client() {
     }
-    public Client(Integer id, RegisterUser registerUser, Address address, String cpf, String name, String phone) {
+    public Client(Integer id, User registerUser, Address address, String cpf, String name, String phone) {
         this.id = id;
-        this.registerUser = registerUser;
+        this.user = registerUser;
         this.address = address;
         this.cpf = cpf;
         this.name = name;
         this.phone = phone;
     }
     public ClientDTO toDTO() {
-        return new ClientDTO(id, registerUser, address, cpf, name, phone);
+        return new ClientDTO(id, user, address, cpf, name, phone);
     }
 }

@@ -9,6 +9,7 @@ import com.pizzeria.MammaMia.Repository.ClientRepository;
 import com.pizzeria.MammaMia.Repository.DeliveryPeopleRepository;
 import com.pizzeria.MammaMia.Repository.EmployRepository;
 import com.pizzeria.MammaMia.Repository.OrderRepository;
+import com.pizzeria.MammaMia.security.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,6 @@ public class OrderService {
         Order order = new Order();
         order.setId(orderDTO.getId());
         order.setPayment(orderDTO.getPayment());
-        order.setOrderSize(orderDTO.getOrderSize());
         order.setOrderState(orderDTO.getOrderState());
         order.setMustDeliver(orderDTO.isMustDeliver());
         order.setOrderTime(orderDTO.getOrderTime());
@@ -76,7 +76,6 @@ public class OrderService {
 
             // Atualizar campos simples
             order.setPayment(orderDTO.getPayment());
-            order.setOrderSize(orderDTO.getOrderSize());
             order.setOrderState(orderDTO.getOrderState());
             order.setMustDeliver(orderDTO.isMustDeliver());
             order.setOrderTime(orderDTO.getOrderTime());
@@ -130,7 +129,6 @@ public class OrderService {
         Order order = new Order();
         order.setId(dto.getId());
         order.setPayment(dto.getPayment());
-        order.setOrderSize(dto.getOrderSize());
         order.setOrderState(dto.getOrderState());
         order.setMustDeliver(dto.isMustDeliver());
         order.setOrderTime(dto.getOrderTime());
@@ -140,5 +138,15 @@ public class OrderService {
     }
 
 
+    public List<Order> getAllMe(User user) {
+        Optional<Client> client =  clientRepository.findByUser(user);
+
+        List<Order> orders = orderRepository.findAllByClient(client.get());
+
+        return orders;
+
+
+
+    }
 }
 

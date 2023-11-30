@@ -1,8 +1,6 @@
 package com.pizzeria.MammaMia.Controller;
 
-import com.pizzeria.MammaMia.Dto.OrderDTO;
 import com.pizzeria.MammaMia.Dto.ProductDTO;
-import com.pizzeria.MammaMia.Entity.Order;
 import com.pizzeria.MammaMia.Entity.Product;
 import com.pizzeria.MammaMia.Exceptions.ErrorResponse;
 import com.pizzeria.MammaMia.Response.ResponseWrapper;
@@ -10,6 +8,7 @@ import com.pizzeria.MammaMia.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +22,8 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/findAll")
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
         List<ProductDTO> products = productService.getAllProducts()
                 .stream()
@@ -32,6 +33,8 @@ public class ProductController {
     }
 
     @GetMapping("/search")
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
     public ResponseEntity<List<ProductDTO>> searchProductsByName(@RequestParam("name") String name) {
         List<ProductDTO> products = productService.getProductsByName(name)
                 .stream()
@@ -41,6 +44,7 @@ public class ProductController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
     public ResponseEntity<ResponseWrapper<ProductDTO>> getProductById(@RequestParam("id") Long id) {
         return productService.getProductById(id)
                 .map(Product :: toDTO)
@@ -51,12 +55,16 @@ public class ProductController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole( 'MANAGER')")
+
     public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDto) {
         Product product = productService.createProduct(productDto);
         return ResponseEntity.ok(product.toDTO());
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasAnyRole( 'MANAGER')")
+
     public ResponseEntity<Object> updateProduct(@RequestParam("id") Long id, @RequestBody ProductDTO productDTO) {
         if (!id.equals(Long.valueOf(productDTO.getId()))) {
             return ResponseEntity.badRequest().body(new ErrorResponse("ID na URL não corresponde ao ID no corpo da requisição", 400));
@@ -66,6 +74,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasAnyRole( 'MANAGER')")
+
     public ResponseEntity<String> deleteProduct(@RequestParam("id") Long id) {
         boolean isDeleted = productService.deleteProduct(id);
 

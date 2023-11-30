@@ -5,6 +5,7 @@ import { Product } from 'src/app/models/product/product';
 import { MatDialog } from '@angular/material/dialog';
 import { OrdersService } from 'src/app/middleware/services/orders/orders.service';
 import { OrdersListComponent } from '../../../public/components/orders-list/orders-list.component';
+import { PaymentFormComponent } from '../../components/payment-form/payment-form.component';
 
 @Component({
   selector: 'app-header',
@@ -38,5 +39,16 @@ export class HeaderComponent implements OnInit {
         data: { orders: orders }
     });
 }
+
+openPaymentMethodModal() {
+  const dialogRef = this.dialog.open(PaymentFormComponent, {
+    width: '500px',
+    // ... any other configurations for your dialog
+  });
+
+}
+
+
+
 
 }

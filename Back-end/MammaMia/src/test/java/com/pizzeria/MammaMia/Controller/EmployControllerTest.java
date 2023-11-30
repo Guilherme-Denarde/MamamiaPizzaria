@@ -114,4 +114,53 @@
 //                .andExpect(status().isOk())
 //                .andDo(MockMvcResultHandlers.print());
 //    }
-//}
+
+    // @Test
+    // void getAllEmployesTest() throws Exception {
+    //     mockMvc.perform(get("/api/employ/findAll"))
+    //             .andExpect(status().isOk())
+    //             .andDo(MockMvcResultHandlers.print());
+    // }
+
+    // @Test
+    // void getEmployByIdTest() throws Exception {
+    //     Long testId = 1L;
+    //     mockMvc.perform(get("/api/employ?id=" + testId))
+    //             .andExpect(status().isOk())
+    //             .andDo(MockMvcResultHandlers.print());
+    // }
+
+    // @Test
+    // void deleteEmployTest() throws Exception {
+    //     Long testIdToDelete = 1L;
+
+    //     when(employService.deleteEmploy(testIdToDelete)).thenReturn(true);
+
+    //     mockMvc.perform(delete("/api/employ/delete?id=" + testIdToDelete))
+    //             .andExpect(status().isOk())
+    //             .andDo(MockMvcResultHandlers.print());
+
+    //     when(employService.deleteEmploy(testIdToDelete)).thenReturn(false);
+
+    //     mockMvc.perform(delete("/api/employ/delete?id=" + testIdToDelete))
+    //             .andExpect(status().isNotFound())
+    //             .andDo(MockMvcResultHandlers.print());
+    // }
+
+//    @Test
+//    void updateEmployTest() throws Exception {
+//        EmployDTO employDtoToUpdate = new EmployDTO();
+//        employDtoToUpdate.setId(1L);
+//        employDtoToUpdate.setName("John Updated");
+//
+//        Employ mockUpdatedEmploy = new Employ();
+//        when(employService.updateEmployFromDTO(any(EmployDTO.class))).thenReturn(mockUpdatedEmploy);
+//
+//        String employDtoJson = objectMapper.writeValueAsString(employDtoToUpdate);
+//
+//        mockMvc.perform(put("/api/employ/update?id=" + employDtoToUpdate.getId())
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(employDtoJson))
+//                .andExpect(status().isOk())
+//                .andDo(MockMvcResultHandlers.print());
+//    }

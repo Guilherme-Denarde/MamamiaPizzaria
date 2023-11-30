@@ -11,13 +11,13 @@ import { User } from 'src/app/models/user/user';
 export class RegisterUserlistComponent {
   
   lista: User[] = [];
-  isValidName: boolean = true;
-  isValidEmail: boolean = true;
+  isValidName = true;
+  isValidEmail = true;
 
   selectedUserForEdit: User = new User();
   indiceSelecionadoParaEdicao!: number;
-  sortDirection: string = 'asc';
-  showDateFilter: boolean = false;
+  sortDirection = 'asc';
+  showDateFilter = false;
   currentYear: number = new Date().getFullYear();
   months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   selectedMonth: string | null = null;
@@ -60,7 +60,7 @@ editar(modal: any, user: User, indice: number) {
 addOuEditarUser(user: User) {
     this.validateName(user.name);
     this.validateEmail(user.email);
-  	console.log(user.userId);
+
     
     if (!this.isValidName || !this.isValidEmail) {
       alert('Por favor, insira dados válidos.');

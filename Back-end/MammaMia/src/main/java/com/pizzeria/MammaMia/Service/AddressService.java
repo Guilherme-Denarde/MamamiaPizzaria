@@ -3,9 +3,11 @@ package com.pizzeria.MammaMia.Service;
 
 import com.pizzeria.MammaMia.Dto.AddressDTO;
 import com.pizzeria.MammaMia.Entity.Address;
-import com.pizzeria.MammaMia.Entity.DeliveryPeople;
-import com.pizzeria.MammaMia.Exceptions.AddressNotFoundException;
+import com.pizzeria.MammaMia.Entity.Client;
 import com.pizzeria.MammaMia.Repository.AddressRepository;
+import com.pizzeria.MammaMia.Repository.ClientRepository;
+import com.pizzeria.MammaMia.security.user.User;
+import com.pizzeria.MammaMia.security.user.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,12 @@ public class AddressService {
 
     @Autowired @Setter
     private AddressRepository addressRepository;
+
+    @Autowired
+    private UserRepository userRepositor;
+
+    @Autowired
+    private ClientRepository clientRepository;
 
     public List<Address> getAllAddresses() {
         return addressRepository.findAll();
@@ -62,6 +70,17 @@ public class AddressService {
         } else {
             return false;
         }
+    }
+
+
+    public Optional<Address> getAllMe(User user) {
+       Optional<Client> client =  clientRepository.findByUser(user);
+       Optional<Address>  addres =  Optional.of( client.get().getAddress() );
+
+            return addres;
+
+
+
     }
 }
 
