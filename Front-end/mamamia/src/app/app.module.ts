@@ -87,7 +87,7 @@ import { AdminOrdersComponent } from './pages/shared/components/admin-orders/adm
     PedidoFormComponent,
     CategorySelectorComponent,
     PaymentFormComponent,
-    AdminOrdersComponent
+    AdminOrdersComponent,
   ],
   imports: [
     BrowserModule,

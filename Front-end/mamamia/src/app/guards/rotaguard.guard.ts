@@ -1,37 +1,28 @@
-import { CanActivateFn, Router } from '@angular/router';
-import { jwtDecode } from 'jwt-decode';
+import { CanActivate, Router } from '@angular/router';
+import { RegisterUserService } from 'src/app/middleware/services/register-user/register-user.service';
+import { Injectable } from '@angular/core';
 
-export const AuthGuard = (router: Router): CanActivateFn => {
-  const isAuthenticated = () => {
-    const token = localStorage.getItem('authToken');
-    return !!token;
-  };
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+  constructor(private router: Router, private userService: RegisterUserService) {}
 
-  const redirectToPathBasedOnRole = (role: string) => {
-    if (role === 'ADMIN') {
-      router.navigate(['/admin/produtos']);
-    } else if (role === 'USER') {
-      router.navigate(['/usuario/pedidos']);
-    }
-  };
-
-  return (route, state) => {
-    if (!isAuthenticated()) {
-      router.navigate(['/login']);
+  canActivate(): boolean {
+    const role = this.userService.getRole();
+    if (!role) {
+      this.router.navigate(['/login']);
       return false;
     }
 
-    const token = localStorage.getItem('authToken');
-    try {
-      const decodedToken = jwtDecode<any>(token as string); 
-      console.log(decodedToken);
-
-      redirectToPathBasedOnRole(decodedToken.role);
-      return true;
-    } catch (error) {
-      localStorage.removeItem('authToken');
-      router.navigate(['/login']);
-      return false;
+    if (role === 'ADMIN' || role === 'MANAGER') {      
+      this.router.navigate(['/admin/product']);
+    } else if (role === 'CLIENTE') {
+      this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['/entrar']);
     }
-  };
-};
+
+    return true;
+  }
+}

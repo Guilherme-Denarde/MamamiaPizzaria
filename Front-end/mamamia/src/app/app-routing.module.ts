@@ -10,6 +10,8 @@ import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/
 import { ProductListComponent } from './pages/admin/components/product/productlist/productlist.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminOrdersComponent } from './pages/shared/components/admin-orders/admin-orders.component';
+import { NotFoundComponent } from './pages/public/components/not-found/not-found.component';
+import { AuthGuard } from './guards/rotaguard.guard';
 
 const routes: Routes = [
   { path: "", redirectTo: "entrar", pathMatch: 'full' },
@@ -17,8 +19,13 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "signup", component: CadastrarComponent },
   { path: "home", component: HomePageComponent },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/404' },
   {
-    path: "admin", data: { roles: ['MANAGER'] }, component: IndexComponent, children: [
+    path: "admin",
+    canActivate: [AuthGuard],
+    component: IndexComponent,
+      children: [
       { path: "registeruser", component: RegisterUserlistComponent },
       { path: "flavor", component: FlavorListComponent },
       { path: "product", component: ProductListComponent },
@@ -26,7 +33,10 @@ const routes: Routes = [
     ]
   },
   {
-    path: "user", data: { roles: ['CLIENTE'] }, component: IndexComponent, children: [
+    path: "user",
+    canActivate: [AuthGuard],
+    component: IndexComponent,
+    children: [
       { path: "registeruser", component: RegisterUserlistComponent },
       { path: "flavor", component: FlavorListComponent },
     ]
@@ -43,4 +53,6 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [CookieService]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+
+}

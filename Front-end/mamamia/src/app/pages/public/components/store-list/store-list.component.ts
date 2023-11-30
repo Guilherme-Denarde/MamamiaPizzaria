@@ -3,6 +3,7 @@ import { Order } from 'src/app/models/orders/orders';
 import { OrdersService } from 'src/app/middleware/services/orders/orders.service';
 import { Product } from 'src/app/models/product/product';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ProductService } from 'src/app/middleware/services/product/product.service';
 
 @Component({
   selector: 'app-store-list',
@@ -14,7 +15,19 @@ export class StoreListComponent implements OnInit {
   pizzasArray: Product[] = [];
   @Input() lista: any[] = [];
 
-  constructor(private ordersService: OrdersService) {}
+  constructor(private productService: ProductService, private ordersService: OrdersService) {}
+  products: Product[] = [];
+  ngOnInit(): void {
+    this.productService.getAllProducts().subscribe(
+      (data: Product[]) => {
+        this.products = data;
+        console.log('Fetched products:', this.products);
+      },
+      (error: any) => {
+        console.error('Error fetching products:', error);
+      }
+    );
+  }
 
   addPizzaPedido(id: number) {
     this.pizzasArray.forEach((value)=> {
@@ -30,7 +43,6 @@ export class StoreListComponent implements OnInit {
 }
 
 
-  ngOnInit(): void {
-  }
+ 
 
 }
