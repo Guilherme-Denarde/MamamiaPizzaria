@@ -1,68 +1,87 @@
 .stores-list {
   width: 100%;
   padding: 20px;
+  background-color: #f8f9fa; // Cor de fundo conforme a imagem
 
   h2 {
     font-size: 24px;
+    color: #333; // Cor do título conforme a imagem
     margin-bottom: 20px;
+    text-align: center; // Centraliza o título
   }
 
   .store-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between; 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); // Layout responsivo com colunas iguais
+    gap: 20px; // Espaço entre os itens
+    justify-content: center;
 
     .store {
-      flex: 0 0 calc(33.33% - 20px); 
-      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); 
-      padding: 10px;
-      background-color: #FFF; 
-      border-radius: 5px;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      background-color: #fff; // Cor de fundo do cartão
+      border-radius: 10px; // Borda arredondada
       display: flex;
       flex-direction: column;
+      align-items: center; // Centraliza o conteúdo do cartão
 
       .store-img {
         width: 100%;
-        height: 150px; 
-        border-radius: 20px;
+        height: 200px; // Altura maior para a imagem
+        border-radius: 5px; // Borda arredondada mais sutil para a imagem
         object-fit: cover;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
       }
 
       .store-info {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        justify-content: space-between;
+        text-align: center; // Centraliza o texto
 
         .store-name {
           font-weight: bold;
           font-size: 18px;
-          margin-bottom: 5px;
-        }
-
-        .store-rating, .store-type {
-          font-size: 14px;
-          margin-bottom: 5px;
+          margin-bottom: 10px;
+          color: #333; // Cor do nome do produto conforme a imagem
         }
 
         .store-rating {
-          color: gold;
+          color: #ffc107; // Cor das estrelas (ouro/amarelo)
+          margin-bottom: 10px;
+          font-size: 16px; // Tamanho maior para as estrelas
+        }
+
+        .store-type {
+          font-size: 14px;
+          margin-bottom: 10px;
+          color: #666; // Cor do texto de descrição
         }
 
         .store-details {
-          display: flex;
-          justify-content: space-between;
-          font-size: 14px;
-          align-items: flex-end;
+          margin-bottom: 20px; // Espaço antes dos botões
+        }
 
-          span {
-            margin-right: 10px;
+        button {
+          background-color: #e63946; // Cor do botão de acordo com a imagem
+          color: #fff; // Texto do botão branco
+          border: none;
+          padding: 10px 15px;
+          border-radius: 20px; // Borda arredondada para os botões
+          margin-top: 10px; // Espaço entre o texto e o botão
+          cursor: pointer;
+          font-weight: bold; // Texto do botão em negrito
+          transition: background-color 0.3s; // Transição suave ao passar o mouse
 
-            &:last-child {
-              margin-right: 0;
-            }
+          &:hover {
+            background-color: darken(#e63946, 10%); // Escurece o botão ao passar o mouse
+          }
+
+          &:active {
+            transform: scale(0.98); // Efeito de clique
+          }
+
+          &.customize {
+            background-color: #fff; // Botão de personalizar com fundo branco
+            color: #333; // Texto do botão de personalizar preto
+            border: 1px solid #ccc; // Borda do botão de personalizar
           }
         }
       }

@@ -46,6 +46,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { PedidoFormComponent } from './pages/shared/layout/pedido-form/pedido-form.component';
+import { CategorySelectorComponent } from './pages/shared/components/category-selector/category-selector.component';
+import { PaymentFormComponent } from './pages/shared/components/payment-form/payment-form.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { PedidoFormComponent } from './pages/shared/layout/pedido-form/pedido-fo
     FoodItemSliderComponent,
     StoreListComponent,
     OrdersListComponent,
-    PedidoFormComponent
+    PedidoFormComponent,
+    CategorySelectorComponent,
+    PaymentFormComponent
   ],
   imports: [
     BrowserModule,

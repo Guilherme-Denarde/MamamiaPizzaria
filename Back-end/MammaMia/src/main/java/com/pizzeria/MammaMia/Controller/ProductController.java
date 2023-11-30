@@ -43,6 +43,17 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/categoria")
+    @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
+    public ResponseEntity<List<ProductDTO>> searchProductsByCategoria(@RequestParam("name") String categoria) {
+        List<ProductDTO> products = productService.getProductsByCategoria(categoria)
+                .stream()
+                .map(Product::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(products);
+    }
+
     @GetMapping
     @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
     public ResponseEntity<ResponseWrapper<ProductDTO>> getProductById(@RequestParam("id") Long id) {

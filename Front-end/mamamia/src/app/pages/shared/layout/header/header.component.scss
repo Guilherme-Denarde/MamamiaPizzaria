@@ -39,9 +39,11 @@
         }
 
         .fas.fa-shopping-cart {
-            font-size: 24px;
+            font-size: 18px;
             color: #d52d2b;
             position: relative;
+            background-color: #fff;
+            margin-left: 10px;
 
             .item-count {
                 position: absolute;

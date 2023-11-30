@@ -1,4 +1,4 @@
-<div class="container">
+ <div class="container">
     <h3 class="alert alert-primary">List of Registered Users</h3>
     <td><button class="btn btn-primary" (click)="adicionar(modal1)">Add User</button></td>
     <div class="row">
@@ -11,17 +11,17 @@
                         </th>
                         <th scope="col">
                             Name
-                            <img src="https://raw.githubusercontent.com/Guilherme-Denarde/Trabalhos_Facu/images/down-filled-triangular-arrow.png" (click)="sortByName()" style="width: 12px; cursor:pointer;">
+                             <!-- <img src="https://raw.githubusercontent.com/Guilherme-Denarde/Trabalhos_Facu/images/down-filled-triangular-arrow.png" (click)="sortByName()" style="width: 12px; cursor:pointer;">  -->
                         </th>
                         <th scope="col">
                             Email
-                            <img src="https://raw.githubusercontent.com/Guilherme-Denarde/Trabalhos_Facu/images/down-filled-triangular-arrow.png" (click)="sortByEmail()" style="width: 12px; cursor:pointer;">
+                            <!-- <img src="https://raw.githubusercontent.com/Guilherme-Denarde/Trabalhos_Facu/images/down-filled-triangular-arrow.png" (click)="sortByEmail()" style="width: 12px; cursor:pointer;"> -->
                         </th>
                         <th scope="col">Active</th>
                         <div style="position: relative;">
                             <th scope="col">
                                 Last Login
-                                <img src="https://raw.githubusercontent.com/Guilherme-Denarde/Trabalhos_Facu/6b31c229cb547eb10afa2d430bd5a4eb103528ab/calendar-range-fill.svg" (click)="toggleDateFilter()" style="width: 20px; cursor:pointer;">
+                                <!-- <img src="https://raw.githubusercontent.com/Guilherme-Denarde/Trabalhos_Facu/6b31c229cb547eb10afa2d430bd5a4eb103528ab/calendar-range-fill.svg" (click)="toggleDateFilter()" style="width: 20px; cursor:pointer;"> -->
                             </th>
                             <div *ngIf="showDateFilter" style="position: absolute; top: 100%; left: 0; background-color: white; border: 1px solid #ccc; padding: 10px;">
                                 <div *ngIf="showDateFilter" style="position: absolute; background-color: white; border: 1px solid #ccc; padding: 10px;">
@@ -31,9 +31,9 @@
                                         <button (click)="nextYear()">&#187;</button>
                                     </div>
                                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px;">
-                                        <div *ngFor="let month of months" [class.active]="selectedMonth === month" (click)="filterByMonth(month)" style="cursor: pointer; padding: 5px; text-align: center;">
+                                        <!-- <div *ngFor="let month of months" [class.active]="selectedMonth === month" (click)="filterByMonth(month)" style="cursor: pointer; padding: 5px; text-align: center;">
                                             {{ month }}
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -70,4 +70,5 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     </div>
-</ng-template>
+</ng-template> 
+
