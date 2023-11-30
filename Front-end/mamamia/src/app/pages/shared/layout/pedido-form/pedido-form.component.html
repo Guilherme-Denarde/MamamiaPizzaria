@@ -1,66 +1,52 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<div class="form-container">
-<h2 mat-dialog-title class="txt-center">Formulário de Pedido</h2>
-<mat-dialog-content class="mat-typography p-3">
-  <form>
-    <div class="form-group">
-      <mat-form-field class="w-100">
-        <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="nome" name="nome" class="">
-      </mat-form-field>
-    </div>
-    
-    <div class="form-group">
-      <mat-form-field class="w-100">
-        <mat-label>Bairro</mat-label>
-        <input matInput [(ngModel)]="bairro" name="bairro" class="">
-      </mat-form-field>
-    </div>
-    
-    <div class="form-group">
-      <mat-form-field class="w-100">
-        <mat-label>Rua</mat-label>
-        <input matInput [(ngModel)]="rua" name="rua" class="">
-      </mat-form-field>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <mat-form-field class="w-100 numero">
-          <mat-label>Número</mat-label>
-          <input matInput [(ngModel)]="numero" name="numero" class="">
-        </mat-form-field>
+<div class="container">
+  <h2 class="text-center">Formulário de Pedido</h2>
+  <div class="p-3">
+    <form>
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" id="nome" [(ngModel)]="nome" name="nome">
       </div>
-    
-      <div class="form-group col-md-8">
-        <mat-form-field class="w-100 complemento">
-          <mat-label>Complemento</mat-label>
-          <input matInput [(ngModel)]="complemento" name="complemento" class="">
-        </mat-form-field>
+      
+      <div class="form-group">
+        <label for="bairro">Bairro</label>
+        <input type="text" class="form-control" id="bairro" [(ngModel)]="bairro" name="bairro">
       </div>
-    </div>
+      
+      <div class="form-group">
+        <label for="rua">Rua</label>
+        <input type="text" class="form-control" id="rua" [(ngModel)]="rua" name="rua">
+      </div>
 
-    <div class="form-group">
-      <mat-form-field class="w-100">
-        <mat-label>Troco para?</mat-label>
-        <input matInput [(ngModel)]="troco" name="troco" class="">
-      </mat-form-field>
-    </div>
-  </form>
-  
-</mat-dialog-content>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="numero">Número</label>
+          <input type="text" class="form-control" id="numero" [(ngModel)]="numero" name="numero">
+        </div>
+        
+        <div class="form-group col-md-8">
+          <label for="complemento">Complemento</label>
+          <input type="text" class="form-control" id="complemento" [(ngModel)]="complemento" name="complemento">
+        </div>
+      </div>
 
-  
-<mat-dialog-actions class="btn-dialog d-flex justify-content-center mt-3">
-  <button mat-raised-button [mat-dialog-close]="true" (click)="concluirPedido()" class="btn custom-btn mr-2">
-    <mat-icon class="dialog-icon">shopping_cart</mat-icon>
-    <span>Concluir</span>
-  </button>
+      <!-- <div class="form-group">
+        <label for="troco">Troco para?</label>
+        <input type="text" class="form-control" id="troco" [(ngModel)]="troco" name="troco">
+      </div> -->
+    </form>
+  </div>
 
-  <button mat-raised-button mat-dialog-close class="btn custom-btn-cancel">
-    <mat-icon class="dialog-icon">cancel</mat-icon>
-    <span>Fechar</span>
-  </button>
-</mat-dialog-actions>
+  <div class="d-flex justify-content-center mt-3">
+    <button type="button" class="btn btn-primary mr-2" (click)="openPaymentMethodModal()">
+      <i class="fa fa-shopping-cart"></i>
+      <span>Concluir</span>
+    </button>
+
+    <button type="button" class="btn btn-secondary" (click)="close()">
+      <i class="fa fa-times"></i>
+      <span>Fechar</span>
+    </button>
+  </div>
 </div>

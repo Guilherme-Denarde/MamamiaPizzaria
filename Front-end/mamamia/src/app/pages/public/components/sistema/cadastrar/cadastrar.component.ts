@@ -18,20 +18,19 @@ export class CadastrarComponent {
     name: '',
     email: '',
     password: '',
-    salt: '',
+    lastLogin: '',
     isActive: false,
-    lastLogin: ''
+    role: 'CLIENTE'
+
   };
 
   constructor(
       private userService: RegisterUserService,
       private router: Router,
       private toastr: ToastrService
-      ) { } 
+      ) {} 
 
   onSubmit() {
-    this.user.salt = '';
-    this.user.isActive = true;
     this.user.lastLogin = new Date().toISOString();
   
     this.userService.registerUser(this.user)
@@ -57,7 +56,7 @@ export class CadastrarComponent {
       )
       .subscribe(response => {
         console.log('User registered successfully', response);
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       });
   }
 }

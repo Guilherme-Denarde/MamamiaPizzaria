@@ -5,6 +5,7 @@ import { Order } from 'src/app/models/orders/orders';
 import { Product } from 'src/app/models/product/product';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PedidoFormComponent } from 'src/app/pages/shared/layout/pedido-form/pedido-form.component';
+import { PaymentFormComponent } from 'src/app/pages/shared/components/payment-form/payment-form.component';
 
 
 @Component({
@@ -20,6 +21,15 @@ export class OrdersListComponent {
   ) { }
 
 products: Product[] = [];
+
+openPaymentMethodModal() {
+  const dialogRef = this.dialog.open(PaymentFormComponent, {
+    width: '500px',
+    
+  });
+}
+
+
 
 getTotalPrice(): number {
   return this.data.orders.reduce((acc: number, product: Product) => acc + product.price, 0);

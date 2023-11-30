@@ -8,18 +8,25 @@ import { IndexComponent } from './pages/shared/layout/index/index.component';
 import { RegisterUserlistComponent } from './pages/admin/components/register-user/register-userlist/register-userlist.component';
 import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/flavorlist.component';
 import { ProductListComponent } from './pages/admin/components/product/productlist/productlist.component';
+import { CookieService } from 'ngx-cookie-service';
 
 const routes: Routes = [
   { path: "", redirectTo: "entrar", pathMatch: 'full' },
   { path: "entrar", component: EntrarComponent },
   { path: "login", component: LoginComponent },
-  { path: "cadastrar", component: CadastrarComponent },
+  { path: "signup", component: CadastrarComponent },
   { path: "home", component: HomePageComponent },
   {
-    path: "admin", component: IndexComponent, children: [
+    path: "admin", data: { roles: ['MANAGER'] }, component: IndexComponent, children: [
       { path: "registeruser", component: RegisterUserlistComponent },
       { path: "flavor", component: FlavorListComponent },
       { path: "product", component: ProductListComponent },
+    ]
+  },
+  {
+    path: "user", data: { roles: ['CLIENTE'] }, component: IndexComponent, children: [
+      { path: "registeruser", component: RegisterUserlistComponent },
+      { path: "flavor", component: FlavorListComponent },
     ]
   },
   {
@@ -31,6 +38,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [CookieService]
 })
 export class AppRoutingModule { }

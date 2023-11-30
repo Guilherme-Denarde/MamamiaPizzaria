@@ -1,66 +1,40 @@
-body {
-  background-color: #666;  /* Cor de fundo similar ao da imagem */
-}
-
-.form-container {
-  background-color: #333;  /* Cor de fundo do formulário */
+.container {
+  background-color: #f2f2f2;
   padding: 20px;
-  border-radius: 10px;
-  width: 80%;
-  margin: 50px auto;
 }
 
-.txt-center {
-  font-size: 24px;
-  color: #fff;  /* Cor do texto do título */
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.form-group {
+.form-control {
+  border: 1px solid #cccccc;
+  padding: 10px;
   margin-bottom: 15px;
 }
 
-.custom-input {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #fff;  /* Cor de fundo do campo de input */
-  font-size: 16px;
+.btn-primary {
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+  color: white;
 }
 
-.custom-btn, .custom-btn-cancel {
-  font-weight: bold;
-  border: none;
-  color: #fff;
-  padding: 10px 30px;
-  border-radius: 5px;
+.btn-primary:hover {
+  background-color: #c0392b;
+  border-color: #c0392b;
 }
 
-.custom-btn {
-  background-color: #ffcc00;  /* Cor de fundo do botão 'Concluir' */
+.btn-secondary {
+  background-color: #3498db;
+  border-color: #3498db;
+  color: white;
 }
 
-.custom-btn-cancel {
-  background-color: #ff0000;  /* Cor de fundo do botão 'Fechar' */
+.btn-secondary:hover {
+  background-color: #2980b9;
+  border-color: #2980b9;
 }
 
-.dialog-icon {
-  color: #fff;
-  margin-right: 8px;
+label {
+  color: #333333;
+  display: block;
+  margin-bottom: 5px;
 }
 
-.price-section {
-  font-size: 24px;
-  color: #fff;  /* Cor do preço */
-  margin-top: 20px;
-  text-align: center;
-}
-
-.btn-dialog {
-  display: flex;
-  justify-content: center;
-  gap: 10px;  /* Espaçamento entre os botões */
-  margin-top: 20px;
-}
+/* Adicione mais estilos conforme necessário */
