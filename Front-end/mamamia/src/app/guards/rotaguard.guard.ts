@@ -1,37 +1,16 @@
+import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { jwtDecode } from 'jwt-decode';
+import { RegisterUserService } from '../middleware/services/register-user/register-user.service';
 
-export const AuthGuard = (router: Router): CanActivateFn => {
-  const isAuthenticated = () => {
-    const token = localStorage.getItem('authToken');
-    return !!token;
-  };
+export const rotaguardGuard: CanActivateFn = (route, state) => {
 
-  const redirectToPathBasedOnRole = (role: string) => {
-    if (role === 'ADMIN') {
-      router.navigate(['/admin/produtos']);
-    } else if (role === 'USER') {
-      router.navigate(['/usuario/pedidos']);
-    }
-  };
+  let loginService = inject(RegisterUserService);
+  let roteador = inject(Router);
 
-  return (route, state) => {
-    if (!isAuthenticated()) {
-      router.navigate(['/login']);
-      return false;
-    }
+  if (loginService.getToken() == null) {
+    roteador.navigate(['/login']);
+    return false;
+  } else
+    return true;
 
-    const token = localStorage.getItem('authToken');
-    try {
-      const decodedToken = jwtDecode<any>(token as string); 
-      console.log(decodedToken);
-
-      redirectToPathBasedOnRole(decodedToken.role);
-      return true;
-    } catch (error) {
-      localStorage.removeItem('authToken');
-      router.navigate(['/login']);
-      return false;
-    }
-  };
 };

@@ -25,6 +25,10 @@ export class RegisterUserService {
     );
   }
 
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
   listAll(): Observable<User[]> {
     return this.http.get<User[]>(`${this.API}/findAll`).pipe(
       catchError(this.handleError)

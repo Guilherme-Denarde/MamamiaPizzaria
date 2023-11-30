@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EntrarComponent } from './pages/shared/components/entrar/entrar.component';
 import { LoginComponent } from './pages/public/components/login/login.component';
 import { CadastrarComponent } from './pages/public/components/sistema/cadastrar/cadastrar.component';
 import { HomePageComponent } from './pages/shared/components/home-page/home-page.component';
@@ -9,31 +8,42 @@ import { RegisterUserlistComponent } from './pages/admin/components/register-use
 import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/flavorlist.component';
 import { ProductListComponent } from './pages/admin/components/product/productlist/productlist.component';
 import { CookieService } from 'ngx-cookie-service';
+import { PageNotFoundComponent } from './pages/public/components/page-not-found/page-not-found.component';
+import { rotaguardGuard } from './guards/rotaguard.guard';
 
 const routes: Routes = [
-  { path: "", redirectTo: "entrar", pathMatch: 'full' },
-  { path: "entrar", component: EntrarComponent },
+  { path: "", redirectTo: "signup", pathMatch: 'full' },
   { path: "login", component: LoginComponent },
   { path: "signup", component: CadastrarComponent },
   { path: "home", component: HomePageComponent },
+  { path: '404', component: PageNotFoundComponent },
+  { path: '**', redirectTo: '/404' },
+  { path: "registeruser", component: RegisterUserlistComponent },
   {
-    path: "admin", data: { roles: ['MANAGER'] }, component: IndexComponent, children: [
+    path: "admin",
+    canActivate: [rotaguardGuard],
+    // data: { roles: ['MANAGER', 'ADMIN'] },
+    component: IndexComponent,
+     children: [
       { path: "registeruser", component: RegisterUserlistComponent },
       { path: "flavor", component: FlavorListComponent },
       { path: "product", component: ProductListComponent },
+      { path: "home", component: HomePageComponent },
+
     ]
   },
   {
-    path: "user", data: { roles: ['CLIENTE'] }, component: IndexComponent, children: [
+    path: "user",
+    // canActivate: [AuthGuard],
+    // data: { roles: ['CLIENTE'] },
+    component: IndexComponent,
+      children: [
       { path: "registeruser", component: RegisterUserlistComponent },
       { path: "flavor", component: FlavorListComponent },
-    ]
-  },
-  {
-    path: "restaurante", component: IndexComponent, children: [
+      { path: "home", component: HomePageComponent },
+
     ]
   }
-
 ];
 
 @NgModule({

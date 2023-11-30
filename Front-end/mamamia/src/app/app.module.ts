@@ -14,7 +14,6 @@ import { IndexComponent } from './pages/shared/layout/index/index.component';
 import { PerfilComponent } from './pages/user/components/perfil/perfil.component';
 import { LoginComponent } from './pages/public/components/login/login.component';
 import { HomePageComponent } from './pages/shared/components/home-page/home-page.component';
-import { EntrarComponent } from './pages/shared/components/entrar/entrar.component';
 import { CadastrarComponent } from './pages/public/components/sistema/cadastrar/cadastrar.component';
 import { ProductCardComponent } from './pages/shared/product-card/product-card.component';
 import { RegisterUserDetailsComponent } from './pages/admin/components/register-user/register-userdetails/register-userdetails.component';
@@ -48,6 +47,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { PedidoFormComponent } from './pages/shared/layout/pedido-form/pedido-form.component';
 import { CategorySelectorComponent } from './pages/shared/components/category-selector/category-selector.component';
 import { PaymentFormComponent } from './pages/shared/components/payment-form/payment-form.component';
+import { httpInterceptorProviders } from './interceptors/httpinterceptor.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,6 @@ import { PaymentFormComponent } from './pages/shared/components/payment-form/pay
     LoginComponent,
     PerfilComponent,
     HomePageComponent,
-    EntrarComponent,
     CadastrarComponent,
     ProductCardComponent,
     RegisterUserDetailsComponent,
@@ -85,7 +85,7 @@ import { PaymentFormComponent } from './pages/shared/components/payment-form/pay
     OrdersListComponent,
     PedidoFormComponent,
     CategorySelectorComponent,
-    PaymentFormComponent
+    PaymentFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,11 +101,11 @@ import { PaymentFormComponent } from './pages/shared/components/payment-form/pay
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    
  ],
  
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [httpInterceptorProviders,
+              CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

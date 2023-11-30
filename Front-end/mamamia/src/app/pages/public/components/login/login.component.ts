@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { RegisterUserService } from 'src/app/middleware/services/register-user/register-user.service';
 import { LoginUser } from 'src/app/models/user/user';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     //Descomente e ele ira limpar os cookies 
-    this.cookieService.deleteAll();
+    // this.cookieService.deleteAll();
   }
 
   onLogin() {
@@ -37,23 +38,27 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(this.loginUser).subscribe(response => {
       // If the response contains the token object, log it and set the cookie
-      if (response && response.access_token) {
-        console.log("Login response:", response);
-        this.cookieService.set('token', response.access_token, { expires: 1, path: '/' }); 
+      this.cookieService.set('token', response.access_token, { expires: 1, path: '/' }); 
 
-        // Navigate to the home page
+    const token = this.cookieService.get('token')
+      
+      if (response) {       
+         console.log(token);
+
+        const decodedToken = jwtDecode<any>(token as string);
+        console.log(decodedToken);
+        console.log("Login response:", response);
+
+
         this.router.navigate(['/home']);
 
-        // Show a success message
         this.toastr.success('Logged in successfully');
       } else {
-        // Handle unexpected response structure
         this.toastr.error('Unexpected response received from the server', 'Login Error');
         console.error('Unexpected login response:', response);
       }
       
     }, error => {
-      // Handle the error according to the HTTP status code
       if (error.error && error.error.message) {
         this.toastr.error(error.error.message, 'Login Error');
       } else {
