@@ -2,23 +2,25 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">MAMMAMIA</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/admin/product">Produtos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/admin/orders">Pedidos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/login">Sair</a>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <!-- Conditionally render links based on role -->
+                    <li class="nav-item" *ngIf="role === 'MANAGER' || role === 'ADMIN'">
+                        <a class="nav-link" href="/admin/product">Produtos</a>
+                    </li>
+                    <li class="nav-item" *ngIf="role === 'MANAGER' || role === 'ADMIN'">
+                        <a class="nav-link" href="/admin/orders">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="logout()">Sair</a>
+                    </li>
+                </ul>
 
             <div class="cart-icon-container">
                 <span class="total-price">{{ totalPrice }}</span>
@@ -28,4 +30,6 @@
             </div>
         </div>
     </div>
+</div>
+
 </nav>
