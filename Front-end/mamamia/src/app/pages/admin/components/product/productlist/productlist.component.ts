@@ -1,7 +1,9 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core'; 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/middleware/services/product/product.service'; 
 import { Product } from 'src/app/models/product/product';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-productlist',
@@ -14,10 +16,17 @@ export class ProductListComponent implements OnInit {
   isValidName = true;
   selectedProductForEdit: Product = new Product();
 
-  constructor(private modalService: NgbModal, private productService: ProductService) { }
+  constructor(private cookieService: CookieService,private modalService: NgbModal, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.listAllProducts();
+  }
+
+  private getHeaders(): HttpHeaders {
+    const token = this.cookieService.get('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
   }
 
   listAllProducts(): void {
@@ -29,7 +38,7 @@ export class ProductListComponent implements OnInit {
       },
       error => {
         console.error('Error:', error);
-        alert('An error occurred. Please check the console for more details.');
+        // alert('An error occurred. Please check the console for more details.');
       }
     );
   }

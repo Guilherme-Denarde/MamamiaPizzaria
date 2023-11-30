@@ -32,7 +32,10 @@ openPaymentMethodModal() {
 
 
 getTotalPrice(): number {
-  return this.data.orders.reduce((acc: number, product: Product) => acc + product.price, 0);
+  if (this.data && Array.isArray(this.data.orders)) {
+    return this.data.orders.reduce((acc: number, product: Product) => acc + product.price, 0);
+  }
+  return 0;
 }
 
 openOrderForm() {
