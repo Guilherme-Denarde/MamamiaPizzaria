@@ -64,6 +64,7 @@ public class AuthenticationService {
       cliente.setName(request.getName());
       cliente.setCpf(request.getCpf());
       cliente.setPhone(request.getPhone());
+      cliente.setUser(savedUser);
       clientRepository.save(cliente);
     }
     return AuthenticationResponse.builder()
