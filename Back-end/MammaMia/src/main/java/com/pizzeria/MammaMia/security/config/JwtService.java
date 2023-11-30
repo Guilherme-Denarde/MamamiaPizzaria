@@ -1,5 +1,6 @@
 package com.pizzeria.MammaMia.security.config;
 
+import com.pizzeria.MammaMia.security.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -34,8 +35,22 @@ public class JwtService {
     return claimsResolver.apply(claims);
   }
 
-  public String generateToken(UserDetails userDetails) {
-    return generateToken(new HashMap<>(), userDetails);
+  public String generateToken(User userDetails) {
+    //AQUI VOCÊ PODE COLOCAR O QUE MAIS VAI COMPOR O PAYLOAD DO TOKEN
+    Map<String, Object> extraClaims = new HashMap<>();
+    extraClaims.put("username", userDetails.getUsername());
+    extraClaims.put("role", userDetails.getRole());
+    extraClaims.put("outracoisa", "teste");
+
+
+    return Jwts
+            .builder()
+            .setClaims(extraClaims)
+            .setSubject(userDetails.getUsername())
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(new Date().getTime() + 3600000 * JwtParameters.HORAS_EXPIRACAO_TOKEN))
+            .signWith(getSignInKey(), JwtParameters.ALGORITMO_ASSINATURA)
+            .compact();
   }
 
   public String generateToken(
