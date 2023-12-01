@@ -11,7 +11,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class RegisterUserService {
 
-  private readonly API: string = 'http://localhost:8081/api/users'; 
+  private readonly API: string = 'http://18.220.122.147:8081/api/users'; 
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 

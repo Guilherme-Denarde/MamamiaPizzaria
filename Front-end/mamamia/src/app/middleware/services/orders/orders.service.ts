@@ -21,7 +21,7 @@ export class OrdersService {
 
   constructor(private _snackBar: MatSnackBar, private client : ClientService, private cookieService: CookieService) {}
 
-  API = 'http://localhost:8081/api/orders';
+  API = 'http://18.220.122.147:8081/api/orders';
   http = inject(HttpClient);
 
 

@@ -12,7 +12,7 @@ export class ClientService {
 
 
   
-  API = 'http://localhost:8081/api/clients';
+  API = 'http://18.220.122.147:8081/api/clients';
   http = inject(HttpClient);
 
   constructor(private cookieService: CookieService) {}
