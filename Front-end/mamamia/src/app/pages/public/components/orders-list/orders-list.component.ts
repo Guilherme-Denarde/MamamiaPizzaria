@@ -18,9 +18,9 @@ export class OrdersListComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { orders: Product[] },
-    
-    private dialogRef: MatDialogRef<OrdersListComponent>,private dialog: MatDialog
-  ) { }
+    private dialogRef: MatDialogRef<OrdersListComponent>,
+    private dialog: MatDialog
+  ) {}
 
 products: Product[] = [];
 

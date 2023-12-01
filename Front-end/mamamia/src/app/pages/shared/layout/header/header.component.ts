@@ -17,7 +17,7 @@ import eventService from 'src/app/pages/public/components/orders-list/event.serv
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   order!: Order;
@@ -25,108 +25,97 @@ export class HeaderComponent implements OnInit {
   totalPrice = 0;
   itemCount = 0;
   role: string | null = null;
-  client! : Client;
+  client!: Client;
 
   selectedProducts!: Product[];
 
-  
+  constructor(
+    private clientService: ClientService,
+    private router: Router,
+    private cookieService: CookieService,
+    private http: HttpClient,
+    private dialog: MatDialog,
+    private ordersService: OrdersService,
+    private userService: RegisterUserService
+  ) {
+    eventService.listen('shop', (data) => {
+      this.selectedProducts = data;
 
-    constructor(private clientService : ClientService, private router: Router,private cookieService: CookieService,private http: HttpClient,private dialog: MatDialog, private ordersService: OrdersService, private userService: RegisterUserService) {
-
-      eventService.listen("shop", (data) => {
-
-        this.selectedProducts = data;
-
-
-
-        this.shop();
-      }) ;
-    }
+      this.shop();
+    });
+  }
 
   ngOnInit(): void {
     this.role = this.userService.getRole();
     console.log(this.role);
     this.fetchProducts();
 
-    this.clientService.me().subscribe( (data:any) => {
-
+    this.clientService.me().subscribe((data: any) => {
       this.client = data.client;
-
-    } );
+    });
   }
 
+  shop(): void {
 
-  shop () :void {
-
-    
-
-     let valor  = 0;
-
-
-    for (let i = 0; i < this.products.length; i++){
-
-      valor += this.products[i].price;
-    }
-
-   
-
+    let valor = 0;
+    this.selectedProducts.forEach(product => {
+      valor += product.price;
+    });
 
     const compra = {
-      
-      payment: Payment.MONEY,
-      orderState: OrderState.OPEN,
+      payment: "CARD",
+      orderState: "OPEN",
       mustDeliver: false,
       orderTime: new Date(),
       priceTotal: valor,
       client: this.client,
-      items: this.selectedProducts,
-    }
+      items: this.selectedProducts
+    };
 
     console.log(compra);
 
-    this.ordersService.save(compra).subscribe( (data:any) => {
-
+    this.ordersService.save(compra).subscribe((data: any) => {
       console.log(data);
-
-    } );
-
-    
+    });
   }
-  
+
   fetchProducts(): void {
     const token = this.cookieService.get('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
-    
-    this.http.get<Product[]>('http://localhost:8081/api/products/findAll', { headers: headers }).subscribe(data => {
-      this.products = data;
-      this.itemCount = this.products.length;
-      this.totalPrice = this.products.reduce((acc, curr) => acc + curr.price, 0);
-    });
+
+    this.http
+      .get<Product[]>('http://localhost:8081/api/products/findAll', {
+        headers: headers,
+      })
+      .subscribe((data) => {
+        this.products = data;
+        this.itemCount = this.products.length;
+        this.totalPrice = this.products.reduce(
+          (acc, curr) => acc + curr.price,
+          0
+        );
+      });
   }
 
   openOrdersList() {
     const orders = this.ordersService.getPedidos();
     const dialogRef = this.dialog.open(OrdersListComponent, {
-        width: '400px',
-        data: { orders: orders }
+      width: '400px',
+      data: { orders: orders },
     });
-}
+  }
 
-openPaymentMethodModal() {
-  const dialogRef = this.dialog.open(PaymentFormComponent, {
-    width: '500px',
-    // ... any other configurations for your dialog
-  });
+  openPaymentMethodModal() {
+    const dialogRef = this.dialog.open(PaymentFormComponent, {
+      width: '500px',
+      // ... any other configurations for your dialog
+    });
+  }
 
-}
-
-logout(): void {
-  this.cookieService.deleteAll();
-  this.router.navigate(['/login']);
-}
-
-
-
+  logout(): void {
+    this.cookieService.deleteAll();
+    this.router.navigate(['/login']);
+  }
 }
