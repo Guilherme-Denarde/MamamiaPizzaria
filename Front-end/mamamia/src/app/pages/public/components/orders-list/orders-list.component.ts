@@ -59,7 +59,7 @@ closeModal(): void {
 }
 
 shope () {
-eventService.emit("shop", true);
+eventService.emit("shop", this.products);
   
 }
 

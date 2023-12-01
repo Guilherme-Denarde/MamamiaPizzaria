@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/middleware/services/product/product.service'; 
 import { Product } from 'src/app/models/product/product';
 import { CookieService } from 'ngx-cookie-service';
+import { HeaderComponent } from '../../../../shared/layout/header/header.component';
 
 @Component({
   selector: 'app-productlist',
@@ -54,7 +55,7 @@ export class ProductListComponent implements OnInit {
   }
 
   saveOrUpdateProduct(product: Product): void {
-    if (!product.name) {      
+    if (!product.name) {
       alert('Please insert valid data.');
       return;
     }
@@ -94,7 +95,10 @@ export class ProductListComponent implements OnInit {
     if (confirm('Are you sure you want to delete this product?')) {
       this.productService.deleteProduct(product.id).subscribe(
         () => {
-          this.products = this.products.filter(p => p.id !== product.id);
+          const index = this.products.findIndex(p => p.id === product.id);
+          if (index !== -1) {
+            this.products.splice(index, 1);
+          }
           alert('Product deleted successfully!');
         },
         error => {
@@ -108,4 +112,7 @@ export class ProductListComponent implements OnInit {
   validateName(name: string): void {
     this.isValidName = !!name.trim(); 
   }
+
+
+  
 }

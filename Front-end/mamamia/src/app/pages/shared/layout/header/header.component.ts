@@ -27,11 +27,17 @@ export class HeaderComponent implements OnInit {
   role: string | null = null;
   client! : Client;
 
+  selectedProducts!: Product[];
+
   
 
     constructor(private clientService : ClientService, private router: Router,private cookieService: CookieService,private http: HttpClient,private dialog: MatDialog, private ordersService: OrdersService, private userService: RegisterUserService) {
 
       eventService.listen("shop", (data) => {
+
+        this.selectedProducts = data;
+
+
 
         this.shop();
       }) ;
@@ -41,6 +47,12 @@ export class HeaderComponent implements OnInit {
     this.role = this.userService.getRole();
     console.log(this.role);
     this.fetchProducts();
+
+    this.clientService.me().subscribe( (data:any) => {
+
+      this.client = data.client;
+
+    } );
   }
 
 
@@ -56,11 +68,7 @@ export class HeaderComponent implements OnInit {
       valor += this.products[i].price;
     }
 
-    this.clientService.me().subscribe( (data:any) => {
-
-      this.client = data.client;
-
-    } );
+   
 
 
     const compra = {
@@ -70,8 +78,11 @@ export class HeaderComponent implements OnInit {
       mustDeliver: false,
       orderTime: new Date(),
       priceTotal: valor,
-      client: this.client
+      client: this.client,
+      items: this.selectedProducts,
     }
+
+    console.log(compra);
 
     this.ordersService.save(compra).subscribe( (data:any) => {
 
