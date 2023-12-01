@@ -50,7 +50,13 @@ export class HeaderComponent implements OnInit {
 
     this.clientService.me().subscribe( (data:any) => {
 
-      this.client = data.client;
+
+
+      this.client = data;
+
+      
+
+
 
     } );
   }
