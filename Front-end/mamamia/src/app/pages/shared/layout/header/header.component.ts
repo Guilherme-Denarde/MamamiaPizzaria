@@ -50,9 +50,22 @@ export class HeaderComponent implements OnInit {
     console.log(this.role);
     this.fetchProducts();
 
+
     this.clientService.me().subscribe((data: any) => {
       this.client = data.client;
-    });
+
+    this.clientService.me().subscribe( (data:any) => {
+
+
+
+      this.client = data;
+
+      
+
+
+
+    } );
+
   }
 
   shop(): void {
