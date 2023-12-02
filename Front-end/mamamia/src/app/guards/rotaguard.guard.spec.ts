@@ -5,6 +5,8 @@
 // import { RouterTestingModule } from '@angular/router/testing';
 // import { AuthGuard } from './rotaguard.guard';
 
+// TODO: Gui-Comentei So falta passa dois parametros naquela func
+
 // describe('AuthGuard', () => {
 //   let guard = TestBed.inject(AuthGuard);
 //   let router: Router;

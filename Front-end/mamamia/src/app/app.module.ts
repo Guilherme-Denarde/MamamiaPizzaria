@@ -8,48 +8,48 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './pages/shared/layout/header/header.component';
-import { FooterComponent } from './pages/shared/layout/footer/footer.component';
-import { IndexComponent } from './pages/shared/layout/index/index.component';
-import { PerfilComponent } from './pages/user/components/perfil/perfil.component';
-import { LoginComponent } from './pages/public/components/login/login.component';
-import { HomePageComponent } from './pages/shared/components/home-page/home-page.component';
-import { EntrarComponent } from './pages/shared/components/entrar/entrar.component';
-import { CadastrarComponent } from './pages/public/components/sistema/cadastrar/cadastrar.component';
-import { ProductCardComponent } from './pages/shared/product-card/product-card.component';
-import { RegisterUserDetailsComponent } from './pages/admin/components/register-user/register-userdetails/register-userdetails.component';
-import { RegisterUserlistComponent } from './pages/admin/components/register-user/register-userlist/register-userlist.component';
-import { ProductListComponent } from './pages/admin/components/product/productlist/productlist.component';
-import { OrderlistComponent } from './pages/admin/components/order/orderlist/orderlist.component';
-import { ProductDetailsComponent } from './pages/admin/components/product/productdetails/productdetails.component';
-import { OrderdetailsComponent } from './pages/admin/components/order/orderdetails/orderdetails.component';
-import { EmploylistComponent } from './pages/admin/components/employ/employlist/employlist.component';
-import { EmploydetailsComponent } from './pages/admin/components/employ/employdetails/employdetails.component';
-import { DeliveryBoylistComponent } from './pages/admin/components/delivery-boy/delivery-boylist/delivery-boylist.component';
-import { DeliveryBoydetailsComponent } from './pages/admin/components/delivery-boy/delivery-boydetails/delivery-boydetails.component';
-import { ClientlistComponent } from './pages/admin/components/client/clientlist/clientlist.component';
-import { ClientdetailsComponent } from './pages/admin/components/client/clientdetails/clientdetails.component';
-import { AddresslistComponent } from './pages/admin/components/address/addresslist/addresslist.component';
-import { AddressdetailsComponent } from './pages/admin/components/address/addressdetails/addressdetails.component';
-import { ReviewlistComponent } from './pages/admin/components/review/reviewlist/reviewlist.component';
-import { ReviewdetailsComponent } from './pages/admin/components/review/reviewdetails/reviewdetails.component';
-import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/flavorlist.component';
-import { FlavorDetailsComponent } from './pages/admin/components/flavor/flavordetails/flavordetails.component';
-import { SearchBarComponent } from './pages/public/components/search-bar/search-bar.component';
-import { FoodItemSliderComponent } from './pages/public/components/food-item-slider/food-item-slider.component';
-import { StoreListComponent } from './pages/public/components/store-list/store-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { OrdersListComponent } from './pages/public/components/orders-list/orders-list.component';
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { PedidoFormComponent } from './pages/shared/layout/pedido-form/pedido-form.component';
-import { CategorySelectorComponent } from './pages/shared/components/category-selector/category-selector.component';
-import { PaymentFormComponent } from './pages/shared/components/payment-form/payment-form.component';
-import { AdminOrdersComponent } from './pages/shared/components/admin-orders/admin-orders.component';
-import { AdminHeaderComponent } from './pages/admin/components/admin-header/admin-header.component';
+import { HeaderComponent } from './components/layout/header/header.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
+import { IndexComponent } from './components/layout/index/index.component';
+import { LoginComponent } from './components/client/login/login.component';
+import { PerfilComponent } from './components/client/perfil/perfil.component';
+import { HomePageComponent } from './components/client/home-page/home-page.component';
+import { CadastrarComponent } from './components/client/cadastrar/cadastrar.component';
+import { ProductCardComponent } from './components/client/product-card/product-card.component';
+import { RegisterUserDetailsComponent } from './components/manager/register-user/register-userdetails/register-userdetails.component';
+import { RegisterUserlistComponent } from './components/manager/register-user/register-userlist/register-userlist.component';
+import { ProductListComponent } from './components/manager/product/productlist/productlist.component';
+import { ProductDetailsComponent } from './components/manager/product/productdetails/productdetails.component';
+import { OrderlistComponent } from './components/manager/order/orderlist/orderlist.component';
+import { OrderdetailsComponent } from './components/manager/order/orderdetails/orderdetails.component';
+import { FlavorListComponent } from './components/manager/flavor/flavorlist/flavorlist.component';
+import { FlavorDetailsComponent } from './components/manager/flavor/flavordetails/flavordetails.component';
+import { EmploylistComponent } from './components/manager/employ/employlist/employlist.component';
+import { EmploydetailsComponent } from './components/manager/employ/employdetails/employdetails.component';
+import { DeliveryBoylistComponent } from './components/manager/delivery-boy/delivery-boylist/delivery-boylist.component';
+import { DeliveryBoydetailsComponent } from './components/manager/delivery-boy/delivery-boydetails/delivery-boydetails.component';
+import { ClientlistComponent } from './components/manager/client/clientlist/clientlist.component';
+import { ClientdetailsComponent } from './components/manager/client/clientdetails/clientdetails.component';
+import { AddresslistComponent } from './components/manager/address/addresslist/addresslist.component';
+import { AddressdetailsComponent } from './components/manager/address/addressdetails/addressdetails.component';
+import { ReviewlistComponent } from './components/manager/review/reviewlist/reviewlist.component';
+import { ReviewdetailsComponent } from './components/manager/review/reviewdetails/reviewdetails.component';
+import { SearchBarComponent } from './components/client/search-bar/search-bar.component';
+import { FoodItemSliderComponent } from './components/client/food-item-slider/food-item-slider.component';
+import { StoreListComponent } from './components/client/store-list/store-list.component';
+import { OrdersListComponent } from './components/client/orders-list/orders-list.component';
+import { PedidoFormComponent } from './components/layout/pedido-form/pedido-form.component';
+import { CategorySelectorComponent } from './components/client/category-selector/category-selector.component';
+import { PaymentFormComponent } from './components/client/payment-form/payment-form.component';
+import { AdminOrdersComponent } from './components/client/admin-orders/admin-orders.component';
+import { AdminHeaderComponent } from './components/manager/admin-header/admin-header.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +60,6 @@ import { AdminHeaderComponent } from './pages/admin/components/admin-header/admi
     LoginComponent,
     PerfilComponent,
     HomePageComponent,
-    EntrarComponent,
     CadastrarComponent,
     ProductCardComponent,
     RegisterUserDetailsComponent,

@@ -1,21 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EntrarComponent } from './pages/shared/components/entrar/entrar.component';
-import { LoginComponent } from './pages/public/components/login/login.component';
-import { CadastrarComponent } from './pages/public/components/sistema/cadastrar/cadastrar.component';
-import { HomePageComponent } from './pages/shared/components/home-page/home-page.component';
-import { IndexComponent } from './pages/shared/layout/index/index.component';
-import { RegisterUserlistComponent } from './pages/admin/components/register-user/register-userlist/register-userlist.component';
-import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/flavorlist.component';
-import { ProductListComponent } from './pages/admin/components/product/productlist/productlist.component';
 import { CookieService } from 'ngx-cookie-service';
-import { AdminOrdersComponent } from './pages/shared/components/admin-orders/admin-orders.component';
-import { NotFoundComponent } from './pages/public/components/not-found/not-found.component';
 import { AuthGuard } from './guards/rotaguard.guard';
+import { HomePageComponent } from './components/client/home-page/home-page.component';
+import { CadastrarComponent } from './components/client/cadastrar/cadastrar.component';
+import { LoginComponent } from './components/client/login/login.component';
+import { NotFoundComponent } from './components/client/not-found/not-found.component';
+import { IndexComponent } from './components/layout/index/index.component';
+import { RegisterUserlistComponent } from './components/manager/register-user/register-userlist/register-userlist.component';
+import { FlavorListComponent } from './components/manager/flavor/flavorlist/flavorlist.component';
+import { ProductListComponent } from './components/manager/product/productlist/productlist.component';
+import { AdminOrdersComponent } from './components/client/admin-orders/admin-orders.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "entrar", pathMatch: 'full' },
-  { path: "entrar", component: EntrarComponent },
+  { path: "", redirectTo: "signup", pathMatch: 'full' },
   { path: "login", component: LoginComponent },
   { path: "signup", component: CadastrarComponent },
   { path: "home", component: HomePageComponent },
@@ -49,7 +47,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule],
   providers: [CookieService]
 })

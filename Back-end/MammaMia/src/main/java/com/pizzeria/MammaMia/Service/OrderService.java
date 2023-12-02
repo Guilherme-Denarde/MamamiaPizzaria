@@ -43,29 +43,16 @@ public class OrderService {
 
     public Order createOrderFromDTO(OrderDTO orderDTO) {
         Order order = new Order();
-        order.setId(orderDTO.getId());
         order.setPayment(orderDTO.getPayment());
         order.setOrderState(orderDTO.getOrderState());
         order.setMustDeliver(orderDTO.isMustDeliver());
         order.setOrderTime(orderDTO.getOrderTime());
-        order.setDeliveryTime(orderDTO.getDeliveryTime());
         order.setPriceTotal(orderDTO.getPriceTotal());
 
-        if (orderDTO.getDeliveryPeople() != null) {
-            DeliveryPeople deliveryPeople = deliveryPeopleRepository.findById(Long.valueOf(orderDTO.getDeliveryPeople().getId()))
-                    .orElseThrow(() -> new EntityNotFoundException("DeliveryPeople não encontrado"));
-            order.setDeliveryPeople(deliveryPeople);
-        }
-        if (orderDTO.getClient() != null) {
-            Client client = clientRepository.findById(Long.valueOf(orderDTO.getClient().getId()))
-                    .orElseThrow(() -> new EntityNotFoundException("Client não encontrado"));
-            order.setClient(client);
-        }
-        if (orderDTO.getEmploy() != null) {
-            Employ employ = employRepository.findById(Long.valueOf(orderDTO.getEmploy().getId()))
-                    .orElseThrow(() -> new EntityNotFoundException("Employ não encontrado"));
-            order.setEmploy(employ);
-        }
+
+          order.setClient(orderDTO.getClient());
+
+
         return orderRepository.save(order);
     }
     public Order updateOrderFromDTO(OrderDTO orderDTO) {

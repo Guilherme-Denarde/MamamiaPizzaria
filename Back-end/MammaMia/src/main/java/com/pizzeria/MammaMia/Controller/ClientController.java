@@ -49,7 +49,7 @@ public class ClientController {
 
     @GetMapping("/me")
 
-    public ResponseEntity<ResponseWrapper<ClientDTO>> GetAllMe (
+    public ResponseEntity<Client> GetAllMe (
 
             HttpServletRequest request
     ) {
@@ -60,12 +60,7 @@ public class ClientController {
         userEmail = jwtService.extractUsername(jwt);
         Optional<User> user = userRepository.findByEmail(userEmail);
 
-        return clientService.getAllMe(user.get())
-                .map(Client::toDTO)
-                .map(dto -> ResponseEntity.ok(new ResponseWrapper<>(dto)))
-                .orElseGet(() -> ResponseEntity
-                        .status(HttpStatus.NOT_FOUND)
-                        .body(new ResponseWrapper<>("Adress  not found.")));
+        return  ResponseEntity.ok(clientService.getAllMe(user.get()));
 
 
 

@@ -1,0 +1,70 @@
+<div class="payment-form">
+    <h2>Formulário de Pagamento</h2>
+   
+    <div *ngIf="!showAddCardForm">
+        <select [(ngModel)]="paymentMethod" (change)="onPaymentMethodChange()">
+            <option value="card">Card</option>
+            <option value="pix">Pix</option>
+            <option value="money">Money</option>
+        </select>
+
+        <div *ngIf="paymentMethod === 'card'">
+            <div class="payment-container">
+                <div class="payment-section">
+                    <h3 class="payment-title">PAGUE PELO APP</h3>
+                    <div class="payment-method google-pay">
+                        <i class="payment-icon fab fa-google-pay"></i> Google Pay
+                    </div>
+                    <div class="payment-method card-payment">
+                        <i class="payment-icon fab fa-cc-mastercard"></i> Mastercard · Crédito
+                    </div>
+                    <div class="payment-method meal-voucher">
+                        <i class="payment-icon fas fa-utensils"></i> Sodexo refeição · Vale-refeição
+                    </div>
+                </div>
+
+                <div class="payment-section">
+                    <h3 class="payment-title">PAGUE NA ENTREGA</h3>
+                    <div class="payment-method card-payment">
+                        <i class="payment-icon fab fa-cc-mastercard"></i> Mastercard · Crédito
+                    </div>
+                    <button class="btn btn-primary add-card-btn" (click)="addNewCard()">Adicionar novo cartão</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showAddCardForm">
+        <input [(ngModel)]="newCardNumber" placeholder="Número do cartão" />
+        <input [(ngModel)]="newCardCVV" placeholder="CVV" />
+        <input [(ngModel)]="newCardName" placeholder="Nome no cartão" />
+        <button (click)="submitCard()">Salvar Cartão</button>
+        <button (click)="cancelAddCard()">Cancelar</button>
+    </div>
+
+    <div class="payment-method-details payment-method-pix" *ngIf="paymentMethod === 'pix'">
+      PIX: {{ randomPixNumber }}
+    </div>
+
+    <div class="payment-method-details payment-method-money" *ngIf="paymentMethod === 'money'">
+        <label>
+            <input type="checkbox" [(ngModel)]="needChange" />
+            Preciso de troco?
+        </label>
+        <input *ngIf="needChange" [(ngModel)]="changeAmount" placeholder="Valor para troco" />
+    </div>
+
+       <div class="payment-method-details payment-method-pix" [class.active]="paymentMethod === 'pix'">
+        PIX: {{ randomPixNumber }}
+      </div>
+
+      <div class="payment-method-details payment-method-money" [class.active]="paymentMethod === 'money'">
+        <label>
+          <input type="checkbox" [(ngModel)]="needChange" />
+          Preciso de troco?
+        </label>
+        <input *ngIf="needChange" [(ngModel)]="changeAmount" placeholder="Valor para troco" />
+      </div>
+  
+      <button (click)="submitPayment()" *ngIf="showPaymentOptions">Concluir Pagamento</button>
+</div>

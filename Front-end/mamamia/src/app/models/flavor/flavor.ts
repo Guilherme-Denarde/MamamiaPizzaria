@@ -3,4 +3,5 @@ export class Flavor {
     nome!: string;
     preco_adicional!: number;
     descricao!: string;
+    
 }

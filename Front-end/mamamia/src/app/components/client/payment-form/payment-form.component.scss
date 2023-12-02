@@ -1,0 +1,113 @@
+.payment-form {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.payment-form h2 {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #ececec;
+    padding-bottom: 0.5rem;
+}
+
+.payment-form select,
+.payment-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.payment-form button {
+    width: 100%;
+    background-color: #c02d28;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.payment-form button:hover {
+    background-color: #a52920;
+}
+
+.payment-method-details {
+    display: none;
+}
+
+.payment-method-card.active,
+.payment-method-pix.active,
+.payment-method-money.active {
+    display: block;
+}
+
+.payment-container {
+    font-family: 'Arial', sans-serif;
+    max-width: 368px;
+    margin: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.payment-section {
+    background: #fff;
+    padding: 20px;
+    border-bottom: 2px solid #ececec;
+}
+
+.payment-title {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid #f2f2f2;
+    padding-bottom: 0.5rem;
+}
+
+.payment-method {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border: 1px solid #f2f2f2;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.payment-method:last-child {
+    margin-bottom: 0;
+}
+
+.payment-method:hover {
+    background-color: #f8f8f8;
+}
+
+.payment-icon {
+    font-size: 1.5rem;
+    color: #c02d28;
+    margin-right: 10px;
+}
+
+.add-card-btn {
+    width: 100%;
+    background-color: #c02d28;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-card-btn:hover {
+    background-color: #a52920;
+}

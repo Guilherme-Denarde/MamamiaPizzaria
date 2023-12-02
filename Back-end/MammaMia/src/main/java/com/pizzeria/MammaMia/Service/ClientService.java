@@ -96,10 +96,10 @@ public class ClientService {
         }
     }
 
-    public Optional<Client> getAllMe(User user) {
+    public Client getAllMe(User user) {
 
         Optional<Client> client = clientRepository.findByUser(user);
-        return client;
+        return client.get();
 
     }
 }

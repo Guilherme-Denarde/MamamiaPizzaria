@@ -1,5 +1,5 @@
 import { CanActivate, Router } from '@angular/router';
-import { RegisterUserService } from 'src/app/middleware/services/register-user/register-user.service';
+import { RegisterUserService } from 'src/app//services/register-user/register-user.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({

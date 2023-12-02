@@ -34,5 +34,5 @@ export class Order {
     priceTotal?: number;
     deliveryPeople?: DeliveryPeople;
     client?: Client;
-    employ?: Employ;
+
 }

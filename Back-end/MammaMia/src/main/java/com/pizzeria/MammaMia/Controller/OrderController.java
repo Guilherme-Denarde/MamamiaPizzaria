@@ -83,6 +83,7 @@ public class OrderController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('CLIENTE', 'MANAGER')")
+
     public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDto) {
         Order orders = orderService.createOrderFromDTO(orderDto);
         return ResponseEntity.ok(orders.toDTO());
