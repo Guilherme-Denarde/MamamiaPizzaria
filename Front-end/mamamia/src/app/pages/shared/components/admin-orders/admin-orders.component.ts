@@ -1,20 +1,22 @@
-import { Component, OnInit, Inject } from '@angular/core'; 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FlavorService } from 'src/app/middleware/services/flavor/flavor.service';
+import { Component, OnInit } from '@angular/core';
+import { OrdersService } from '../../../../middleware/services/orders/orders.service';
+import { Product } from 'src/app/models/product/product';
 import { Flavor } from 'src/app/models/flavor/flavor';
+import { FlavorService } from 'src/app/middleware/services/flavor/flavor.service';
 
 @Component({
-  selector: 'app-flavorlist',
-  templateUrl: './flavorlist.component.html',
-  styleUrls: ['./flavorlist.component.scss']
+  selector: 'app-admin-orders',
+  templateUrl: './admin-orders.component.html',
+  styleUrls: ['./admin-orders.component.scss']
 })
-export class FlavorListComponent implements OnInit {  
-  
+export class AdminOrdersComponent implements OnInit {
+  orders: any[] = [];
+
   flavors: Flavor[] = [];
   isValidName = true;
   selectedFlavorForEdit: Flavor = new Flavor();
 
-  constructor(private modalService: NgbModal, private flavorService: FlavorService) { }
+  constructor(private flavorService: FlavorService) { }
 
   ngOnInit(): void {
     this.listAllFlavors();
@@ -36,12 +38,10 @@ export class FlavorListComponent implements OnInit {
 
   addFlavor(modal: any): void {
     this.selectedFlavorForEdit = new Flavor();
-    this.modalService.open(modal, { size: 'sm' });
   }
 
   editFlavor(modal: any, flavor: Flavor, index: number): void {
     this.selectedFlavorForEdit = Object.assign({}, flavor);
-    this.modalService.open(modal, { size: 'sm' });
   }
 
   saveOrUpdateFlavor(flavor: Flavor): void {
@@ -72,7 +72,6 @@ export class FlavorListComponent implements OnInit {
       }
     );
 
-    this.modalService.dismissAll();
   }
 
   deleteFlavor(flavor: Flavor): void {
@@ -103,3 +102,5 @@ export class FlavorListComponent implements OnInit {
     this.isValidName = !!name.trim(); 
   }
 }
+
+

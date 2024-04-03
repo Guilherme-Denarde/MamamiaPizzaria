@@ -20,6 +20,10 @@ export class FoodItemSliderComponent implements OnInit {
   }
 
   listAll() {
+    // Retrieve the headers
+    const headers = this.productService.getHeaders();
+  
+    // Pass the headers to the getAllProducts method
     this.productService.getAllProducts().subscribe({
       next: data => {
         console.log('Data:', data);
@@ -30,6 +34,7 @@ export class FoodItemSliderComponent implements OnInit {
       }
     });
   }
+
 
   move(direction: string) {
     if (direction === 'prev') {

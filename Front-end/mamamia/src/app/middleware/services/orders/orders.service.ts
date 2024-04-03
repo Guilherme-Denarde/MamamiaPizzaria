@@ -38,6 +38,10 @@ export class OrdersService {
     });
   }
 
+  // getOrders(): Observable<any[]> {
+  //   return this.http.get<any[]>(this.ordersUrl);
+  // }
+
   getPedidoValues(item: string, price: number) {
     const newOrder: Order = {
       id: this.orders.length,

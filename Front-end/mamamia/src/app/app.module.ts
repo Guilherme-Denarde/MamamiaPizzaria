@@ -49,6 +49,7 @@ import { CategorySelectorComponent } from './pages/shared/components/category-se
 import { PaymentFormComponent } from './pages/shared/components/payment-form/payment-form.component';
 import { httpInterceptorProviders } from './interceptors/httpinterceptor.service';
 import { CookieService } from 'ngx-cookie-service';
+import { AdminOrdersComponent } from './pages/shared/components/admin-orders/admin-orders.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { CookieService } from 'ngx-cookie-service';
     PedidoFormComponent,
     CategorySelectorComponent,
     PaymentFormComponent,
+    AdminOrdersComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,8 @@ import { FlavorListComponent } from './pages/admin/components/flavor/flavorlist/
 import { ProductListComponent } from './pages/admin/components/product/productlist/productlist.component';
 import { CookieService } from 'ngx-cookie-service';
 import { PageNotFoundComponent } from './pages/public/components/page-not-found/page-not-found.component';
-import { RotaguardGuard } from './guards/rotaguard.guard';
+import { AdminOrdersComponent } from './pages/shared/components/admin-orders/admin-orders.component';
+import { AuthGuard } from './guards/rotaguard.guard';
 
 const routes: Routes = [
   { path: "", redirectTo: "signup", pathMatch: 'full' },
@@ -18,23 +19,23 @@ const routes: Routes = [
   { path: "home", component: HomePageComponent },
   { path: '404', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/404' },
-  { path: "registeruser", component: RegisterUserlistComponent },
+  { path: "teste", component: ProductListComponent },
   {
     path: "admin",
-    // canActivate: [RotaguardGuard],
-    // data: { roles: ['MANAGER', 'ADMIN'] },
+    canActivate: [AuthGuard],
+    data: { roles: ['MANAGER', 'ADMIN'] },
     component: IndexComponent,
      children: [
       { path: "registeruser", component: RegisterUserlistComponent },
       { path: "flavor", component: FlavorListComponent },
       { path: "product", component: ProductListComponent },
       { path: "home", component: HomePageComponent },
-
+      {path: "orders", component: AdminOrdersComponent}
     ]
   },
   {
     path: "user",
-    canActivate: [RotaguardGuard],
+    canActivate: [AuthGuard],
     data: { roles: ['CLIENTE'] },
     component: IndexComponent,
       children: [
