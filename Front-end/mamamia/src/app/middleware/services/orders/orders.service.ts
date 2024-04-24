@@ -14,7 +14,7 @@ import {
 })
 export class OrdersService {
   
-  API = 'http://localhost:8080/api/produto';
+  API = 'http://192.168.3.130:8080/api/produto';
   http = inject(HttpClient);
 
   pedidoURI = '';

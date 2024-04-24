@@ -9,7 +9,7 @@ import { LoginUser, User } from 'src/app/models/user/user';
 })
 export class RegisterUserService {
 
-  private readonly API: string = 'http://localhost:8080/api/users'; 
+  private readonly API: string = 'http://192.168.3.130:8080/api/users'; 
 
   constructor(private http: HttpClient) { }
   

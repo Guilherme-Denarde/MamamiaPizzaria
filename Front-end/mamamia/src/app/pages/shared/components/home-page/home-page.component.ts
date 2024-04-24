@@ -17,9 +17,9 @@ export class HomePageComponent implements OnInit {
   }
   
   onSearch(term: string) {
-    let url = 'http://localhost:8080/api/products/findAll';
+    let url = 'http://192.168.3.130:8080/api/products/findAll';
     if(term.trim() !== '') {
-      url = `http://localhost:8080/api/products/search?name=${term}`;
+      url = `http://192.168.3.130:8080/api/products/search?name=${term}`;
     }
 
     this.http.get<any[]>(url).subscribe(
