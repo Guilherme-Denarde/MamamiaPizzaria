@@ -12,7 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class ProductService {
   products: Product[] = [];
 
-  private readonly API: string = 'http://backend.local:8080/api/products';
+  private readonly API: string = 'http://backend:8080/api/products';
 
   constructor(private cookieService: CookieService,private http: HttpClient) { }
 

@@ -14,7 +14,7 @@ import {
 })
 export class OrdersService {
   
-  API = 'http://backend.local:8080/api/produto';
+  API = 'http://backend:8080/api/produto';
   http = inject(HttpClient);
 
   pedidoURI = '';

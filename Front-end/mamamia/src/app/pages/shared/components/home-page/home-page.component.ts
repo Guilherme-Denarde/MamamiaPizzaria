@@ -17,9 +17,9 @@ export class HomePageComponent implements OnInit {
   }
   
   onSearch(term: string) {
-    let url = 'http://backend.local:8080/api/products/findAll';
+    let url = 'http://backend:8080/api/products/findAll';
     if(term.trim() !== '') {
-      url = `http://backend.local:8080/api/products/search?name=${term}`;
+      url = `http://backend:8080/api/products/search?name=${term}`;
     }
 
     this.http.get<any[]>(url).subscribe(
