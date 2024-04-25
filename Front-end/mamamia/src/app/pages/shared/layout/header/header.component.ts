@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
       'Authorization': `Bearer ${token}`
     });
     
-    this.http.get<Product[]>('http://192.168.3.130:8080/api/products/findAll', { headers: headers }).subscribe(data => {
+    this.http.get<Product[]>('http://backend.local:8080/api/products/findAll', { headers: headers }).subscribe(data => {
       this.products = data;
       this.itemCount = this.products.length;
       this.totalPrice = this.products.reduce((acc, curr) => acc + curr.price, 0);

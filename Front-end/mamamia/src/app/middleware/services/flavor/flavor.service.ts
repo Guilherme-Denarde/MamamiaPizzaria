@@ -9,7 +9,7 @@ import { Flavor } from 'src/app/models/flavor/flavor';
 })
 export class FlavorService {
 
-  private readonly API: string = 'http://192.168.3.130:8080/api/flavors'; 
+  private readonly API: string = 'http://backend.local:8080/api/flavors'; 
 
   constructor(private http: HttpClient) { }
 
